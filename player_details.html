@@ -15,13 +15,21 @@
     <div class="container mt-4">
         <div id="playerCard" class="card text-dark bg-light mb-3">
     <div class="card-body">
-        <h2 id="playerName" class="card-title">Player Name</h2>
-        <p id="totalMoney" class="card-text">Balance: </p>
-        <p id="playerRank" class="card-text">Rank: </p>
-        <p id="winRate" class="card-text">Win Rate: </p>
+        <div id="warning" class="alert alert-warning" role="alert" style="display:none;">
+            Please clear your dues as soon as possible!
+        </div>
+        <div class="profile-header">
+            <div>
+                <h2 id="playerName" class="card-title">Player Name</h2>
+                <p id="playerRank" class="card-text">Rank: </p>
+                <p id="winRate" class="card-text">Win Rate: </p>
+            </div>
+            <p id="totalMoney" class="card-text balance">Balance: </p>
+        </div>
         <!-- Add more player details here -->
     </div>
 </div>
+
 
         <div id="framesInfo" class="mb-3">
             <h3 class="mb-3">Frame Details</h3>
