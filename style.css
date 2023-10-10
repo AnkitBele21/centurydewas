@@ -69,5 +69,26 @@ main {
     font-size: 14px;
     color: #FFEB3B; /* Yellow color for visibility, adjust as needed */
 }
+#floatingButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: float 1s ease-in-out infinite;
+}
+
+#floatingButton img {
+    width: 60px;
+    height: 60px;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
 
 /* Additional CSS for color coding and animations can be added here */
