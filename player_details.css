@@ -15,12 +15,16 @@ header {
     width: 150px;
 }
 
+.container {
+    margin: 20px auto;
+    width: 80%;
+}
+
 #playerCard {
     border-radius: 8px;
-    margin: 20px auto;
+    margin-bottom: 20px;
     padding: 20px;
     text-align: center;
-    width: 80%;
 }
 
 #playerCard h2 {
@@ -28,16 +32,17 @@ header {
 }
 
 #framesInfo {
-    margin: 20px;
+    margin: 20px 0;
 }
-@@ -31,7 +36,24 @@ header {
+
+.frame-card {
+    background-color: #3C3E42;
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 15px;
-@@ -57,10 +56,6 @@ header {
     display: flex;
-    flex-direction: column;
-    align-items: start;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .frame-card p {
@@ -45,42 +50,19 @@ header {
 }
 
 .frame-card.winner {
-    background-color: #28a745; /* Green for frames you won */
+    background-color: #01AB7A;
 }
 
 .frame-card.loser {
-    background-color: #dc3545; /* Red for frames you lost */
+    background-color: #FF4757;
 }
 
 .frame-card.rummy {
-    background-color: #6c757d; /* Grey for rummy frames */
+    background-color: #3C3E42;
 }
 
-@@ -43,19 +65,24 @@ header {
-table {
-    width: 100%;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #4CAF50;
-}
-
-td {
-    background-color: #6c757d;
-}
-
-.card-text {
-    margin-bottom: 0.5rem;
-}
-
-/* Responsive design */
 @media only screen and (max-width: 600px) {
-    #playerCard {
+    .container {
         width: 95%;
     }
 }
