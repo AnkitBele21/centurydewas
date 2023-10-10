@@ -24,22 +24,7 @@ function initClient() {
     });
 }
 
-function fetchPlayerInfo(playerName) {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: `${PLAYER_SHEET_NAME}`,
-    }).then((response) => {
-        const values = response.result.values;
-        const playerInfo = values.find(row => row[2] === playerName); // Assuming name is in column C
-        if (playerInfo) {
-            displayPlayerInfo(playerInfo);
-        } else {
-            console.log('Player info not found.');
-        }
-    }, (response) => {
-        console.error('Error fetching player data:', response.result.error.message);
-    });
-}
+// ... (No changes in fetchPlayerInfo and fetchRankInfo functions) ...
 
 function fetchFramesInfo(playerName) {
     gapi.client.sheets.spreadsheets.values.get({
@@ -58,35 +43,12 @@ function fetchFramesInfo(playerName) {
     });
 }
 
-function fetchRankInfo(playerName) {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: `${RANK_SHEET_NAME}`,
-    }).then((response) => {
-        const values = response.result.values;
-        const rankInfo = values.find(row => row[1] === playerName); // Matching player name in column B
-        if (rankInfo) {
-            displayRankInfo(rankInfo);
-        } else {
-            console.log('Rank info not found.');
-        }
-    }, (response) => {
-        console.error('Error fetching rank data:', response.result.error.message);
-    });
-}
-
-function displayPlayerInfo(playerInfo) {
-    document.getElementById('playerName').innerText = playerInfo[2]; // Assuming name is in column C
-    document.getElementById('totalMoney').innerText = `Balance: ₹ ${playerInfo[6]}`; // Assuming balance is in column G
-}
-
 function displayFramesInfo(framesData, playerName) {
-    const framesContainer = document.getElementById('framesInfo');
+    const framesContainer = document.getElementById('framesTableBody');
     
     // Reverse the framesData array to display the newest frames first
     framesData.reverse().forEach(frame => {
-        const frameElement = document.createElement('div');
-        frameElement.className = 'frame-card';
+        const frameRow = document.createElement('tr');
 
         // Format the date
         const dateParts = frame[2].split("/");
@@ -95,35 +57,31 @@ function displayFramesInfo(framesData, playerName) {
         
         const durationStr = `${frame[3]} Min`;
         const winner = frame[5];
-        const loser = frame[34];
+        const loser = frame[33];
 
         // Determine the opponent's name
         const opponentName = winner === playerName ? loser : winner;
 
         // Determine the frame card color
         if(winner === playerName) {
-            frameElement.classList.add('winner');
+            frameRow.classList.add('winner');
         } else if(winner === "Rummy") {
-            frameElement.classList.add('rummy');
+            frameRow.classList.add('rummy');
         } else {
-            frameElement.classList.add('loser');
+            frameRow.classList.add('loser');
         }
 
-        frameElement.innerHTML = `
-            <p>Date: ${dateStr}, Duration: ${durationStr}</p>
-            <p>Opponent: ${opponentName}</p>
-            <p>Winner: ${winner}</p>
+        frameRow.innerHTML = `
+            <td>${dateStr}</td>
+            <td>${durationStr}</td>
+            <td>${opponentName}</td>
+            <td>${winner === playerName ? "Won" : "Lost"}</td>
         `;
-        framesContainer.appendChild(frameElement);
+        framesContainer.appendChild(frameRow);
     });
 }
 
-
-function displayRankInfo(rankInfo) {
-    document.getElementById('playerRank').innerText = `Rank: ${rankInfo[0]}`; // Assuming Rank is in column A
-    document.getElementById('winRate').innerText = `Win Rate: ${rankInfo[4]}%`; // Assuming Win Rate is in column E
-    document.getElementById('playerCard').style.backgroundColor = rankInfo[3]; // Assuming Color is in column D
-}
+// ... (No changes in displayPlayerInfo and displayRankInfo functions) ...
 
 // Load the Google API client and call initClient
 gapi.load('client', initClient);
