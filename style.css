@@ -74,7 +74,7 @@ main {
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-    animation: float 1s ease-in-out infinite;
+    animation: rotate 2s linear infinite;
 }
 
 #floatingButton img {
@@ -82,13 +82,11 @@ main {
     height: 60px;
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
     }
-    50% {
-        transform: translateY(-10px);
+    100% {
+        transform: rotate(-360deg);
     }
 }
-
-/* Additional CSS for color coding and animations can be added here */
