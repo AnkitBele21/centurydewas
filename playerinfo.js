@@ -64,3 +64,7 @@ function goToDetailsPage() {
     const playerName = document.getElementById('playerNameInput').value;
     window.location.href = "player_details.html?player=" + encodeURIComponent(playerName);
 }
+function redirectToPlayerDetails() {
+    const playerName = document.getElementById('nameInput').value; // Assume you get player name from an input with id 'nameInput'
+    window.location.href = `player_details.html?player=${playerName}`;
+}
