@@ -77,7 +77,7 @@ function displayPlayerInfo(playerInfo) {
 
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
-
+    
     // Reverse the framesData array to display the newest frames first
     framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
@@ -87,7 +87,7 @@ function displayFramesInfo(framesData, playerName) {
         const dateParts = frame[2].split("/");
         const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
         const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
-
+        
         const durationStr = `${frame[3]} Min`;
         const winner = frame[5];
         const loser = frame[34];
@@ -105,8 +105,6 @@ function displayFramesInfo(framesData, playerName) {
         }
 
         frameElement.innerHTML = `
-            <p>${frame[2]}, ${frame[3]} Min</p>
-            <p class="${frame[5] === playerName ? 'winner-you' : 'winner'}">Winner: ${frame[5]}</p>
             <p>Date: ${dateStr}, Duration: ${durationStr}</p>
             <p>Opponent: ${opponentName}</p>
             <p>Winner: ${winner}</p>
