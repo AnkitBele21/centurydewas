@@ -59,7 +59,7 @@ function fetchFramesInfo(playerName) {
 
 function displayPlayerInfo(playerInfo) {
     document.getElementById('playerName').innerText = playerInfo[2];
-    document.getElementById('totalMoney').innerText = `Total Money: ${playerInfo[6]}`;
+    document.getElementById('totalMoney').innerText = `Balance: ${playerInfo[6]}`;
 }
 
 function displayFramesInfo(framesData) {
