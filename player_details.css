@@ -21,65 +21,31 @@ header {
     padding: 20px;
     text-align: center;
     width: 80%;
+    background-color: #3C3E42; /* Default color, will be overridden by JS */
 }
 
 #playerCard h2 {
     margin-bottom: 10px;
+    font-size: 24px;
+}
+
+#playerCard .card-text {
+    font-size: 18px;
 }
 
 #framesInfo {
     margin: 20px;
 }
 
-/* Styles for the table */
-table {
-    width: 100%;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #4CAF50;
-}
-
-/* Styles for the frame entries */
-.winner td {
-    background-color: #28a745; /* Green */
-}
-
-.loser td {
-    background-color: #dc3545; /* Red */
-}
-
-.rummy td {
-    background-color: #6c757d; /* Grey */
-}
-
-.card-text {
-    margin-bottom: 0.5rem;
-}
-
-/* Responsive design */
-@media only screen and (max-width: 600px) {
-    #playerCard {
-        width: 95%;
-    }
-}
-/* [Existing CSS here] */
-
-/* New/Modified CSS */
 .frame-card {
     background-color: #3C3E42;
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 15px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .frame-card p {
@@ -87,14 +53,23 @@ th {
 }
 
 .frame-card.winner {
-    background-color: #01AB7A;
+    background-color: #28a745;
 }
 
 .frame-card.rummy {
-    background-color: #3C3E42;
+    background-color: #6c757d;
 }
 
 .frame-card.loser {
-    background-color: #FF4747;
+    background-color: #dc3545;
 }
 
+@media only screen and (max-width: 600px) {
+    #playerCard {
+        width: 95%;
+    }
+
+    .frame-card p {
+        font-size: 14px;
+    }
+}
