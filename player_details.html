@@ -25,3 +25,22 @@
     <script src="player_details.js" defer></script>
 </body>
 </html>
+function displayFramesInfo(playerFrames) {
+    const framesInfoDiv = document.getElementById('framesInfo');
+    playerFrames.forEach(frame => {
+        const frameCard = document.createElement('div');
+        frameCard.className = 'frame-card';
+
+        const winnerInfo = document.createElement('p');
+        winnerInfo.innerText = `Winner: ${frame[5]}`;
+        
+        const frameDate = document.createElement('p');
+        frameDate.className = 'frame-date';
+        const date = new Date(frame[2]);
+        frameDate.innerText = date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+
+        frameCard.appendChild(winnerInfo);
+        frameCard.appendChild(frameDate);
+        framesInfoDiv.appendChild(frameCard);
+    });
+}
