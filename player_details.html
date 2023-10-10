@@ -17,11 +17,28 @@
             <div class="card-body">
                 <h2 id="playerName" class="card-title">Player Name</h2>
                 <p id="totalMoney" class="card-text">Balance: </p>
+                <p id="playerRank" class="card-text">Rank: </p>
+                <p id="playerWinRate" class="card-text">Win Rate: </p>
                 <!-- Add more player details here -->
             </div>
         </div>
-        <div id="framesInfo">
-            <!-- Frames data will be appended here -->
+        <div id="framesInfo" class="mb-3">
+            <h3 class="mb-3">Frame Details</h3>
+            <!-- Frames data will be appended here in a tabular format -->
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Winner</th>
+                        <th scope="col">Loser</th>
+                        <!-- Add more columns as per your data -->
+                    </tr>
+                </thead>
+                <tbody id="framesTableBody">
+                    <!-- Frame rows will be appended here by JavaScript -->
+                </tbody>
+            </table>
         </div>
     </div>
     <script src="player_details.js" defer></script>
