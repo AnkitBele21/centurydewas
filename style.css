@@ -72,12 +72,22 @@ main {
 #floatingButton {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    allign: center ;
     z-index: 1000;
-    animation: roll 4s linear infinite;
+    animation: roll 2s linear infinite;
 }
 
 #floatingButton img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
 }
+
+@keyframes roll {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        transform: translateX(10px) rotate(-360deg);
+    }
+}
+
