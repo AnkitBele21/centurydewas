@@ -9,13 +9,10 @@
     <h1>Enter Player Information</h1>
     <label for="name">Name:</label>
     <input type="text" id="name" required>
-    <button onclick="goToDetails()">Get Info</button>
+    <label for="number">Number:</label>
+    <input type="number" id="number" required>
+    <button onclick="fetchPlayerInfo()">Get Info</button>
 
-    <script>
-        function goToDetails() {
-            const playerName = document.getElementById('name').value;
-            window.location.href = `player_details.html?player=${encodeURIComponent(playerName)}`;
-        }
-    </script>
+    <script src="playerinfo.js" defer></script>
 </body>
 </html>
