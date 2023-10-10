@@ -47,30 +47,43 @@ function displayPlayerInfo(values, playerName) {
     }
 }
 
-function displayFramesInfo(values, playerName) {
-    const framesData = values.filter(row => [row[5], row[33]].includes(playerName));
+function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
     
+    // Reverse the framesData array to display the newest frames first
     framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
 
+        // Format the date
         const dateParts = frame[2].split("/");
         const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
         const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
+        
         const durationStr = `${frame[3]} Min`;
         const winner = frame[5];
         const loser = frame[34];
+
+        // Determine the opponent's name
         const opponentName = winner === playerName ? loser : winner;
 
-        frameElement.classList.add(winner === playerName ? 'winner' : winner === "Rummy" ? 'rummy' : 'loser');
+        // Determine the frame card color
+        if(winner === playerName) {
+            frameElement.classList.add('winner');
+        } else if(winner === "Rummy") {
+            frameElement.classList.add('rummy');
+        } else {
+            frameElement.classList.add('loser');
+        }
+
         frameElement.innerHTML = `
-            <p>Date: ${dateStr}, Duration: ${durationStr}</p>
+            <p>${dateStr}, Duration: ${durationStr}</p>
             <p>Opponent: ${opponentName}</p>
         `;
         framesContainer.appendChild(frameElement);
     });
 }
+
 
 function displayRankInfo(values, playerName) {
     const rankInfo = values.find(row => row[1] === playerName);
