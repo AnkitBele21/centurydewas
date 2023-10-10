@@ -72,7 +72,8 @@ main {
 #floatingButton {
     position: fixed;
     bottom: 20px;
-    allign: center ;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
     animation: roll 2s linear infinite;
 }
@@ -83,11 +84,10 @@ main {
 }
 
 @keyframes roll {
-    0% {
-        transform: translateX(0) rotate(0deg);
+    0%, 100% {
+        transform: translateX(-50%) rotate(0deg);
     }
-    100% {
-        transform: translateX(10px) rotate(-360deg);
+    50% {
+        transform: translateX(-50%) rotate(-360deg);
     }
 }
-
