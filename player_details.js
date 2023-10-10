@@ -1,7 +1,7 @@
 // Your API Key and Sheet ID
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
-const PLAYER_SHEET_NAME = 'Snookerplus*';
+const PLAYER_SHEET_NAME = 'snookerplus';
 const FRAMES_SHEET_NAME = 'Frames';
 
 // Initialize Google Sheets API client
