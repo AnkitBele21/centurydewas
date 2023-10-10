@@ -74,7 +74,7 @@ main {
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-    animation: rotate 2s linear infinite;
+    animation: roll 2s linear infinite;
 }
 
 #floatingButton img {
@@ -82,11 +82,11 @@ main {
     height: 60px;
 }
 
-@keyframes rotate {
+@keyframes roll {
     0% {
-        transform: rotate(0deg);
+        transform: translateX(0) rotate(0deg);
     }
     100% {
-        transform: rotate(-360deg);
+        transform: translateX(50px) rotate(-360deg);
     }
 }
