@@ -6,7 +6,6 @@ const FRAMES_SHEET_NAME = 'Frames';
 
 // Initialize Google Sheets API client
 function initClient() {
-    // Initialize API client and fetch data...
     gapi.client.init({
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
@@ -26,14 +25,12 @@ function fetchPlayerInfo(playerName) {
     }).then(function (response) {
         const values = response.result.values;
         if (values && values.length > 0) {
-            // Find the player by name in columns C (assuming it's in column C) and G
-            const playerInfo = values.find(row => row[2] === playerName || row[6] === playerName);
+            const playerInfo = values.find(row => row[2] === playerName);
 
             if (playerInfo) {
-                // Player found, you can access their data in playerInfo.
-                // playerInfo[2] contains the player name in column C.
-                // playerInfo[6] contains the player name in column G.
-                console.log('Player Info:', playerInfo);
+                document.getElementById('playerName').textContent = playerInfo[2]; // Name
+                document.getElementById('totalMoney').textContent = `Total Money: ${playerInfo[6]}`; // Total Money
+                // Add more fields as per your requirement
             } else {
                 console.log('Player not found.');
             }
@@ -53,15 +50,17 @@ function fetchFramesInfo(playerName) {
     }).then(function (response) {
         const values = response.result.values;
         if (values && values.length > 0) {
-            // Filter frames data where the player's name is in columns M, N, O, P, Q, R
             const framesData = values.filter(row =>
                 [row[12], row[13], row[14], row[15], row[16], row[17]].includes(playerName)
             );
 
             if (framesData.length > 0) {
-                // Player found in frames, you can access the frames data in framesData.
-                // Each row in framesData represents a frame.
-                console.log('Frames Info:', framesData);
+                const framesList = document.getElementById('frames');
+                framesData.forEach(frame => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Date: ${frame[2]}, Duration: ${frame[3]} mins, Winner: ${frame[5]}`;
+                    framesList.appendChild(listItem);
+                });
             } else {
                 console.log('Player not found in frames.');
             }
