@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="player_details.css">
     <title>Player Details</title>
@@ -14,21 +13,14 @@
     </header>
     <div class="alert alert-danger text-center" id="warning">Warning: Your balance is above 2000. Please clear dues ASAP!</div>
     <div id="playerCard" class="card text-white bg-dark mb-3 mx-auto" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Logo%206.png/:/rs=w:110,h:113,cg:true,m/cr=w:110,h:113/qt=q:95" alt="Player Logo" class="img-fluid rounded-start p-3">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h2 id="playerName" class="card-title">Player Name</h2>
-                    <p id="playerRank" class="card-text">Rank: 1</p>
-                    <p id="winRate" class="card-text">Win Rate: 75%</p>
-                    <p id="totalMoney" class="card-text balance positive">Balance: 0000</p>
-                </div>
-            </div>
+        <div class="card-body">
+            <h2 id="playerName" class="card-title">Player Name</h2>
+            <p id="playerRank" class="card-text">Rank: 1</p>
+            <p id="winRate" class="card-text">Win Rate: 75%</p>
+            <p id="totalMoney" class="card-text balance positive">Balance: 0000</p>
         </div>
     </div>
-    <!-- Additional Content Here -->
+    <div id="framesInfo" class="mx-auto" style="max-width: 540px;"></div>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="player_details.js" defer></script>
 </body>
