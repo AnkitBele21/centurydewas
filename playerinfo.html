@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="playerinfo.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Info</title>
 </head>
 <body>
-    <h1>Player Information</h1>
+    <h1>Enter Player Information</h1>
     <label for="name">Name:</label>
     <input type="text" id="name" required>
-    <label for="number">Number:</label>
-    <input type="number" id="number" required>
-    <button onclick="fetchPlayerInfo()">Get Info</button>
+    <button onclick="goToDetails()">Get Info</button>
 
-    <div id="playerInfo"></div>
-    <div id="framesInfo"></div>
-
-    <script src="script.js"></script>
-    <script src="playerinfo.js" defer></script>
-<script>
-    function fetchPlayerInfo() {
-    window.location.href = "player_details.html";
-}
-</script>
+    <script>
+        function goToDetails() {
+            const playerName = document.getElementById('name').value;
+            window.location.href = `player_details.html?player=${encodeURIComponent(playerName)}`;
+        }
+    </script>
 </body>
 </html>
