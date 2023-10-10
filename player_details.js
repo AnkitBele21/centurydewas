@@ -72,8 +72,24 @@ function fetchRankInfo(playerName) {
 }
 function displayPlayerInfo(playerInfo) {
     document.getElementById('playerName').innerText = playerInfo[2]; // Assuming name is in column C
-    document.getElementById('totalMoney').innerText = `Balance: ₹ ${playerInfo[6]}`; // Assuming balance is in column G
+    const totalMoneyElement = document.getElementById('totalMoney');
+    totalMoneyElement.innerText = `Balance: ₹ ${playerInfo[6]}`; // Assuming balance is in column G
+    
+    // Check if balance is more than 0 and color it red
+    if (parseInt(playerInfo[6]) > 0) {
+        totalMoneyElement.classList.add('positive');
+    } else {
+        totalMoneyElement.classList.remove('positive');
+    }
+    
+    // Check if balance is more than 2000 and display warning
+    if (parseInt(playerInfo[6]) > 2000) {
+        document.getElementById('warning').style.display = 'block';
+    } else {
+        document.getElementById('warning').style.display = 'none';
+    }
 }
+
 
 // [Existing JavaScript here]
 
