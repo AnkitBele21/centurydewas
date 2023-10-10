@@ -22,45 +22,15 @@ function initClient() {
 }
 
 function fetchPlayerInfo(playerName) {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: PLAYER_SHEET_NAME,
-    }).then(function (response) {
-        const values = response.result.values;
-        const playerInfo = values.find(row => row[2] === playerName); // Assuming name is in column C
-        if (playerInfo) {
-            displayPlayerInfo(playerInfo);
-        } else {
-            console.log('Player not found.');
-        }
-    }, function (response) {
-        console.error('Error fetching player data:', response.result.error.message);
-    });
+    // ... (No changes here)
 }
 
 function fetchFramesInfo(playerName) {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: FRAMES_SHEET_NAME,
-    }).then(function (response) {
-        const values = response.result.values;
-        const framesData = values.filter(row => 
-            [row[12], row[13], row[14], row[15], row[16], row[17]].includes(playerName)
-        );
-        if (framesData.length > 0) {
-            displayFramesInfo(framesData);
-        } else {
-            console.log('No frames found for player.');
-        }
-    }, function (response) {
-        console.error('Error fetching frames data:', response.result.error.message);
-    });
+    // ... (No changes here)
 }
 
 function displayPlayerInfo(playerInfo) {
-    document.getElementById('playerName').innerText = playerInfo[2]; // Assuming name is in column C
-    document.getElementById('totalMoney').innerText = `Total Money: ${playerInfo[6]}`; // Assuming total money is in column G
-    // Add more player info display logic as needed
+    // ... (No changes here)
 }
 
 function displayFramesInfo(playerFrames) {
@@ -71,7 +41,7 @@ function displayFramesInfo(playerFrames) {
 
         const winnerInfo = document.createElement('p');
         winnerInfo.innerText = `Winner: ${frame[5]}`;
-        
+
         const frameDate = document.createElement('p');
         frameDate.className = 'frame-date';
         const date = new Date(frame[2]);
@@ -81,8 +51,6 @@ function displayFramesInfo(playerFrames) {
         frameCard.appendChild(winnerInfo);
         framesInfoDiv.appendChild(frameCard);
     });
-}
-
 }
 
 gapi.load('client', initClient);
