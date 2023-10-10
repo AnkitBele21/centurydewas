@@ -77,6 +77,8 @@ function displayPlayerInfo(playerInfo) {
 
 // [Existing JavaScript here]
 
+// [Rest of the JavaScript code remains the same]
+
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
     
@@ -109,6 +111,9 @@ function displayFramesInfo(framesData, playerName) {
         framesContainer.appendChild(frameElement);
     });
 }
+
+// [Rest of the JavaScript code remains the same]
+
 
 function displayRankInfo(rankInfo) {
     document.getElementById('playerRank').innerText = `Rank: ${rankInfo[0]}`; 
