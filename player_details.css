@@ -23,11 +23,8 @@ header {
 }
 
 .alert {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: white;
-    background-color: #dc3545; /* Bootstrap danger color */
-    border-color: #dc3545; /* Bootstrap danger color */
+    display: none;
+    /* other styles... */
 }
 
 /* Additional styles for other components can be added here */
