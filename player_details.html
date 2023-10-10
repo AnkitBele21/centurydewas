@@ -3,23 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="player_details.css">
+    <script src="https://apis.google.com/js/api.js"></script>
     <title>Player Details</title>
 </head>
-<body>
-    <header>
-        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Logo" id="logo">
+<body class="bg-dark text-white">
+    <header class="bg-success text-center p-3">
+        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Logo" id="logo" class="img-fluid" style="max-width: 150px;">
     </header>
-    <div id="playerCard">
-        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Logo%206.png/:/rs=w:110,h:113,cg:true,m/cr=w:110,h:113/qt=q:95" alt="Player Logo" class="player-logo">
-        <div class="player-info">
+    <div class="container mt-4">
+        <!-- ... [Previous HTML] ... -->
+<div id="playerCard" class="card text-dark bg-light mb-3">
+    <div class="card-body">
+        <div class="profile-header">
             <h2 id="playerName" class="card-title">Player Name</h2>
-            <p id="playerRank" class="card-text">Rank: 1</p>
-            <p id="winRate" class="card-text">Win Rate: 75%</p>
-            <p id="totalMoney" class="card-text balance positive">Balance: $2500</p>
+            <p id="totalMoney" class="card-text balance">Balance: </p>
+        </div>
+        <div class="profile-stats">
+            <p id="playerRank" class="card-text">Rank: </p>
+            <p id="winRate" class="card-text">Win Rate: </p>
+        </div>
+        <p id="warningMessage" class="warning-message"></p>
+        <!-- Add more player details here -->
+    </div>
+</div>
+<!-- ... [Rest of the HTML] ... -->
+
+</div>
+
+
+
+        <div id="framesInfo" class="mb-3">
+            <h3 class="mb-3">Frame Details</h3>
+            <!-- Frames data will be appended here -->
         </div>
     </div>
-    <div class="alert">Warning: Your balance is above $2000. Please clear dues ASAP!</div>
-    <!-- Additional Content Here -->
+    <script src="player_details.js" defer></script>
 </body>
 </html>
