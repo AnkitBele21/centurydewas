@@ -97,3 +97,17 @@ th {
 .frame-card.loser {
     background-color: #FF4747;
 }
+/* [Previous CSS remains the same] */
+
+.frame-card p {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.frame-card p .icon {
+    margin-right: 5px;
+}
+
+/* [Rest of the CSS remains the same] */
+
