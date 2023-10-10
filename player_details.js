@@ -81,6 +81,8 @@ function displayPlayerInfo(playerInfo) {
 
 // [Previous JS code remains the same]
 
+// [Previous JS code remains the same]
+
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
 
@@ -111,7 +113,7 @@ function displayFramesInfo(framesData, playerName) {
         }
 
         frameElement.innerHTML = `
-            <p><span class="icon">&#128337;</span> ${dateStr}, ${durationStr}</p>
+            <p><span class="icon">&#128197;</span> ${dateStr}, <span class="icon">&#128337;</span> ${durationStr}</p>
             <p>Opponent: ${opponentName === "Rummy" ? "Format: Rummy" : opponentName}</p>
         `;
         framesContainer.appendChild(frameElement);
@@ -119,6 +121,7 @@ function displayFramesInfo(framesData, playerName) {
 }
 
 // [Rest of the JS code remains the same]
+
 
 
 
