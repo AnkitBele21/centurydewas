@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="player_details.css">
     <title>Player Details</title>
 </head>
 <body>
-    <header>
+    <header class="text-center py-3">
         <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Logo" id="logo">
     </header>
-    <div class="alert" id="warning">Warning: Your balance is above $2000. Please clear dues ASAP!</div>
-    <div id="playerCard">
-        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Logo%206.png/:/rs=w:110,h:113,cg:true,m/cr=w:110,h:113/qt=q:95" alt="Player Logo" class="player-logo">
-        <div class="player-info">
-            <h2 id="playerName" class="card-title">Player Name</h2>
-            <p id="playerRank" class="card-text">Rank: 1</p>
-            <p id="winRate" class="card-text">Win Rate: 75%</p>
-            <p id="totalMoney" class="card-text balance positive">Balance: $2500</p>
+    <div class="alert alert-danger text-center" id="warning">Warning: Your balance is above $2000. Please clear dues ASAP!</div>
+    <div id="playerCard" class="card text-white bg-dark mb-3 mx-auto" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Logo%206.png/:/rs=w:110,h:113,cg:true,m/cr=w:110,h:113/qt=q:95" alt="Player Logo" class="img-fluid rounded-start p-3">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 id="playerName" class="card-title">Player Name</h2>
+                    <p id="playerRank" class="card-text">Rank: 1</p>
+                    <p id="winRate" class="card-text">Win Rate: 75%</p>
+                    <p id="totalMoney" class="card-text balance positive">Balance: $2500</p>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Additional Content Here -->
