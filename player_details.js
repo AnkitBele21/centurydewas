@@ -83,6 +83,8 @@ function displayPlayerInfo(playerInfo) {
 
 // [Previous JS code remains the same]
 
+// [Previous JavaScript remains the same]
+
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
 
@@ -112,15 +114,24 @@ function displayFramesInfo(framesData, playerName) {
             frameElement.classList.add('loser');
         }
 
-        frameElement.innerHTML = `
-            <p><span class="icon">&#128197;</span> ${dateStr}, <span class="icon">&#128337;</span> ${durationStr}</p>
-            <p>Opponent: ${opponentName === "Rummy" ? "Format: Rummy" : opponentName}</p>
-        `;
+        // Check if the frame was a Rummy
+        if (opponentName === "Rummy") {
+            frameElement.innerHTML = `
+                <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
+                <p>Format: Rummy</p>
+            `;
+        } else {
+            frameElement.innerHTML = `
+                <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
+                <p>Opponent: ${opponentName}</p>
+            `;
+        }
         framesContainer.appendChild(frameElement);
     });
 }
 
-// [Rest of the JS code remains the same]
+// [Remaining JavaScript remains the same]
+
 
 
 
