@@ -60,3 +60,7 @@ function displayFramesInfo(playerFrames) {
         `;
     });
 }
+function goToDetailsPage() {
+    const playerName = document.getElementById('playerNameInput').value;
+    window.location.href = "player_details.html?player=" + encodeURIComponent(playerName);
+}
