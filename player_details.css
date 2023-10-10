@@ -55,3 +55,6 @@ header {
 .frame-card .winner.you {
     color: #01AB7A;
 }
+.winner-you {
+    color: #01AB7A; /* Your green color */
+}
