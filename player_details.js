@@ -10,44 +10,63 @@ function initClient() {
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function () {
-        // Example usage (replace 'John Doe' with the desired player name)
-        const playerName = 'John Doe';
-        fetchPlayerInfo(playerName);
-        fetchFramesInfo(playerName);
+        const urlParams = new URLSearchParams(window.location.search);
+        const playerName = decodeURIComponent(urlParams.get('player'));
+        if (playerName) {
+            fetchPlayerInfo(playerName);
+            fetchFramesInfo(playerName);
+        } else {
+            console.error('Player name is missing in URL parameters.');
+        }
     });
 }
 
+// Function to fetch and display player info
 function fetchPlayerInfo(playerName) {
-    // Fetching and displaying player info logic...
-    // [Your existing logic here]
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: SHEET_ID,
+        range: PLAYER_SHEET_NAME,
+    }).then(function (response) {
+        const values = response.result.values;
+        if (values && values.length > 0) {
+            const playerInfo = values.find(row => row[2] === playerName);
+            if (playerInfo) {
+                console.log('Player Info:', playerInfo);
+                // TODO: Display player info on the webpage
+            } else {
+                console.log('Player not found.');
+            }
+        } else {
+            console.log('No data found.');
+        }
+    }, function (response) {
+        console.error('Error fetching data:', response.result.error.message);
+    });
 }
 
+// Function to fetch and display frames info
 function fetchFramesInfo(playerName) {
-    // Fetching and displaying frames info logic...
-    // [Your existing logic here]
-}
-
-function displayPlayerInfo(playerInfo) {
-    // Displaying player info logic...
-    document.getElementById('playerName').textContent = playerInfo.name;
-    document.getElementById('totalMoney').textContent = `Total Money: ${playerInfo.totalMoney}`;
-    document.getElementById('tableMoney').textContent = `Table Money: ${playerInfo.tableMoney}`;
-    document.getElementById('balance').textContent = `Balance: ${playerInfo.balance}`;
-}
-
-function displayFramesInfo(framesData) {
-    const framesList = document.getElementById('framesList');
-    framesList.innerHTML = '';  // Clear previous data
-
-    if (framesData && framesData.length > 0) {
-        framesData.forEach(frame => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `Date: ${frame[2]}, Duration: ${frame[3]} minutes, Winner: ${frame[5]}`;
-            framesList.appendChild(listItem);
-        });
-    } else {
-        framesList.innerHTML = '<li>No frames data found for this player.</li>';
-    }
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: SHEET_ID,
+        range: FRAMES_SHEET_NAME,
+    }).then(function (response) {
+        const values = response.result.values;
+        if (values && values.length > 0) {
+            const framesData = values.filter(row =>
+                [row[12], row[13], row[14], row[15], row[16], row[17]].includes(playerName)
+            );
+            if (framesData.length > 0) {
+                console.log('Frames Info:', framesData);
+                // TODO: Display frames info on the webpage
+            } else {
+                console.log('Player not found in frames.');
+            }
+        } else {
+            console.log('No data found.');
+        }
+    }, function (response) {
+        console.error('Error fetching data:', response.result.error.message);
+    });
 }
 
 // Call the initClient function to start fetching data
