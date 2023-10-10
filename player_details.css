@@ -1,48 +1,44 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
+    background-color: #121212;
+    color: #ffffff;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-#container {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-#playerInfo {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 20px;
-    border-radius: 8px;
+header {
+    background-color: #1a73e8;
+    padding: 10px;
     text-align: center;
 }
 
-#playerInfo h2 {
+#logo {
+    max-width: 100px;
+}
+
+#playerName {
     margin: 0;
-    font-size: 24px;
 }
 
-#playerInfo p {
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+#framesInfo h2 {
+    color: #1a73e8;
+}
+
+#framesInfo p {
+    background-color: #333333;
+    border-radius: 5px;
+    padding: 10px;
     margin: 10px 0;
-    font-size: 18px;
 }
 
-#framesInfo {
-    margin-top: 20px;
-}
-
-#framesInfo div {
-    background-color: #ecf0f1;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-size: 16px;
+#framesInfo p:nth-child(even) {
+    background-color: #444444;
 }
