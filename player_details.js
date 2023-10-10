@@ -10,11 +10,6 @@ function initClient() {
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function () {
-        function initClient() {
-    gapi.client.init({
-        apiKey: API_KEY,
-        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-    }).then(function () {
         // Retrieve player name from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const playerName = urlParams.get('player');
@@ -28,26 +23,23 @@ function initClient() {
     });
 }
 
-    });
-}
-
 // Function to fetch and display player info
 function fetchPlayerInfo(playerName) {
-    // ... (same as in your previous code)
+    // ... (Code to fetch player info from Google Sheets)
 }
 
 // Function to fetch and display frames info
 function fetchFramesInfo(playerName) {
-    // ... (same as in your previous code)
+    // ... (Code to fetch frames info from Google Sheets)
 }
 
-// Display functions from the previous message
+// Display functions for player and frame info
 function displayPlayerInfo(playerInfo) {
-    // ... (same as in the previous message)
+    // ... (Code to display player info on the webpage)
 }
 
 function displayFramesInfo(framesData) {
-    // ... (same as in the previous message)
+    // ... (Code to display frame info on the webpage)
 }
 
 // Call the initClient function to start fetching data
