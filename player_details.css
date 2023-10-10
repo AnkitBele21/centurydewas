@@ -69,3 +69,32 @@ th {
         width: 95%;
     }
 }
+/* [Existing CSS here] */
+
+/* New/Modified CSS */
+.frame-card {
+    background-color: #3C3E42;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.frame-card p {
+    margin: 5px 0;
+}
+
+.frame-card.winner {
+    background-color: #01AB7A;
+}
+
+.frame-card.rummy {
+    background-color: #3C3E42;
+}
+
+.frame-card.loser {
+    background-color: #FF4747;
+}
+
