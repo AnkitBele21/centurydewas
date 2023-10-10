@@ -10,10 +10,24 @@ function initClient() {
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function () {
-        // Example usage (replace 'John Doe' with the desired player name)
-        const playerName = 'John Doe'; // TODO: Get this from user input or another source
-        fetchPlayerInfo(playerName);
-        fetchFramesInfo(playerName);
+        function initClient() {
+    gapi.client.init({
+        apiKey: API_KEY,
+        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+    }).then(function () {
+        // Retrieve player name from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const playerName = urlParams.get('player');
+        
+        if (playerName) {
+            fetchPlayerInfo(playerName);
+            fetchFramesInfo(playerName);
+        } else {
+            console.error('Player name not provided.');
+        }
+    });
+}
+
     });
 }
 
