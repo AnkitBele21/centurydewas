@@ -79,6 +79,8 @@ function displayPlayerInfo(playerInfo) {
 
 // [Rest of the JavaScript code remains the same]
 
+// [Rest of the JavaScript code remains the same]
+
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
     
@@ -94,25 +96,28 @@ function displayFramesInfo(framesData, playerName) {
         const winner = frame[5];
         const loser = frame[34];
 
-        const opponentName = winner === playerName ? loser : winner;
+        let opponentName = winner === playerName ? loser : winner;
 
         if(winner === playerName) {
             frameElement.classList.add('winner');
         } else if(winner === "Rummy") {
             frameElement.classList.add('rummy');
+            opponentName = "Rummy";
         } else {
             frameElement.classList.add('loser');
         }
 
         frameElement.innerHTML = `
-            <p>${dateStr}, Duration: ${durationStr}</p>
-            <p>Opponent: ${opponentName}</p>
+            <p>${dateStr}</p>
+            <p>Duration: ${durationStr}</p>
+            <p>${opponentName === "Rummy" ? "Format" : "Opponent"}: ${opponentName}</p>
         `;
         framesContainer.appendChild(frameElement);
     });
 }
 
 // [Rest of the JavaScript code remains the same]
+
 
 
 function displayRankInfo(rankInfo) {
