@@ -3,7 +3,7 @@ const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 const PLAYER_SHEET_NAME = 'snookerplus';
 const FRAMES_SHEET_NAME = 'Frames';
-const RANK_SHEET_NAME = 'Rank'; // Assuming you have a sheet named 'Rank'
+const RANK_SHEET_NAME = 'Rank';
 
 function initClient() {
     gapi.client.init({
@@ -16,7 +16,7 @@ function initClient() {
         if (playerName) {
             fetchPlayerInfo(playerName);
             fetchFramesInfo(playerName);
-            fetchRankInfo(playerName); // Fetching rank info
+            fetchRankInfo(playerName);
         } else {
             console.error('Player name not provided.');
         }
@@ -37,7 +37,7 @@ function fetchRankInfo(playerName) {
         range: RANK_SHEET_NAME,
     }).then(function (response) {
         const values = response.result.values;
-        const rankInfo = values.find(row => row[2] === playerName);
+        const rankInfo = values.find(row => row[1] === playerName); // Matching player name in column B
         if (rankInfo) {
             displayRankInfo(rankInfo);
         } else {
@@ -57,9 +57,9 @@ function displayFramesInfo(framesData) {
 }
 
 function displayRankInfo(rankInfo) {
-    // Example: Display rank and apply color to player card
-    document.getElementById('playerRank').innerText = `Rank: ${rankInfo[/*Index for Rank*/]}`;
-    document.getElementById('playerCard').style.backgroundColor = rankInfo[/*Index for Color of Profile Card*/];
+    // Display rank and apply color to player card
+    document.getElementById('playerRank').innerText = `Rank: ${rankInfo[0]}`; // Assuming Rank is in column A
+    document.getElementById('playerCard').style.backgroundColor = rankInfo[3]; // Assuming Color is in column D
 }
 
 // Load the Google API client and call initClient
