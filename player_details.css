@@ -32,7 +32,6 @@ header {
 }
 
 .frame-card {
-    background-color: #3C3E42;
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 15px;
@@ -55,10 +54,6 @@ header {
 
 .frame-card.rummy {
     background-color: #6c757d; /* Grey for rummy frames */
-}
-
-.winner-you {
-    color: #01AB7A; /* Your green color */
 }
 
 /* New or adjusted styles */
