@@ -3,6 +3,7 @@ const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 const PLAYER_SHEET_NAME = 'snookerplus';
 const FRAMES_SHEET_NAME = 'Frames';
+const RANK_SHEET_NAME = 'Rank'; // Assuming you have a sheet named 'Rank'
 
 function initClient() {
     gapi.client.init({
@@ -15,6 +16,7 @@ function initClient() {
         if (playerName) {
             fetchPlayerInfo(playerName);
             fetchFramesInfo(playerName);
+            fetchRankInfo(playerName); // Fetching rank info
         } else {
             console.error('Player name not provided.');
         }
@@ -22,72 +24,43 @@ function initClient() {
 }
 
 function fetchPlayerInfo(playerName) {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: PLAYER_SHEET_NAME,
-    }).then(function (response) {
-        const values = response.result.values;
-        const playerInfo = values.find(row => row[2] === playerName);
-        if (playerInfo) {
-            displayPlayerInfo(playerInfo);
-        } else {
-            console.log('Player not found.');
-        }
-    }, function (response) {
-        console.error('Error fetching player data:', response.result.error.message);
-    });
+    // ... (Same as before)
 }
 
 function fetchFramesInfo(playerName) {
+    // ... (Same as before)
+}
+
+function fetchRankInfo(playerName) {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: SHEET_ID,
-        range: FRAMES_SHEET_NAME,
+        range: RANK_SHEET_NAME,
     }).then(function (response) {
         const values = response.result.values;
-        const framesData = values.filter(row => 
-            [row[12], row[13], row[14], row[15], row[16], row[17]].includes(playerName)
-        );
-        if (framesData.length > 0) {
-            displayFramesInfo(framesData);
+        const rankInfo = values.find(row => row[/*Index for Player Name*/] === playerName);
+        if (rankInfo) {
+            displayRankInfo(rankInfo);
         } else {
-            console.log('No frames found for player.');
+            console.log('Rank info not found.');
         }
     }, function (response) {
-        console.error('Error fetching frames data:', response.result.error.message);
+        console.error('Error fetching rank data:', response.result.error.message);
     });
 }
 
 function displayPlayerInfo(playerInfo) {
-    document.getElementById('playerName').innerText = playerInfo[2];
-    document.getElementById('totalMoney').innerText = `Balance:₹ ${playerInfo[6]}`;
+    // ... (Same as before)
 }
 
 function displayFramesInfo(framesData) {
-    const framesContainer = document.getElementById('framesInfo');
-    const playerName = document.getElementById('playerName').innerText; // Get the displayed player name
-    
-    // Reverse the framesData array to display the newest frames first
-    framesData.reverse().forEach(frame => {
-        const frameElement = document.createElement('div');
-        frameElement.className = 'frame-card';
-
-        const dateParts = frame[2].split("/");
-        const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-        const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
-        const durationStr = `${frame[3]} Min`;
-
-        // Check if the displayed player is the winner and apply a special class
-        const winnerIsPlayer = frame[5] === playerName;
-        const winnerClass = winnerIsPlayer ? 'winner-you' : 'winner';
-
-        frameElement.innerHTML = `
-            <p>${dateStr}, ${durationStr}</p>
-            <p class="${winnerClass}">Winner: ${frame[5]}</p>
-        `;
-        framesContainer.appendChild(frameElement);
-    });
+    // ... (Same as before)
 }
 
+function displayRankInfo(rankInfo) {
+    // Example: Display rank and apply color to player card
+    document.getElementById('playerRank').innerText = `Rank: ${rankInfo[/*Index for Rank*/]}`;
+    document.getElementById('playerCard').style.backgroundColor = rankInfo[/*Index for Color of Profile Card*/];
+}
 
 // Load the Google API client and call initClient
 gapi.load('client', initClient);
