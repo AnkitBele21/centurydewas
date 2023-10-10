@@ -79,44 +79,46 @@ function displayPlayerInfo(playerInfo) {
 
 // [Rest of the JavaScript code remains the same]
 
-// [Rest of the JavaScript code remains the same]
+// [Previous JS code remains the same]
 
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
-    
+
+    // Reverse the framesData array to display the newest frames first
     framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
 
+        // Format the date
         const dateParts = frame[2].split("/");
         const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
         const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
-        
+
         const durationStr = `${frame[3]} Min`;
         const winner = frame[5];
         const loser = frame[34];
 
-        let opponentName = winner === playerName ? loser : winner;
+        // Determine the opponent's name
+        const opponentName = winner === playerName ? loser : winner;
 
+        // Determine the frame card color
         if(winner === playerName) {
             frameElement.classList.add('winner');
         } else if(winner === "Rummy") {
             frameElement.classList.add('rummy');
-            opponentName = "Rummy";
         } else {
             frameElement.classList.add('loser');
         }
 
         frameElement.innerHTML = `
-            <p>${dateStr}</p>
-            <p>Duration: ${durationStr}</p>
-            <p>${opponentName === "Rummy" ? "Format" : "Opponent"}: ${opponentName}</p>
+            <p><span class="icon">&#128337;</span> ${dateStr}, ${durationStr}</p>
+            <p>Opponent: ${opponentName === "Rummy" ? "Format: Rummy" : opponentName}</p>
         `;
         framesContainer.appendChild(frameElement);
     });
 }
 
-// [Rest of the JavaScript code remains the same]
+// [Rest of the JS code remains the same]
 
 
 
