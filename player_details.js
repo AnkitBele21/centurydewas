@@ -75,27 +75,25 @@ function displayPlayerInfo(playerInfo) {
     document.getElementById('totalMoney').innerText = `Balance: ₹ ${playerInfo[6]}`; // Assuming balance is in column G
 }
 
+// [Existing JavaScript here]
+
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
-
-    // Reverse the framesData array to display the newest frames first
+    
     framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
 
-        // Format the date
         const dateParts = frame[2].split("/");
         const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
         const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
-
+        
         const durationStr = `${frame[3]} Min`;
         const winner = frame[5];
         const loser = frame[34];
 
-        // Determine the opponent's name
         const opponentName = winner === playerName ? loser : winner;
 
-        // Determine the frame card color
         if(winner === playerName) {
             frameElement.classList.add('winner');
         } else if(winner === "Rummy") {
@@ -105,21 +103,18 @@ function displayFramesInfo(framesData, playerName) {
         }
 
         frameElement.innerHTML = `
-            <p>${frame[2]}, ${frame[3]} Min</p>
-            <p class="${frame[5] === playerName ? 'winner-you' : 'winner'}">Winner: ${frame[5]}</p>
-            <p>Date: ${dateStr}, Duration: ${durationStr}</p>
+            <p>${dateStr}, Duration: ${durationStr}</p>
             <p>Opponent: ${opponentName}</p>
-            <p>Winner: ${winner}</p>
         `;
         framesContainer.appendChild(frameElement);
     });
 }
 
-
 function displayRankInfo(rankInfo) {
-    document.getElementById('playerRank').innerText = `Rank: ${rankInfo[0]}`; // Assuming Rank is in column A
-    document.getElementById('winRate').innerText = `Win Rate: ${rankInfo[4]}%`; // Assuming Win Rate is in column E
-    document.getElementById('playerCard').style.backgroundColor = rankInfo[3]; // Assuming Color is in column D
+    document.getElementById('playerRank').innerText = `Rank: ${rankInfo[0]}`; 
+    document.getElementById('winRate').innerText = `Win Rate: ${rankInfo[4]}%`; 
+    document.getElementById('playerCard').style.backgroundColor = rankInfo[3]; 
 }
+
 // Load the Google API client and call initClient
 gapi.load('client', initClient);
