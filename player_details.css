@@ -150,6 +150,21 @@ th {
         margin-right: 3px;
     }
 }
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.balance {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.balance.positive {
+    color: red;
+}
+
 
 
 
