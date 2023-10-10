@@ -37,7 +37,7 @@ function fetchRankInfo(playerName) {
         range: RANK_SHEET_NAME,
     }).then(function (response) {
         const values = response.result.values;
-        const rankInfo = values.find(row => row[/*Index for Player Name*/] === playerName);
+        const rankInfo = values.find(row => row[2] === playerName);
         if (rankInfo) {
             displayRankInfo(rankInfo);
         } else {
