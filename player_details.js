@@ -64,6 +64,8 @@ function displayPlayerInfo(playerInfo) {
 
 function displayFramesInfo(framesData) {
     const framesContainer = document.getElementById('framesInfo');
+    const playerName = document.getElementById('playerName').innerText; // Get the displayed player name
+    
     // Reverse the framesData array to display the newest frames first
     framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
@@ -74,13 +76,18 @@ function displayFramesInfo(framesData) {
         const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
         const durationStr = `${frame[3]} Min`;
 
+        // Check if the displayed player is the winner and apply a special class
+        const winnerIsPlayer = frame[5] === playerName;
+        const winnerClass = winnerIsPlayer ? 'winner-you' : 'winner';
+
         frameElement.innerHTML = `
             <p>${dateStr}, ${durationStr}</p>
-            <p>Winner: ${frame[5]}</p>
+            <p class="${winnerClass}">Winner: ${frame[5]}</p>
         `;
         framesContainer.appendChild(frameElement);
     });
 }
+
 
 // Load the Google API client and call initClient
 gapi.load('client', initClient);
