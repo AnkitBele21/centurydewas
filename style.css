@@ -83,11 +83,3 @@ main {
     height: 45px;
 }
 
-@keyframes roll {
-    0%, 100% {
-        transform: translateX(-50%) rotate(0deg);
-    }
-    50% {
-        transform: translateX(-50%) rotate(-360deg);
-    }
-}
