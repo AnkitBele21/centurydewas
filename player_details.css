@@ -1,37 +1,17 @@
 body {
-    background-color: #22252B;
-    color: white;
     font-family: Arial, sans-serif;
-    margin: 0;
-    margin: 10px;
-    padding: 0;
 }
 
 header {
-    background-color: #22252B;
-    padding: 10px;
-    text-align: center;
+    background-color: #4CAF50;
 }
-#logo {
-    width: 150px;
-}
+
 #playerCard {
-    background-color: #33363B;
     border-radius: 8px;
-    margin: 20px auto;
-    padding: 20px;
-    text-align: center;
-    width: 80%;
 }
-#playerCard h2 {
-    margin-bottom: 10px;
-}
-#framesInfo {
-    margin: 20px;
-}
-/* ... (previous CSS) ... */
+
 .frame-card {
-    background-color: #3C3E42;
+    background-color: #6c757d;
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 15px;
@@ -39,15 +19,19 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+
 .frame-card p {
     margin: 5px 0;
 }
+
 .frame-card .winner {
     color: white;
 }
+
 .frame-card .winner.you {
     color: #01AB7A;
 }
+
 .winner-you {
     color: #01AB7A; /* Your green color */
 }
