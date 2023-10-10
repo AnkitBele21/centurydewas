@@ -63,13 +63,26 @@ function displayPlayerInfo(playerInfo) {
     // Add more player info display logic as needed
 }
 
-function displayFramesInfo(framesData) {
-    const framesContainer = document.getElementById('framesInfo');
-    framesData.forEach(frame => {
-        const frameElement = document.createElement('div');
-        frameElement.innerText = `Date: ${frame[2]}, Duration: ${frame[3]}, Winner: ${frame[5]}`; // Adjust column indices as needed
-        framesContainer.appendChild(frameElement);
+function displayFramesInfo(playerFrames) {
+    const framesInfoDiv = document.getElementById('framesInfo');
+    playerFrames.forEach(frame => {
+        const frameCard = document.createElement('div');
+        frameCard.className = 'frame-card';
+
+        const winnerInfo = document.createElement('p');
+        winnerInfo.innerText = `Winner: ${frame[5]}`;
+        
+        const frameDate = document.createElement('p');
+        frameDate.className = 'frame-date';
+        const date = new Date(frame[2]);
+        frameDate.innerText = `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${frame[3]} Min`;
+
+        frameCard.appendChild(frameDate);
+        frameCard.appendChild(winnerInfo);
+        framesInfoDiv.appendChild(frameCard);
     });
+}
+
 }
 
 gapi.load('client', initClient);
