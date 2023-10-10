@@ -64,7 +64,8 @@ function displayPlayerInfo(playerInfo) {
 
 function displayFramesInfo(framesData) {
     const framesContainer = document.getElementById('framesInfo');
-    framesData.forEach(frame => {
+    // Reverse the framesData array to display the newest frames first
+    framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
 
