@@ -62,24 +62,38 @@ function displayPlayerInfo(playerInfo) {
     document.getElementById('totalMoney').innerText = `Total Money: ${playerInfo[6]}`;
 }
 
-function displayFramesInfo(framesData) {
-    const framesContainer = document.getElementById('framesInfo');
-    framesData.forEach(frame => {
-        const frameElement = document.createElement('div');
-        frameElement.className = 'frame-card';
+// ... (previous JavaScript) ...
 
-        const dateParts = frame[2].split("/");
-        const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-        const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
-        const durationStr = `${frame[3]} Min`;
+function displayFramesInfo(playerFrames) {
+    const framesInfoDiv = document.getElementById('framesInfo');
+    const playerName = document.getElementById('playerName').innerText; // Get the displayed player name
+    
+    playerFrames.forEach(frame => {
+        const frameCard = document.createElement('div');
+        frameCard.className = 'frame-card';
 
-        frameElement.innerHTML = `
-            <p>${dateStr}, ${durationStr}</p>
-            <p>Winner: ${frame[5]}</p>
-        `;
-        framesContainer.appendChild(frameElement);
+        const frameDate = document.createElement('p');
+        frameDate.className = 'frame-date';
+        const date = new Date(frame[2]);
+        frameDate.innerText = `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${frame[3]} Min`;
+
+        const winnerInfo = document.createElement('p');
+        winnerInfo.className = 'winner';
+        winnerInfo.innerText = `Winner: ${frame[5]}`;
+        
+        // Check if the displayed player is the winner and apply a special class
+        if(frame[5] === playerName) {
+            winnerInfo.classList.add('you');
+        }
+
+        frameCard.appendChild(frameDate);
+        frameCard.appendChild(winnerInfo);
+        framesInfoDiv.appendChild(frameCard);
     });
 }
+
+// ... (rest of the JavaScript) ...
+
 
 // Load the Google API client and call initClient
 gapi.load('client', initClient);
