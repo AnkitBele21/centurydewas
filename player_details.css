@@ -16,11 +16,98 @@ header {
 }
 
 #playerCard {
-    background-color: #3C3E42;
     border-radius: 8px;
     margin: 20px auto;
     padding: 20px;
+    text-align: center;
     width: 80%;
+    background-color: #6c757d; /* Grey color */
+    color: #FFFFFF; /* White text */
+}
+
+#playerCard h2 {
+    margin-bottom: 10px;
+}
+
+#framesInfo {
+    margin: 20px;
+}
+
+/* Styles for the table */
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+}
+
+/* Styles for the frame entries */
+.winner td {
+    background-color: #28a745; /* Green */
+}
+
+.loser td {
+    background-color: #dc3545; /* Red */
+}
+
+.rummy td {
+    background-color: #6c757d; /* Grey */
+}
+
+.card-text {
+    margin-bottom: 0.5rem;
+}
+
+/* New/Modified CSS */
+.frame-card {
+    background-color: #3C3E42;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.frame-card p {
+    margin: 5px 0;
+}
+
+.frame-card.winner {
+    background-color: #01AB7A;
+}
+
+.frame-card.rummy {
+    background-color: #3C3E42;
+}
+
+.frame-card.loser {
+    background-color: #FF4747;
+}
+
+/* Responsive design */
+@media only screen and (max-width: 600px) {
+    #playerCard {
+        width: 95%;
+    }
+}
+
+/* Profile Card Styles */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.left-section {
     display: flex;
     align-items: center;
 }
@@ -36,7 +123,23 @@ header {
     text-align: left;
 }
 
-#playerName {
+.balance {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.balance.positive {
+    color: red;
+}
+
+.card-body {
+    background: #2C2E34;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+.card-title {
     font-size: 1.8rem;
     margin-bottom: 5px;
 }
@@ -46,85 +149,7 @@ header {
     margin-bottom: 5px;
 }
 
-.balance {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.balance.positive {
-    color: red;
-}
-
 .alert {
     font-size: 1.1rem;
     margin-bottom: 10px;
-    color: red;
-    text-align: center;
-    padding: 10px;
-    background-color: #3C3E42;
-    border-radius: 8px;
-    width: 80%;
-    margin: 0 auto 20px auto;
-}
-
-#framesInfo {
-    margin: 20px;
-}
-
-.frame-card {
-    background-color: #3C3E42;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.frame-card p {
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
-}
-
-.frame-card p .icon {
-    margin-right: 5px;
-}
-
-.frame-card.winner {
-    background-color: #01AB7A;
-}
-
-.frame-card.rummy {
-    background-color: #3C3E42;
-}
-
-.frame-card.loser {
-    background-color: #FF4747;
-}
-
-@media only screen and (max-width: 600px) {
-    #playerCard {
-        flex-direction: column;
-        align-items: center;
-        width: 95%;
-    }
-
-    .player-info {
-        text-align: center;
-    }
-
-    .frame-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .frame-card p {
-        margin: 5px 0;
-        font-size: 0.9rem;
-    }
-
-    .frame-card p .icon {
-        margin-right: 3px;
-    }
 }
