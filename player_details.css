@@ -217,6 +217,25 @@ th {
     font-size: 1.1rem;
     margin-bottom: 10px;
 }
+/* ... [Previous CSS] ... */
+
+.card-body {
+    background: #6c757d; /* Grey color similar to the rummy card */
+    border-radius: 10px;
+    color: #FFFFFF; /* Text color set to white */
+}
+
+.balance {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.balance.positive {
+    color: red; /* If balance is more than 0, text color will be red */
+}
+
+/* ... [Rest of the CSS] ... */
 
 
 
