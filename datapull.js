@@ -4,21 +4,26 @@ const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 const SHEET_NAME = 'Rank';
 
 // Load the Google Sheets API
-function loadClient() {
-    gapi.load('client', initClient);
-}
+gapi.load('client', initClient);
 
 // Initialize the Google Sheets API client
 function initClient() {
-    gapi.client.init({
-        apiKey: API_KEY,
-        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-    }).then(function() {
-        // Fetch data
-        fetchSheetData();
-    }).catch(function(error) {
-        console.error("Error initializing API client:", error);
-    });
+    // Check if gapi.client is defined before calling methods on it
+    if (typeof gapi.client !== "undefined") {
+        gapi.client.init({
+            apiKey: API_KEY,
+            discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+        }).then(function() {
+            // Fetch data
+            fetchSheetData();
+        }).catch(function(error) {
+            // Log any errors in the console
+            console.error("Error initializing client:", error);
+        });
+    } else {
+        // Log an error message if gapi.client is not defined
+        console.error("gapi.client is not defined. Ensure the Google API client library is loaded.");
+    }
 }
 
 // ... [Rest of your code remains the same]
