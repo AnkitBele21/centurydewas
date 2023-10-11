@@ -1,7 +1,10 @@
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 
-document.getElementById('submitBtn').addEventListener('click', fetchPlayerInfo);
+document.getElementById('playerInfoForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevents the form from submitting in the traditional way
+    fetchPlayerInfo();
+});
 
 function fetchPlayerInfo() {
     const name = document.getElementById('name').value;
