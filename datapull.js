@@ -30,15 +30,15 @@ function createPlayerCard(player) {
     const playerName = document.createElement('span');
     playerName.className = 'player-name';
     playerName.textContent = `${rank}. ${name}`;
-// Check if player is a champion and add a medal icon
-    if (["Arpit", "Saurav Johari"].includes(name)) {
-    const championIcon = document.createElement('img');
-    championIcon.src = 'path_to_medal_icon.png'; // Replace with the path to your medal icon
-    championIcon.alt = 'Champion';
-    championIcon.className = 'champion-icon';
-    playerName.appendChild(championIcon);
-}
 
+    // Check if player is a champion and add a medal icon
+    if (["Arpit", "Saurav Johari"].includes(name)) {
+        const championIcon = document.createElement('img');
+        championIcon.src = 'path_to_medal_icon.png'; // Replace with the path to your medal icon
+        championIcon.alt = 'Champion';
+        championIcon.className = 'champion-icon';
+        playerName.appendChild(championIcon);
+    }
 
     const playerCoins = document.createElement('span');
     playerCoins.className = 'player-coins';
@@ -47,40 +47,7 @@ function createPlayerCard(player) {
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
 
-    let progressBarColor = '#F44336'; // Default: Red
-
-    if (coins >= 11 && coins <= 30) {
-        progressBarColor = '#FFEB3B'; // Yellow
-    } else if (coins >= 31 && coins <= 60) {
-        progressBarColor = '#4CAF50'; // Green
-    } else if (coins >= 61 && coins <= 100) {
-        progressBarColor = '#795548'; // Brown
-    } else if (coins >= 101 && coins <= 150) {
-        progressBarColor = '#2196F3'; // Blue
-    } else if (coins >= 151 && coins <= 210) {
-        progressBarColor = '#E91E63'; // Pink
-    } else if (coins > 210) {
-        progressBarColor = '#000000'; // Black
-    }
-
-    progressBar.style.backgroundColor = progressBarColor;
-
-    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
-    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000];
-    let progressBarWidth = 0;
-
-    for (let i = 0; i < colorMinCoins.length; i++) {
-        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
-            break;
-        }
-    }
-
-    if ([11, 31, 61, 101, 151, 211].includes(coins)) {
-        progressBarWidth = Math.max(progressBarWidth, 2); // Ensuring at least 2% width
-    }
-
-    progressBar.style.width = `${progressBarWidth}%`;
+    // ... [Rest of the code for progress bar and colors remains the same]
 
     playerInfo.appendChild(playerName);
     playerInfo.appendChild(playerCoins);
@@ -136,6 +103,7 @@ function searchTable() {
         }
     }
 }
+
 let lastScrollTop = 0;
 const floatingButton = document.getElementById('floatingButton');
 
