@@ -82,18 +82,3 @@ main {
     width: 45px;
     height: 45px;
 }
-.modal-content {
-    background-color: #22252B;
-    color: white;
-}
-
-.modal-title {
-    color: #FFD700;
-}
-
-.btn-primary {
-    background-color: #FFD700;
-    border-color: #FFD700;
-}
-
-/* Add any additional styling as per your theme */
