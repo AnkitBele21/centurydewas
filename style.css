@@ -97,6 +97,8 @@ main {
     height: 45px;
 }
 
+/* Your existing CSS code... */
+/* ... */
 /* Added CSS for Modal */
 .modal {
     display: none;
@@ -129,3 +131,18 @@ main {
     border-radius: 5px;
     float: right;
 }
+
+button {
+    background-color: #01AB7A;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #018f69;
+}
+
