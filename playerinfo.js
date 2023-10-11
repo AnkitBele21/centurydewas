@@ -1,6 +1,8 @@
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 
+document.getElementById('submitBtn').addEventListener('click', fetchPlayerInfo);
+
 function fetchPlayerInfo() {
     const name = document.getElementById('name').value;
     const number = document.getElementById('number').value;
@@ -13,7 +15,7 @@ function fetchPlayerInfo() {
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/snookerplus!A2:Z1000?key=${API_KEY}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok' + response.statusText);
+                throw new Error('Network response was not ok: ' + response.statusText);
             }
             return response.json();
         })
@@ -27,6 +29,3 @@ function fetchPlayerInfo() {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
-// Assuming you have a button with an ID of 'submitBtn' to trigger the fetchPlayerInfo function
-document.getElementById('submitBtn').addEventListener('click', fetchPlayerInfo);
