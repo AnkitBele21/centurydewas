@@ -6,13 +6,25 @@ body {
     padding: 0;
 }
 header {
-    background-color: #33363B;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* ... existing styles ... */
+    flex-direction: column; /* Stack items vertically */
+}
+
+h1 {
+    color: #01AB7A;
+    margin: 10px 0 0; /* Add top margin */
+    font-size: 18px; /* Smaller font size */
+    font-weight: 600; /* Semi-bold */
+}
+
+#floatingButton {
+    position: absolute; /* Absolute positioning */
+    top: 20px; /* Adjusted top position */
+    right: 20px; /* Positioned to the right */
+    transform: none; /* Remove translateX */
+    /* ... other styles ... */
+}
+
 }
 header img {
     width: 180px;
