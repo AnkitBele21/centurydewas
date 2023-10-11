@@ -27,16 +27,6 @@
             </form>
         </div>
     </div>
-    <script>
-        document.getElementById('playerInfoForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevents the form from submitting in the traditional way
-            goToDetails();
-        });
-
-        function goToDetails() {
-            const playerName = document.getElementById('name').value;
-            window.location.href = `player_details.html?player=${encodeURIComponent(playerName)}`;
-        }
-    </script>
+    <script src="playerinfo.js" defer></script>
 </body>
 </html>
