@@ -8,10 +8,19 @@ header {
     text-align: center;
 }
 
+header img {
+    width: 180px;
+}
+
 .card {
     border-radius: 8px;
 }
 
 button:hover {
     opacity: 0.8;
+}
+
+small {
+    display: block;
+    margin-top: 5px;
 }
