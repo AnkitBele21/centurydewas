@@ -28,10 +28,6 @@ function initClient() {
 
 // ... [Rest of your code remains the same]
 
-// Add this line to ensure loadClient is called once the window is fully loaded
-window.onload = loadClient;
-
-
 // Function to create a player card element
 function createPlayerCard(player) {
     const { rank, name, coins } = player;
