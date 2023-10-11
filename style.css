@@ -82,3 +82,11 @@ main {
     width: 45px;
     height: 45px;
 }
+/* style.css */
+
+.champion-icon {
+    width: 20px;  /* or your desired size */
+    height: 20px; /* or your desired size */
+    margin-left: 5px; /* space between name and icon */
+    /* additional styling as per your design */
+}
