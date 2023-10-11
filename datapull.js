@@ -6,82 +6,44 @@ const SHEET_NAME = 'Rank';
 // Load the Google Sheets API
 gapi.load('client', initClient);
 
-// Initialize the Google Sheets API client
 function initClient() {
     gapi.client.init({
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function() {
-        // Fetch data
         fetchSheetData();
     });
 }
 
-// Function to create a player card element
 function createPlayerCard(player) {
-    const { rank, name, coins } = player;
+    //... [Existing code for creating player cards]
 
-    const playerCard = document.createElement('div');
-    playerCard.className = 'player-card';
-
-    const playerInfo = document.createElement('div');
-    playerInfo.className = 'player-info';
-
-    const playerName = document.createElement('span');
-    playerName.className = 'player-name';
-    playerName.textContent = `${rank}. ${name}`;
-
-    const playerCoins = document.createElement('span');
-    playerCoins.className = 'player-coins';
-    playerCoins.textContent = `S+ Coins: ${coins}`;
-
-    const progressBar = document.createElement('div');
-    progressBar.className = 'progress-bar';
-
-    let progressBarColor = '#F44336'; // Default: Red
-
-    if (coins >= 11 && coins <= 30) {
-        progressBarColor = '#FFEB3B'; // Yellow
-    } else if (coins >= 31 && coins <= 60) {
-        progressBarColor = '#4CAF50'; // Green
-    } else if (coins >= 61 && coins <= 100) {
-        progressBarColor = '#795548'; // Brown
-    } else if (coins >= 101 && coins <= 150) {
-        progressBarColor = '#2196F3'; // Blue
-    } else if (coins >= 151 && coins <= 210) {
-        progressBarColor = '#E91E63'; // Pink
-    } else if (coins > 210) {
-        progressBarColor = '#000000'; // Black
-    }
-
-    progressBar.style.backgroundColor = progressBarColor;
-
-    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
-    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000];
-    let progressBarWidth = 0;
-
-    for (let i = 0; i < colorMinCoins.length; i++) {
-        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
-            break;
-        }
-    }
-
-    if ([11, 31, 61, 101, 151, 211].includes(coins)) {
-        progressBarWidth = Math.max(progressBarWidth, 2); // Ensuring at least 2% width
-    }
-
-    progressBar.style.width = `${progressBarWidth}%`;
-
-    playerInfo.appendChild(playerName);
-    playerInfo.appendChild(playerCoins);
-    playerCard.appendChild(playerInfo);
-    playerCard.appendChild(progressBar);
-
+    playerCard.addEventListener('click', function() {
+        openPopup(player);
+    });
+    
     return playerCard;
 }
 
-// Function to display players
+function openPopup(player) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p>${player.name}</p>
+            <!-- Add more player details here -->
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.close-button').addEventListener('click', function() {
+        document.body.removeChild(modal);
+    });
+}
+
 function displayPlayers(players) {
     const playerContainer = document.getElementById('playerContainer');
     playerContainer.innerHTML = '';
@@ -90,7 +52,6 @@ function displayPlayers(players) {
     });
 }
 
-// Function to fetch data from Google Sheets
 function fetchSheetData() {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: SHEET_ID,
@@ -112,33 +73,9 @@ function fetchSheetData() {
     });
 }
 
-// Function to search and filter data
 function searchTable() {
-    var input, filter, cards, name, i;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    cards = document.getElementsByClassName("player-card");
-    for (i = 0; i < cards.length; i++) {
-        name = cards[i].getElementsByClassName("player-name")[0].textContent;
-        if (name.toUpperCase().indexOf(filter) > -1) {
-            cards[i].style.display = "";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
+    //... [Existing code for search functionality]
 }
-let lastScrollTop = 0;
-const floatingButton = document.getElementById('floatingButton');
-
-window.addEventListener("scroll", function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop) {
-        floatingButton.style.opacity = "0";
-    } else {
-        floatingButton.style.opacity = "1";
-    }
-    lastScrollTop = scrollTop;
-});
 
 // Call the initClient function to start fetching data
 initClient();
