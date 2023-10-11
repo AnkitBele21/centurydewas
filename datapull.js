@@ -14,12 +14,20 @@ function initClient() {
     }).then(function() {
         // Fetch data
         fetchSheetData();
+    }).catch(function(error) {
+        // Log any errors in the console
+        console.error("Error initializing client:", error);
     });
 }
 
 // Function to create a player card element
 function createPlayerCard(player) {
     const { rank, name, coins } = player;
+
+    // Create a link element
+    const playerLink = document.createElement('a');
+    playerLink.href = `https://leaderboard.snookerplus.in/playerinfo?player=${encodeURIComponent(name)}`;
+    playerLink.style.textDecoration = 'none'; // Optional: to remove underline from link
 
     const playerCard = document.createElement('div');
     playerCard.className = 'player-card';
@@ -38,45 +46,15 @@ function createPlayerCard(player) {
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
 
-    let progressBarColor = '#F44336'; // Default: Red
+    //... [rest of your code to create and style progressBar]
 
-    if (coins >= 11 && coins <= 30) {
-        progressBarColor = '#FFEB3B'; // Yellow
-    } else if (coins >= 31 && coins <= 60) {
-        progressBarColor = '#4CAF50'; // Green
-    } else if (coins >= 61 && coins <= 100) {
-        progressBarColor = '#795548'; // Brown
-    } else if (coins >= 101 && coins <= 150) {
-        progressBarColor = '#2196F3'; // Blue
-    } else if (coins >= 151 && coins <= 210) {
-        progressBarColor = '#E91E63'; // Pink
-    } else if (coins > 210) {
-        progressBarColor = '#000000'; // Black
-    }
+    // Append playerInfo and progressBar to playerLink instead of playerCard
+    playerLink.appendChild(playerInfo);
+    playerLink.appendChild(playerCoins);
+    playerLink.appendChild(progressBar);
 
-    progressBar.style.backgroundColor = progressBarColor;
-
-    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
-    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000];
-    let progressBarWidth = 0;
-
-    for (let i = 0; i < colorMinCoins.length; i++) {
-        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
-            break;
-        }
-    }
-
-    if ([11, 31, 61, 101, 151, 211].includes(coins)) {
-        progressBarWidth = Math.max(progressBarWidth, 2); // Ensuring at least 2% width
-    }
-
-    progressBar.style.width = `${progressBarWidth}%`;
-
-    playerInfo.appendChild(playerName);
-    playerInfo.appendChild(playerCoins);
-    playerCard.appendChild(playerInfo);
-    playerCard.appendChild(progressBar);
+    // Append playerLink to playerCard
+    playerCard.appendChild(playerLink);
 
     return playerCard;
 }
@@ -127,18 +105,5 @@ function searchTable() {
         }
     }
 }
-let lastScrollTop = 0;
-const floatingButton = document.getElementById('floatingButton');
 
-window.addEventListener("scroll", function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop) {
-        floatingButton.style.opacity = "0";
-    } else {
-        floatingButton.style.opacity = "1";
-    }
-    lastScrollTop = scrollTop;
-});
-
-// Call the initClient function to start fetching data
-initClient();
+//... [rest of your code]
