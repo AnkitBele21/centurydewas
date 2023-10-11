@@ -31,14 +31,13 @@ function createPlayerCard(player) {
     playerName.className = 'player-name';
     playerName.textContent = `${rank}. ${name}`;
 
-    // Check if player is a champion and add a medal icon
-    if (["Arpit", "Saurav Johari"].includes(name)) {
-        const championIcon = document.createElement('img');
-        championIcon.src = 'path_to_medal_icon.png'; // Replace with the path to your medal icon
-        championIcon.alt = 'Champion';
-        championIcon.className = 'champion-icon';
-        playerName.appendChild(championIcon);
-    }
+   // Check if player is a champion and add a medal icon
+if (["Arpit", "Saurav Johari"].includes(name)) {
+    const championIcon = document.createElement('span');
+    championIcon.textContent = '🏅'; // Using a medal emoji
+    championIcon.className = 'champion-icon';
+    playerName.appendChild(championIcon);
+}
 
     const playerCoins = document.createElement('span');
     playerCoins.className = 'player-coins';
