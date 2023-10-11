@@ -34,7 +34,7 @@ function createPlayerCard(player) {
    // Check if player is a champion and add a medal icon
 if (["Arpit", "Saurav Johari"].includes(name)) {
     const championIcon = document.createElement('span');
-    championIcon.textContent = '🏅'; // Using a medal emoji
+    championIcon.textContent = '🎖️'; // Using a medal emoji
     championIcon.className = 'champion-icon';
     playerName.appendChild(championIcon);
 }
