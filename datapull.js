@@ -7,8 +7,8 @@ const SHEET_NAME = 'Rank';
 gapi.load('client', initClient);
 
 // Initialize the Google Sheets API client
+// Initialize the Google Sheets API client
 function initClient() {
-    // Check if gapi.client is defined before calling methods on it
     if (typeof gapi.client !== "undefined") {
         gapi.client.init({
             apiKey: API_KEY,
