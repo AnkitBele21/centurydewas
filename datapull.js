@@ -4,7 +4,9 @@ const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 const SHEET_NAME = 'Rank';
 
 // Load the Google Sheets API
-gapi.load('client', initClient);
+function loadClient() {
+    gapi.load('client', initClient);
+}
 
 // Initialize the Google Sheets API client
 function initClient() {
@@ -14,8 +16,16 @@ function initClient() {
     }).then(function() {
         // Fetch data
         fetchSheetData();
+    }).catch(function(error) {
+        console.error("Error initializing API client:", error);
     });
 }
+
+// ... [Rest of your code remains the same]
+
+// Add this line to ensure loadClient is called once the window is fully loaded
+window.onload = loadClient;
+
 
 // Function to create a player card element
 function createPlayerCard(player) {
