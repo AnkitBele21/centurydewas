@@ -139,26 +139,6 @@ window.addEventListener("scroll", function() {
     }
     lastScrollTop = scrollTop;
 });
-document.addEventListener('DOMContentLoaded', () => {
-    // Add click event listener to player elements
-    document.querySelectorAll('.player-element-class').forEach(playerElement => {
-        playerElement.addEventListener('click', () => {
-            // Trigger the modal to appear
-            new bootstrap.Modal(document.getElementById('playerModal')).show();
-        });
-    });
-
-    // Handle "View Card" click
-    document.getElementById('viewCardBtn').addEventListener('click', () => {
-        // Logic to navigate to the player info page with the respective player data
-        // Example: window.location.href = `https://leaderboard.snookerplus.in/playerinfo?player=${playerName}`;
-    });
-
-    // Handle "Challenge" click
-    document.getElementById('challengeBtn').addEventListener('click', () => {
-        // Logic to initiate a challenge
-    });
-});
 
 // Call the initClient function to start fetching data
 initClient();
