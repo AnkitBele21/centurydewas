@@ -14,18 +14,25 @@
     <div class="container mt-5">
         <div class="card bg-secondary p-4">
             <h2 class="mb-4">Enter Player Information</h2>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="name" required>
-            </div>
-            <div class="mb-3">
-                <label for="number" class="form-label">Number:</label>
-                <input type="number" class="form-control" id="number" required>
-            </div>
-            <button onclick="goToDetails()" class="btn btn-success w-100">Get Info</button>
+            <form id="playerInfoForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="number" class="form-label">Number:</label>
+                    <input type="number" class="form-control" id="number" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Get Info</button>
+            </form>
         </div>
     </div>
     <script>
+        document.getElementById('playerInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevents the form from submitting in the traditional way
+            goToDetails();
+        });
+
         function goToDetails() {
             const playerName = document.getElementById('name').value;
             window.location.href = `player_details.html?player=${encodeURIComponent(playerName)}`;
