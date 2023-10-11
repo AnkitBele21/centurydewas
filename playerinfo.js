@@ -11,7 +11,12 @@ function fetchPlayerInfo() {
     }
 
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/snookerplus!A2:Z1000?key=${API_KEY}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             const playerRow = data.values.find(row => row[2] === name && row[4] === number);
             if (playerRow) {
@@ -22,3 +27,6 @@ function fetchPlayerInfo() {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
+
+// Assuming you have a button with an ID of 'submitBtn' to trigger the fetchPlayerInfo function
+document.getElementById('submitBtn').addEventListener('click', fetchPlayerInfo);
