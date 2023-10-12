@@ -104,7 +104,6 @@ function displayPlayerInfo(playerInfo) {
 function displayFramesInfo(framesData, playerName) {
     const framesContainer = document.getElementById('framesInfo');
 
-    // Reverse the framesData array to display the newest frames first
     framesData.reverse().forEach(frame => {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
@@ -137,16 +136,23 @@ function displayFramesInfo(framesData, playerName) {
                 <p>Format: Rummy</p>
             `;
         } else {
+            const isWinner = frame[5] === playerName;
+            const currencyValue = frame[9] || "LP";
+            const sPlusValue = isWinner ? frame[50] : frame[51];
+            const currencyDisplay = isWinner ? `+₹${currencyValue}` : `-₹${currencyValue}`;
+            const sPlusDisplay = `S+${sPlusValue}`;
+
             frameElement.innerHTML = `
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
                 <p>Opponent: ${opponentName}</p>
+                <p>Amount: ${currencyDisplay}</p>
+                <p>Score: ${sPlusDisplay}</p>
             `;
         }
         framesContainer.appendChild(frameElement);
     });
 }
 
-// [Remaining JavaScript remains the same]
 
 
 
