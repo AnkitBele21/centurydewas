@@ -28,11 +28,11 @@ h1 {
     right: 20px;
     background-color: #01AB7A;
     color: #FFFFFF;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     transition: background-color 0.3s ease;
 }
 #loginButton:hover {
