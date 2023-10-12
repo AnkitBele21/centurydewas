@@ -139,8 +139,8 @@ function displayFramesInfo(framesData, playerName) {
             const isWinner = frame[5] === playerName;
             const currencyValue = frame[9] || "LP";
             const sPlusValue = isWinner ? frame[50] : frame[51];
-            const currencyDisplay = isWinner ? `+${currencyValue}` : `-₹${currencyValue}`;
-            const sPlusDisplay = `Coins${sPlusValue}`;
+            const currencyDisplay = isWinner ? `+${currencyValue}` : `-${currencyValue}`;
+            const sPlusDisplay = `Coins ${sPlusValue}`;
 
             frameElement.innerHTML = `
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
