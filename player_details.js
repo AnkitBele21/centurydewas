@@ -131,26 +131,29 @@ function displayFramesInfo(framesData, playerName) {
 
         // Check if the frame was a Rummy
         if (opponentName === "Rummy") {
-            frameElement.innerHTML = `
-                <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
-                <p>Format: Rummy</p>
-            `;
-        } else {
-            const isWinner = frame[5] === playerName;
-            const currencyValue = frame[9] || "LP";
-            const sPlusValue = isWinner ? frame[50] : frame[51];
-            const currencyDisplay = isWinner ? `+${currencyValue}` : `-${currencyValue}`;
-            const sPlusDisplay = `Coins ${sPlusValue}`;
+    frameElement.innerHTML = `
+        <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
+        <p>Format: Rummy</p>
+    `;
+} else if (opponentName === "Tie") {
+    frameElement.innerHTML = `
+        <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
+        <p>Result: Tie</p>
+    `;
+} else {
+    const isWinner = frame[5] === playerName;
+    const currencyValue = frame[9] || "LP";
+    const sPlusValue = isWinner ? frame[50] : frame[51];
+    const currencyDisplay = isWinner ? `+${currencyValue}` : `-${currencyValue}`;
+    const sPlusDisplay = `Coins ${sPlusValue}`;
 
-            frameElement.innerHTML = `
-                <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
-                <p>Opponent: ${opponentName}</p>
-                <p>${currencyDisplay}, ${sPlusDisplay}</p>
-            `;
-        }
-        framesContainer.appendChild(frameElement);
-    });
+    frameElement.innerHTML = `
+        <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
+        <p>Opponent: ${opponentName}</p>
+        <p>${currencyDisplay}, ${sPlusDisplay}</p>
+    `;
 }
+framesContainer.appendChild(frameElement);
 
 
 
