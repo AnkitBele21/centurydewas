@@ -57,7 +57,9 @@ header {
 .frame-card.rummy {
     background-color: #3C3E42;
 }
-
+.frame-card.tie {
+    background-color: #3C3E42;
+}
 .frame-card.loser {
     background-color: #FF4747;
 }
