@@ -46,40 +46,40 @@ if (["Arpit", "Saurav Johari"].includes(name)) {
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
 
-    let progressBarColor = '#F44336'; // Default: Red
+   let progressBarColor = '#F44336'; // Default: Red
 
-    if (coins >= 11 && coins <= 30) {
-        progressBarColor = '#FFEB3B'; // Yellow
-    } else if (coins >= 31 && coins <= 60) {
-        progressBarColor = '#4CAF50'; // Green
-    } else if (coins >= 61 && coins <= 100) {
-        progressBarColor = '#795548'; // Brown
-    } else if (coins >= 101 && coins <= 150) {
-        progressBarColor = '#2196F3'; // Blue
-    } else if (coins >= 151 && coins <= 210) {
-        progressBarColor = '#E91E63'; // Pink
-    } else if (coins > 210) {
-        progressBarColor = '#000000'; // Black
-    }
+        // Updated color and range conditions
+        if (coins >= 21 && coins <= 30) {
+            progressBarColor = '#FFEB3B'; // Yellow
+        } else if (coins >= 31 && coins <= 40) {
+            progressBarColor = '#4CAF50'; // Green
+        } else if (coins >= 41 && coins <= 50) {
+            progressBarColor = '#795548'; // Brown
+        } else if (coins >= 51 && coins <= 60) {
+            progressBarColor = '#2196F3'; // Blue
+        } else if (coins >= 61 && coins <= 70) {
+            progressBarColor = '#E91E63'; // Pink
+        } else if (coins > 70) {
+            progressBarColor = '#000000'; // Black
+        }
 
-    progressBar.style.backgroundColor = progressBarColor;
+        progressBar.style.backgroundColor = progressBarColor;
 
-    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
-    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000];
-    let progressBarWidth = 0;
+   const colorMinCoins = [0, 21, 31, 41, 51, 61, 71];
+        const colorMaxCoins = [20, 30, 40, 50, 60, 70, 1000];
+        let progressBarWidth = 0;
 
     for (let i = 0; i < colorMinCoins.length; i++) {
-        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
-            break;
+            if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
+                progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
+                break;
+            }
         }
-    }
+   if ([21, 31, 41, 51, 61, 71].includes(coins)) {
+            progressBarWidth = Math.max(progressBarWidth, 2);
+        }
 
-    if ([11, 31, 61, 101, 151, 211].includes(coins)) {
-        progressBarWidth = Math.max(progressBarWidth, 2); // Ensuring at least 2% width
-    }
-
-    progressBar.style.width = `${progressBarWidth}%`;
+        progressBar.style.width = `${progressBarWidth}%`;
 
     playerInfo.appendChild(playerName);
     playerInfo.appendChild(playerCoins);
