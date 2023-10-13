@@ -110,15 +110,15 @@ function displayFramesInfo(framesData, playerName) {
         const loser = frame[34];
 
         // Determine the opponent's name
-        const opponentName = winner === playerName ? loser : winner;
+        let opponentName = winner === playerName ? loser : winner;
 
         // Determine the frame card color
         if(winner === playerName) {
             frameElement.classList.add('winner');
         } else if(winner === "Rummy") {
             frameElement.classList.add('rummy');
-        } else if(winner === "Tie") {  // Check if it's a Tie
-            frameElement.classList.add('tie');  // Add a new CSS class for "Tie"
+        } else if(winner === "Tie") {
+            frameElement.classList.add('tie');
         } else {
             frameElement.classList.add('loser');
         }
@@ -129,10 +129,18 @@ function displayFramesInfo(framesData, playerName) {
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
                 <p>Format: Rummy</p>
             `;
-        } else if (winner === "Tie") {  // Check if it's a Tie
+        } else if (winner === "Tie") {
+            // Fetch additional data for Tie
+            const additionalNameM = frame[12]; // Assuming column M is at index 12
+            const additionalNameN = frame[13]; // Assuming column N is at index 13
+
+            // Determine the name to display based on additional columns M and N
+            opponentName = additionalNameM === playerName ? additionalNameN : additionalNameM;
+
             frameElement.innerHTML = `
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
                 <p>Result: Tie</p>
+                <p>Other Player: ${opponentName}</p>
             `;
         } else {
             const isWinner = frame[5] === playerName;
