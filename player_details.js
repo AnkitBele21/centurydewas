@@ -139,8 +139,8 @@ function displayFramesInfo(framesData, playerName) {
 
             frameElement.innerHTML = `
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
+                <p>Opponent: ${opponentName}</p>
                 <p>Result: Tie</p>
-                <p>Other Player: ${opponentName}</p>
             `;
         } else {
             const isWinner = frame[5] === playerName;
