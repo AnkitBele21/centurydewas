@@ -100,8 +100,12 @@ function displayFramesInfo(framesData, playerName) {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
 
-        // ... [Date and duration formatting code remains the same]
+        // Format the date
+        const dateParts = frame[2].split("/");
+        const formattedDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+        const dateStr = `${formattedDate.getDate()} ${formattedDate.toLocaleString('default', { month: 'short' })}, ${formattedDate.getFullYear()}`;
 
+        const durationStr = `${frame[3]} Min`;
         const winner = frame[5];
         const loser = frame[34];
 
@@ -113,19 +117,19 @@ function displayFramesInfo(framesData, playerName) {
             frameElement.classList.add('winner');
         } else if(winner === "Rummy") {
             frameElement.classList.add('rummy');
-        } else if(winner === "Tie") {
+        } else if(winner === "Tie") {  // Check if it's a Tie
             frameElement.classList.add('tie');  // Add a new CSS class for "Tie"
         } else {
             frameElement.classList.add('loser');
         }
 
-        // Check if the frame was a Rummy or Tie
+        // Check if the frame was a Rummy, Tie, or a regular frame
         if (opponentName === "Rummy") {
             frameElement.innerHTML = `
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
                 <p>Format: Rummy</p>
             `;
-        } else if (opponentName === "Tie") {
+        } else if (winner === "Tie") {  // Check if it's a Tie
             frameElement.innerHTML = `
                 <p><span class="icon">&#128197;</span>${dateStr}, <span class="icon">&#128337;</span>${durationStr}</p>
                 <p>Result: Tie</p>
@@ -146,6 +150,7 @@ function displayFramesInfo(framesData, playerName) {
         framesContainer.appendChild(frameElement);
     });
 }
+
 
 // ... [Rest of the code remains the same]
 
