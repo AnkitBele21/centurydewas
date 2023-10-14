@@ -24,6 +24,16 @@
             <p>Total Goods: <span id="totalGoods">000000</span></p>
         </section>
         <section id="frameEntries">
+            <h2>Frame Entries</h2>
+            <div id="frameFilters">
+                <label for="playerNameFilter">Player Name:</label>
+                <input type="text" id="playerNameFilter" placeholder="Enter player name">
+                
+                <label for="dateFilter">Date:</label>
+                <input type="date" id="dateFilter">
+                
+                <button onclick="applyFilters()">Apply Filters</button>
+            </div>
             <!-- Frame entries will be dynamically added here via JavaScript -->
         </section>
     </main>
