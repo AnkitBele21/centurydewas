@@ -8,8 +8,6 @@ async function fetchData(sheetName) {
     return data.values;
 }
 
-// ... [Previous Code]
-
 function createGraph(data, labels, canvasId, graphTitle) {
     var ctx = document.getElementById(canvasId).getContext('2d');
     var myChart = new Chart(ctx, {
@@ -32,12 +30,11 @@ function createGraph(data, labels, canvasId, graphTitle) {
             },
             plugins: {
                 legend: {
-                    display: false // Hides legend to reduce clutter
+                    display: false
                 },
                 tooltip: {
                     callbacks: {
                         title: function(context) {
-                            // Customizing tooltip title
                             return `Details for ${labels[context[0].dataIndex]}`;
                         }
                     }
@@ -58,27 +55,92 @@ function createGraph(data, labels, canvasId, graphTitle) {
 
 async function createTableWisePerformanceGraph() {
     const data = await fetchData('club');
-    const tables = data.map((row, index) => index + 1); // Simplified labels
+    const tables = data.map((row, index) => index + 1);
     const occupancy = data.map(row => row[1]);
-    const filteredData = occupancy.filter(val => val !== '0'); // Exclude zero values
-    const filteredTables = tables.slice(0, filteredData.length); // Match labels to data length
+    const filteredData = occupancy.filter(val => val !== '0');
+    const filteredTables = tables.slice(0, filteredData.length);
     createGraph(filteredData, filteredTables, 'tableWisePerformanceChart', 'Tables Occupied');
 }
 
 async function createDateWisePerformanceGraph() {
     const data = await fetchData('club');
-    const dates = data.map((row, index) => index + 1); // Simplified labels
+    const dates = data.map((row, index) => index + 1);
     const occupancy = data.map(row => row[9]);
-    const filteredData = occupancy.filter(val => val !== '0'); // Exclude zero values
-    const filteredDates = dates.slice(0, filteredData.length); // Match labels to data length
+    const filteredData = occupancy.filter(val => val !== '0');
+    const filteredDates = dates.slice(0, filteredData.length);
     createGraph(filteredData, filteredDates, 'dateWisePerformanceChart', 'Club Performance by Date');
 }
 
-// ... [Previous Code]
+async function fetchFrameEntries() {
+    const data = await fetchData('Frames');
+    return data.map(row => ({
+        date: row[2],
+        duration: row[3],
+        startTime: row[10],
+        playerNames: row.slice(12, 18),
+        frameMoney: row[20]
+    }));
+}
 
+function displayFrameEntries(frameEntries) {
+    const frameEntriesContainer = document.getElementById('frameEntries');
+    frameEntries.forEach(entry => {
+        const frameElement = document.createElement('div');
+        frameElement.className = 'frame-entry';
+        
+        const dateElement = document.createElement('p');
+        dateElement.innerText = `Date: ${entry.date}`;
+        frameElement.appendChild(dateElement);
+        
+        const durationElement = document.createElement('p');
+        durationElement.innerText = `Duration: ${entry.duration} min`;
+        frameElement.appendChild(durationElement);
+        
+        const startTimeElement = document.createElement('p');
+        startTimeElement.innerText = `Start Time: ${entry.startTime}`;
+        frameElement.appendChild(startTimeElement);
+        
+        const playersElement = document.createElement('p');
+        playersElement.innerText = `Players: ${entry.playerNames.join(', ')}`;
+        frameElement.appendChild(playersElement);
+        
+        const frameMoneyElement = document.createElement('p');
+        frameMoneyElement.innerText = `Frame Money: ${entry.frameMoney}`;
+        frameElement.appendChild(frameMoneyElement);
+        
+        frameEntriesContainer.appendChild(frameElement);
+    });
+}
 
-// Initialize graphs on page load
+function applyFilters() {
+    const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
+    const dateFilter = document.getElementById('dateFilter').value;
+    
+    fetchFrameEntries().then(frameEntries => {
+        let filteredEntries = frameEntries;
+        
+        if (playerNameFilter) {
+            filteredEntries = filteredEntries.filter(entry =>
+                entry.playerNames.some(name => name.toLowerCase().includes(playerNameFilter))
+            );
+        }
+        
+        if (dateFilter) {
+            filteredEntries = filteredEntries.filter(entry => entry.date === dateFilter);
+        }
+        
+        if (!playerNameFilter && !dateFilter) {
+            const latestDate = Math.max(...frameEntries.map(entry => new Date(entry.date)));
+            filteredEntries = frameEntries.filter(entry => new Date(entry.date).getTime() === latestDate);
+        }
+        
+        document.getElementById('frameEntries').innerHTML = '';
+        displayFrameEntries(filteredEntries);
+    });
+}
+
 window.onload = function() {
     createTableWisePerformanceGraph();
     createDateWisePerformanceGraph();
+    applyFilters();
 };
