@@ -38,3 +38,19 @@ canvas {
     border-radius: 8px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 }
+/* ... [Your existing CSS code] */
+
+#framesButton {
+    background-color: #01AB7A;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px; /* Spacing from the heading */
+}
+
+#framesButton:hover {
+    background-color: #018a5e;
+}
+
