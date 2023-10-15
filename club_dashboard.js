@@ -9,14 +9,19 @@ async function fetchData(sheetName) {
 }
 
 function createGraph(data, labels, canvasId, graphTitle) {
+    // Filter out zero values and corresponding labels
+    const nonZeroIndices = data.map((val, idx) => val !== '0' ? idx : -1).filter(idx => idx !== -1);
+    const filteredData = nonZeroIndices.map(idx => data[idx]);
+    const filteredLabels = nonZeroIndices.map(idx => labels[idx]);
+
     var ctx = document.getElementById(canvasId).getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: filteredLabels,
             datasets: [{
                 label: graphTitle,
-                data: data,
+                data: filteredData,
                 backgroundColor: '#01AB7A',
                 borderColor: '#018a5e',
                 borderWidth: 1,
@@ -35,7 +40,7 @@ function createGraph(data, labels, canvasId, graphTitle) {
                 tooltip: {
                     callbacks: {
                         title: function(context) {
-                            return `Details for ${labels[context[0].dataIndex]}`;
+                            return `Details for ${filteredLabels[context[0].dataIndex]}`;
                         }
                     }
                 }
