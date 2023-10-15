@@ -58,8 +58,10 @@ function createGraph(data, labels, canvasId, graphTitle) {
     });
 }
 
-async function createTableWisePerformanceGraph() {
-    const data = await fetchData('club');
+// ...
+
+async function createTableWisePerformanceGraph(sheetName) {
+    const data = await fetchData(sheetName);
     const tables = data.map((row, index) => index + 1);
     const occupancy = data.map(row => row[1]);
     const filteredData = occupancy.filter(val => val !== '0');
@@ -67,8 +69,8 @@ async function createTableWisePerformanceGraph() {
     createGraph(filteredData, filteredTables, 'tableWisePerformanceChart', 'Tables Occupied');
 }
 
-async function createDateWisePerformanceGraph() {
-    const data = await fetchData('club');
+async function createDateWisePerformanceGraph(sheetName) {
+    const data = await fetchData(sheetName);
     const dates = data.map((row, index) => index + 1);
     const occupancy = data.map(row => row[9]);
     const filteredData = occupancy.filter(val => val !== '0');
@@ -76,16 +78,13 @@ async function createDateWisePerformanceGraph() {
     createGraph(filteredData, filteredDates, 'dateWisePerformanceChart', 'Club Performance by Date');
 }
 
-async function fetchFrameEntries() {
-    const data = await fetchData('Frames');
-    return data.map(row => ({
-        date: row[2],
-        duration: row[3],
-        startTime: row[10],
-        playerNames: row.slice(12, 18),
-        frameMoney: row[20]
-    }));
-}
+// ...
+
+window.onload = function() {
+    createTableWisePerformanceGraph('club'); // Graph for data in 'club' sheet
+    createDateWisePerformanceGraph('club2'); // Graph for data in 'club2' sheet
+    applyFilters();
+};
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
