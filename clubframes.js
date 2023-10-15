@@ -6,12 +6,12 @@ async function fetchData(sheetName) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
-    return data.values;
+    return data.values.slice(1); // Exclude the header row
 }
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
-    frameEntriesContainer.innerHTML = ''; // Clear previous entries
+    frameEntriesContainer.innerHTML = ''; 
     
     frameEntries.forEach(entry => {
         const frameElement = document.createElement('div');
@@ -34,7 +34,7 @@ function displayFrameEntries(frameEntries) {
         frameElement.appendChild(tableMoneyElement);
         
         const playersElement = document.createElement('p');
-        playersElement.innerText = `Players: ${entry.playerNames.join(', ')}`;
+        playersElement.innerText = `Players: ${entry.playerNames.filter(name => name).join(', ')}`;
         frameElement.appendChild(playersElement);
         
         frameEntriesContainer.appendChild(frameElement);
@@ -51,8 +51,9 @@ function applyFilters() {
             duration: row[3],
             startTime: row[10],
             tableMoney: row[20],
-            playerNames: row.slice(12, 18)
-        }));
+            playerNames: row.slice(12, 18),
+            isValid: row[6] && row[8] // Check if G and I columns are not empty
+        })).filter(entry => entry.isValid); // Filter out invalid entries
         
         if (playerNameFilter) {
             frameEntries = frameEntries.filter(entry =>
@@ -75,8 +76,10 @@ window.onload = function() {
             duration: row[3],
             startTime: row[10],
             tableMoney: row[20],
-            playerNames: row.slice(12, 18)
-        }));
+            playerNames: row.slice(12, 18),
+            isValid: row[6] && row[8] // Check if G and I columns are not empty
+        })).filter(entry => entry.isValid); // Filter out invalid entries
+        
         displayFrameEntries(frameEntries);
     });
 };
