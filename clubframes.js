@@ -1,4 +1,3 @@
-// Add your API_KEY and SHEET_ID here
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 
@@ -6,7 +5,7 @@ async function fetchData(sheetName) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
-    return data.values.slice(1); // Exclude the header row
+    return data.values.slice(1);
 }
 
 function displayFrameEntries(frameEntries) {
@@ -36,6 +35,10 @@ function displayFrameEntries(frameEntries) {
         const playersElement = document.createElement('p');
         playersElement.innerText = `Players: ${entry.playerNames.filter(name => name).join(', ')}`;
         frameElement.appendChild(playersElement);
+
+        const paidByElement = document.createElement('p');
+        paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ')}`;
+        frameElement.appendChild(paidByElement);
         
         frameEntriesContainer.appendChild(frameElement);
     });
@@ -45,7 +48,6 @@ function applyFilters() {
     const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
     let dateFilter = document.getElementById('dateFilter').value;
     
-    // Convert date from YYYY-MM-DD to DD/MM/YYYY format
     if(dateFilter) {
         const [year, month, day] = dateFilter.split('-');
         dateFilter = `${day}/${month}/${year}`;
@@ -58,8 +60,9 @@ function applyFilters() {
             startTime: row[10],
             tableMoney: row[20],
             playerNames: row.slice(12, 18),
-            isValid: row[6] && row[8] // Check if G and I columns are not empty
-        })).filter(entry => entry.isValid); // Filter out invalid entries
+            paidByNames: row.slice(23, 29), // Assuming X to AC columns
+            isValid: row[6] && row[8]
+        })).filter(entry => entry.isValid);
         
         if (playerNameFilter) {
             frameEntries = frameEntries.filter(entry =>
@@ -83,8 +86,9 @@ window.onload = function() {
             startTime: row[10],
             tableMoney: row[20],
             playerNames: row.slice(12, 18),
-            isValid: row[6] && row[8] // Check if G and I columns are not empty
-        })).filter(entry => entry.isValid); // Filter out invalid entries
+            paidByNames: row.slice(23, 29), // Assuming X to AC columns
+            isValid: row[6] && row[8]
+        })).filter(entry => entry.isValid);
         
         displayFrameEntries(frameEntries);
     });
