@@ -5,36 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="club_dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/css/bootstrap.min.css">
     <title>Club Dashboard</title>
 </head>
 <body>
     <header>
         <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="SnookerPlus Logo" id="logo">
-        <h1>ClubName Dashboard</h1>
+        <h1>21st Century Snooker+ Studio</h1>
     </header>
     <main>
+        <section id="clubDetails" class="card">
+            <!-- Club details will be dynamically added here via JavaScript -->
+        </section>
         <section id="analytics">
             <canvas id="tableWisePerformanceChart" width="400" height="200"></canvas>
             <canvas id="dateWisePerformanceChart" width="400" height="200"></canvas>
-        </section>
-        <section id="info">
-            <h2>Club Information</h2>
-            <p>Total Credit: <span id="totalCredit">0000000</span></p>
-            <p>Amount Received: <span id="amountReceived">00000000</span></p>
-            <p>Total Goods: <span id="totalGoods">000000</span></p>
-        </section>
-        <section id="frameEntries">
-            <h2>Frame Entries</h2>
-            <div id="frameFilters">
-                <label for="playerNameFilter">Player Name:</label>
-                <input type="text" id="playerNameFilter" placeholder="Enter player name">
-                
-                <label for="dateFilter">Date:</label>
-                <input type="date" id="dateFilter">
-                
-                <button onclick="applyFilters()">Apply Filters</button>
-            </div>
-            <!-- Frame entries will be dynamically added here via JavaScript -->
         </section>
     </main>
     <script src="club_dashboard.js"></script>
