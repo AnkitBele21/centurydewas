@@ -1,61 +1,68 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
+    background-color: #121212;
+    color: #fff;
+    font-family: Arial, sans-serif;
 }
 
 header {
     background-color: #01AB7A;
     padding: 10px;
     text-align: center;
-}
-
-header img {
-    width: 150px;
+    color: #fff;
 }
 
 header h1 {
-    color: #fff;
     margin: 0;
 }
 
-#filters {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+header img {
+    width: 50px;
+    height: 50px;
 }
 
-#filters input, #filters button {
+main {
+    padding: 20px;
+}
+
+#filters {
+    margin-bottom: 20px;
+}
+
+input, button {
     padding: 10px;
+    margin-right: 10px;
     border: none;
     border-radius: 5px;
 }
 
-#filters button {
+input {
+    width: calc(50% - 10px);
+}
+
+button {
     background-color: #01AB7A;
     color: #fff;
     cursor: pointer;
 }
 
+button:hover {
+    background-color: #018a5e;
+}
+
 .frame-card {
-    background-color: #fff;
-    margin: 10px;
+    background-color: #2C2C2C;
+    border-radius: 5px;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
 }
 
 .frame-card h5, .frame-card p {
     margin: 5px 0;
 }
 
-.frame-card h5 {
-    color: #01AB7A;
-}
-
-.frame-card p {
-    color: #666;
+@media only screen and (max-width: 600px) {
+    input {
+        width: calc(100% - 10px);
+        margin-bottom: 10px;
+    }
 }
