@@ -13,7 +13,10 @@
         <h1>Club Frames</h1>
     </header>
     <section id="filters" class="card">
-        <input type="text" id="playerNameFilter" placeholder="Filter by player name">
+        <input type="text" id="playerNameFilter" list="playerNames" placeholder="Filter by player name">
+        <datalist id="playerNames">
+            <!-- Player names will be dynamically added here via JavaScript -->
+        </datalist>
         <input type="date" id="dateFilter">
         <button onclick="applyFilters()">Apply Filters</button>
     </section>
