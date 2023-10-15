@@ -1,0 +1,57 @@
+// Add your API_KEY and SHEET_ID here
+const API_KEY = 'YOUR_API_KEY';
+const SHEET_ID = 'YOUR_SHEET_ID';
+
+async function fetchData(sheetName) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.values;
+}
+
+function displayFrameEntries(frameEntries) {
+    const frameEntriesContainer = document.getElementById('frameEntries');
+    frameEntries.forEach(entry => {
+        const frameElement = document.createElement('div');
+        frameElement.className = 'frame-card';
+        
+        const dateElement = document.createElement('h5');
+        dateElement.innerText = `Date: ${entry.date}`;
+        frameElement.appendChild(dateElement);
+        
+        const durationElement = document.createElement('p');
+        durationElement.innerText = `Duration: ${entry.duration} min`;
+        frameElement.appendChild(durationElement);
+        
+        const startTimeElement = document.createElement('p');
+        startTimeElement.innerText = `Start Time: ${entry.startTime}`;
+        frameElement.appendChild(startTimeElement);
+        
+        const tableMoneyElement = document.createElement('p');
+        tableMoneyElement.innerText = `Table Money: ${entry.tableMoney}`;
+        frameElement.appendChild(tableMoneyElement);
+        
+        const playersElement = document.createElement('p');
+        playersElement.innerText = `Players: ${entry.playerNames.join(', ')}`;
+        frameElement.appendChild(playersElement);
+        
+        frameEntriesContainer.appendChild(frameElement);
+    });
+}
+
+function applyFilters() {
+    // Implement filter logic here
+}
+
+window.onload = function() {
+    fetchData('Frames').then(data => {
+        const frameEntries = data.map(row => ({
+            date: row[2],
+            duration: row[3],
+            startTime: row[10],
+            tableMoney: row[20],
+            playerNames: row.slice(12, 18)
+        }));
+        displayFrameEntries(frameEntries);
+    });
+};
