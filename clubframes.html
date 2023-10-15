@@ -9,20 +9,17 @@
 </head>
 <body>
     <header>
-        <img src="img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="SnookerPlus Logo" id="logo">
+        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="SnookerPlus Logo" id="logo">
         <h1>Club Frames</h1>
     </header>
-    <main>
-        <section id="filters" class="d-flex flex-column flex-md-row justify-content-between">
-            <input type="text" id="playerNameFilter" placeholder="Enter player name" class="mb-2 mb-md-0">
-            <input type="date" id="dateFilter" class="mb-2 mb-md-0 ms-md-2">
-            <button onclick="applyFilters()" class="ms-md-2">Apply Filters</button>
-        </section>
-        <section id="frameEntries">
-            <!-- Frame entries will be dynamically added here via JavaScript -->
-        </section>
-    </main>
+    <section id="filters" class="card">
+        <input type="text" id="playerNameFilter" placeholder="Filter by player name">
+        <input type="date" id="dateFilter">
+        <button onclick="applyFilters()">Apply Filters</button>
+    </section>
+    <section id="frameEntries">
+        <!-- Frame entries will be dynamically added here via JavaScript -->
+    </section>
     <script src="clubframes.js"></script>
 </body>
 </html>
-
