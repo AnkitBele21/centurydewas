@@ -6,10 +6,6 @@ body {
     padding: 0;
 }
 
-body {
-    /* ... (previous code) */
-}
-
 header {
     background-color: #33363B;
     padding: 20px;
@@ -21,7 +17,8 @@ header {
 
 .header-content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     flex-grow: 1;
 }
 
@@ -31,13 +28,21 @@ header img {
 
 h1 {
     color: #01AB7A;
-    margin: 10px 0 0 20px;
+    margin: 10px 0 0;
     font-size: 18px;
     font-weight: 600;
 }
 
 .card, canvas {
-    /* ... (previous code) */
+    background-color: #33363B;
+    border-radius: 8px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding: 20px;
+}
+
+canvas {
+    margin-top: 20px;
 }
 
 #framesButton {
@@ -47,7 +52,7 @@ h1 {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px; /* Added margin-top */
+    margin-top: 10px;
 }
 
 #framesButton:hover {
@@ -61,7 +66,6 @@ h1 {
     }
 
     .header-content {
-        order: 2;
         width: 100%;
         text-align: center;
     }
@@ -71,7 +75,6 @@ h1 {
     }
 
     #framesButton {
-        order: 1;
         width: 100%;
         margin: 10px 0;
     }
