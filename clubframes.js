@@ -11,6 +11,8 @@ async function fetchData(sheetName) {
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
+    frameEntriesContainer.innerHTML = ''; // Clear previous entries
+    
     frameEntries.forEach(entry => {
         const frameElement = document.createElement('div');
         frameElement.className = 'frame-card';
@@ -40,7 +42,30 @@ function displayFrameEntries(frameEntries) {
 }
 
 function applyFilters() {
-    // Implement filter logic here
+    const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
+    const dateFilter = document.getElementById('dateFilter').value;
+    
+    fetchData('Frames').then(data => {
+        let frameEntries = data.map(row => ({
+            date: row[2],
+            duration: row[3],
+            startTime: row[10],
+            tableMoney: row[20],
+            playerNames: row.slice(12, 18)
+        }));
+        
+        if (playerNameFilter) {
+            frameEntries = frameEntries.filter(entry =>
+                entry.playerNames.some(name => name.toLowerCase().includes(playerNameFilter))
+            );
+        }
+        
+        if (dateFilter) {
+            frameEntries = frameEntries.filter(entry => entry.date === dateFilter);
+        }
+        
+        displayFrameEntries(frameEntries);
+    });
 }
 
 window.onload = function() {
