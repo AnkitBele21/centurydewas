@@ -9,7 +9,14 @@ body {
 header {
     background-color: #33363B;
     padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
 }
 
 header img {
@@ -18,10 +25,9 @@ header img {
 
 h1 {
     color: #01AB7A;
-    margin: 10px 0 0;
+    margin: 10px 0 0 20px;
     font-size: 18px;
     font-weight: 600;
-    text-align: left;
 }
 
 .card {
@@ -38,7 +44,6 @@ canvas {
     border-radius: 8px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 }
-/* ... [Your existing CSS code] */
 
 #framesButton {
     background-color: #01AB7A;
@@ -47,10 +52,8 @@ canvas {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 20px; /* Spacing from the heading */
 }
 
 #framesButton:hover {
     background-color: #018a5e;
 }
-
