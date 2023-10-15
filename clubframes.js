@@ -43,7 +43,13 @@ function displayFrameEntries(frameEntries) {
 
 function applyFilters() {
     const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
-    const dateFilter = document.getElementById('dateFilter').value;
+    let dateFilter = document.getElementById('dateFilter').value;
+    
+    // Convert date from YYYY-MM-DD to DD/MM/YYYY format
+    if(dateFilter) {
+        const [year, month, day] = dateFilter.split('-');
+        dateFilter = `${day}/${month}/${year}`;
+    }
     
     fetchData('Frames').then(data => {
         let frameEntries = data.map(row => ({
