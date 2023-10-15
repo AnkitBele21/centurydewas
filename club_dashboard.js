@@ -1,15 +1,15 @@
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 
-async function fetchData(sheetName) {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
+async function fetchData(sheetName, range = '') {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}${range}?key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
     return data.values;
 }
 
 async function displayClubDetails() {
-    const data = await fetchData('club');
+    const data = await fetchData('club', '!H:I'); // Fetching data from columns H and I
     const clubDetailsContainer = document.getElementById('clubDetails');
     data.forEach(([label, value]) => {
         const detailElement = document.createElement('p');
@@ -65,14 +65,14 @@ function createGraph(data, labels, canvasId, graphTitle) {
 }
 
 async function createTableWisePerformanceGraph() {
-    const data = await fetchData('club');
+    const data = await fetchData('club', '!A:B'); // Fetching data from columns A and B
     const tables = data.map(row => row[0]);
     const occupancy = data.map(row => row[1]);
     createGraph(occupancy, tables, 'tableWisePerformanceChart', 'Table\'s Performance');
 }
 
 async function createDateWisePerformanceGraph() {
-    const data = await fetchData('club2');
+    const data = await fetchData('club2', '!A:C'); // Fetching data from columns A and C
     const dates = data.map(row => row[0]);
     const occupancy = data.map(row => row[2]);
     createGraph(occupancy, dates, 'dateWisePerformanceChart', 'Club Performance');
