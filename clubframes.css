@@ -1,0 +1,19 @@
+#logo {
+    width: 150px;
+    height: auto;
+}
+
+.frame-card {
+    border: 1px solid #01AB7A;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.frame-card h5 {
+    color: #01AB7A;
+}
+
+.frame-card p {
+    margin-bottom: 0.5rem;
+}
