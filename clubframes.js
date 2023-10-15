@@ -1,6 +1,6 @@
 // Add your API_KEY and SHEET_ID here
-const API_KEY = 'YOUR_API_KEY';
-const SHEET_ID = 'YOUR_SHEET_ID';
+const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
+const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 
 async function fetchData(sheetName) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
