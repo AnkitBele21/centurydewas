@@ -77,6 +77,24 @@ function applyFilters() {
         displayFrameEntries(frameEntries);
     });
 }
+function populatePlayerNames() {
+    fetchData('SnookerPlus').then(data => {
+        const nameDatalist = document.getElementById('playerNames');
+        data.forEach(row => {
+            const optionElement = document.createElement('option');
+            optionElement.value = row[2]; // Assuming names are in column C
+            nameDatalist.appendChild(optionElement);
+        });
+    });
+}
+
+window.onload = function() {
+    fetchData('Frames').then(data => {
+        // ... [Code inside this function remains the same]
+    });
+
+    populatePlayerNames(); // Populate player name suggestions
+};
 
 window.onload = function() {
     fetchData('Frames').then(data => {
