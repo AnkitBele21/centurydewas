@@ -24,15 +24,20 @@ h1 {
     text-align: left;
 }
 
-#filters {
+.card, .frame-card {
     background-color: #33363B;
     border-radius: 8px;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
     margin: 20px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+}
+
+.frame-card {
+    margin-bottom: 10px;
+}
+
+h5 {
+    color: #01AB7A;
 }
 
 input, button {
