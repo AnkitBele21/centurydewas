@@ -39,17 +39,15 @@ function createPlayerCard(player) {
         playerName.appendChild(championIcon);
     }
 
-   playerInfo.appendChild(playerName); // Append the name first
-if (youtubeLink) {
-    const playButton = document.createElement('a');
-    playButton.href = youtubeLink;
-    playButton.target = "_blank";
-    playButton.className = 'play-button';
-    playButton.textContent = '▶️';
-    playerInfo.appendChild(playButton); // Then append the play button
-}
-playerInfo.appendChild(playerCoins); // Finally, append the coins
-
+    // Add YouTube play button if link exists
+    if (youtubeLink) {
+        const playButton = document.createElement('a');
+        playButton.href = youtubeLink;
+        playButton.target = "_blank";
+        playButton.className = 'play-button';
+        playButton.textContent = '▶️';
+        playerInfo.appendChild(playButton);
+    }
 
     const playerCoins = document.createElement('span');
     playerCoins.className = 'player-coins';
