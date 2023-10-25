@@ -93,15 +93,17 @@ main {
 
 .play-button {
     display: inline-block;
-    background-color: #01AB7A; /* YouTube red color */
+    background-color: #01AB7A; /* Green color */
     color: #FFFFFF;
-    padding: 2px 5px;
-    border-radius: 3px;
-    margin-left: 10px;
+    border-radius: 50%; /* Make it circular */
+    width: 24px; /* Width of the button */
+    height: 24px; /* Height of the button */
+    text-align: center; /* Center the play icon */
+    line-height: 24px; /* Align the play icon vertically */
+    margin-right: 10px; /* Space before the S+ Coins */
     text-decoration: none;
     font-size: 1em;
     transition: background-color 0.3s;
-    vertical-align: middle; /* Align with the player name */
 }
 
 .play-button:hover {
