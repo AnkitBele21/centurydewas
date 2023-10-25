@@ -89,18 +89,21 @@ main {
     margin-left: 5px;
     font-size: 1.5em;
 }
+/* ... (rest of your CSS remains unchanged) */
+
 .play-button {
     display: inline-block;
-    padding: 5px 10px;
-    background-color: #FF0000; /* YouTube red color */
+    background-color: #01AB7A; /* YouTube red color */
     color: #FFFFFF;
-    border-radius: 5px;
+    padding: 2px 5px;
+    border-radius: 3px;
     margin-left: 10px;
     text-decoration: none;
-    font-size: 1.5em;
+    font-size: 1em;
     transition: background-color 0.3s;
+    vertical-align: middle; /* Align with the player name */
 }
 
 .play-button:hover {
-    background-color: #D80000; /* Darker red on hover */
+    background-color: #018a5e; /* Darker green on hover */
 }
