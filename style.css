@@ -95,7 +95,7 @@ main {
     display: inline-block;
     background-color: #01AB7A; /* Green color */
     color: #FFFFFF;
-    border-radius: 50%; /* Make it circular */
+    border-radius: 5%; /* Make it circular */
     width: 24px; /* Width of the button */
     height: 24px; /* Height of the button */
     text-align: center; /* Center the play icon */
