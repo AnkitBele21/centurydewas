@@ -18,6 +18,7 @@ function initClient() {
 }
 
 // Function to create a player card element
+// Function to create a player card element
 function createPlayerCard(player) {
     const { rank, name, coins, youtubeLink } = player;
 
@@ -43,11 +44,6 @@ function createPlayerCard(player) {
     playerCoins.className = 'player-coins';
     playerCoins.textContent = `S+ Coins: ${coins}`;
 
-    const progressBar = document.createElement('div');
-    progressBar.className = 'progress-bar';
-
-    // ... (rest of the progressBar code remains unchanged)
-
     // Add YouTube play button if link exists
     if (youtubeLink) {
         const playButton = document.createElement('a');
@@ -65,6 +61,7 @@ function createPlayerCard(player) {
 
     return playerCard;
 }
+
 
 // Function to display players
 function displayPlayers(players) {
