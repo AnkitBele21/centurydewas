@@ -39,9 +39,22 @@ function createPlayerCard(player) {
         playerName.appendChild(championIcon);
     }
 
+    // Add YouTube play button if link exists
+    if (youtubeLink) {
+        const playButton = document.createElement('a');
+        playButton.href = youtubeLink;
+        playButton.target = "_blank";
+        playButton.className = 'play-button';
+        playButton.textContent = '▶️';
+        playerInfo.appendChild(playButton);
+    }
+
     const playerCoins = document.createElement('span');
     playerCoins.className = 'player-coins';
     playerCoins.textContent = `S+ Coins: ${coins}`;
+
+    playerInfo.appendChild(playerName);
+    playerInfo.appendChild(playerCoins);
 
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
@@ -72,37 +85,20 @@ function createPlayerCard(player) {
 
     for (let i = 0; i < colorMinCoins.length; i++) {
         if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
+            progressBarWidth = ((coins - colorMinCoins[i]) + 1) / (colorMaxCoins[i] - colorMinCoins[i] + 1) * 100;
             break;
         }
-    }
-    if ([21, 31, 41, 51, 61, 71].includes(coins)) {
-        progressBarWidth = Math.max(progressBarWidth, 2);
     }
 
     progressBarInner.style.width = `${progressBarWidth}%`;
 
     progressBar.appendChild(progressBarInner); // Append the inner div to the progress bar
 
-    // Add YouTube play button if link exists
-    if (youtubeLink) {
-        const playButton = document.createElement('a');
-        playButton.href = youtubeLink;
-        playButton.target = "_blank";
-        playButton.className = 'play-button';
-        playButton.textContent = '▶️';
-        playerInfo.appendChild(playButton);
-    }
-
-    playerInfo.appendChild(playerName);
-    playerInfo.appendChild(playerCoins);
     playerCard.appendChild(playerInfo);
     playerCard.appendChild(progressBar);
 
     return playerCard;
 }
-
-
 
 // Function to display players
 function displayPlayers(players) {
