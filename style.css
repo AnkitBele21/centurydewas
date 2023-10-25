@@ -75,10 +75,12 @@ main {
     flex: 1; /* This ensures that the name takes up as much space as possible */
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* Aligns content to the left */
 }
 
 .play-button {
     margin-left: 10px; /* Add some spacing between the name and the play button */
+    margin-right: 10px; /* Add some spacing between the play button and coins */
 }
 
 .play-button:hover {
