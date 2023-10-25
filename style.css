@@ -68,26 +68,17 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    width: 100%;
 }
 
-.player-coins {
-    color: #01AB7A;
+.player-name {
+    flex: 1; /* This ensures that the name takes up as much space as possible */
+    display: flex;
+    align-items: center;
 }
 
 .play-button {
-    display: inline-block;
-    background-color: #01AB7A; /* Green color */
-    color: #FFFFFF;
-    border-radius: 50%; /* Make it circular */
-    width: 24px; /* Width of the button */
-    height: 24px; /* Height of the button */
-    text-align: center; /* Center the play icon */
-    line-height: 24px; /* Align the play icon vertically */
-    margin-right: 10px; /* Space before the S+ Coins */
-    text-decoration: none;
-    font-size: 1em;
-    transition: background-color 0.3s;
+    margin-left: 10px; /* Add some spacing between the name and the play button */
 }
 
 .play-button:hover {
