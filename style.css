@@ -116,3 +116,21 @@ main {
     margin-left: 5px;
     font-size: 1.5em;
 }
+.banner-section {
+    background-color: #004d99; /* Example color, adjust as needed */
+    padding: 10px 0;
+    text-align: center;
+}
+
+.banner-text {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .banner-text {
+        font-size: 18px;
+    }
+}
+
