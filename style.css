@@ -124,9 +124,9 @@ main {
 
 .banner-text {
     color: white;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
+    font-size: 18px;
+    font-weight: Medium;
+    margin: 1;
 }
 @media (max-width: 768px) {
     .banner-text {
