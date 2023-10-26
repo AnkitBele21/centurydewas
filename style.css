@@ -118,7 +118,7 @@ main {
 }
 .banner-section {
     background-color: #01AB7A; /* Example color, adjust as needed */
-    padding: 10px 0;
+    padding: 8px 0;
     text-align: center;
 }
 
@@ -126,7 +126,7 @@ main {
     color: white;
     font-size: 18px;
     font-weight: Medium;
-    margin: 1;
+    margin: 0;
 }
 @media (max-width: 768px) {
     .banner-text {
