@@ -133,4 +133,20 @@ main {
         font-size: 18px;
     }
 }
+.black-level-card {
+    background-color: #000; /* Black background */
+    border: 2px solid gold; /* Golden border */
+    color: gold; /* Golden text */
+}
+
+.black-level-card .player-name {
+    color: gold; /* Golden player name */
+}
+
+.black-level-card .player-coins {
+    color: gold; /* Golden coins text */
+}
+
+/* Optional: Add any additional styling for Black level cards */
+
 
