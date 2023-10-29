@@ -96,6 +96,13 @@ function createPlayerCard(player) {
 
     playerCard.appendChild(playerInfo);
     playerCard.appendChild(progressBar);
+    if (coins > 70) {
+        playerCard.className = 'player-card black-level-card';
+        // Remove the progress bar for Black level players
+        progressBar.remove();
+    } else {
+        // ... existing progress bar code ...
+    }
 
     return playerCard;
 }
