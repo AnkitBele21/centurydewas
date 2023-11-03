@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetchPlayerList(); // Fetch the player list when the document is ready
-
     const form = document.getElementById('challenge-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -10,30 +8,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function fetchPlayerList() {
-    const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc'; // Replace with your actual API key
-    const SHEET_ID = '18mGrkwL9Xma64QeFm_0moXcuF0SIACqgT-s16kQe2BY'; // Your Google Sheet ID
-    const RANGE = 'Player%20List!A:A'; // The range of cells to fetch
-
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`)
-        .then(response => response.json())
-        .then(data => {
-            populateDropdown('challenger-name', data.values);
-            populateDropdown('opponent-name', data.values);
-        })
-        .catch(error => console.error('Error fetching player list:', error));
-}
-
-function populateDropdown(dropdownId, playerList) {
-    const dropdown = document.getElementById(dropdownId);
-    playerList.forEach(player => {
-        const option = document.createElement('option');
-        option.value = player[0]; // Assuming the name is in the first column
-        option.textContent = player[0];
-        dropdown.appendChild(option);
-    });
-}
-
 function submitChallenge(challenger, opponent) {
-    // ... your existing submitChallenge function ...
+    const scriptId = '13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2'; // Replace with your Apps Script ID
+
+    fetch(`https://script.google.com/macros/s/AKfycbxjdMSbeqBuJI5_tnrqB1neG_DSiHrMZXCwT6Bs61lL7qB32dw__Hjqs-plPW0yXAY/exec`, {
+        method: 'POST',
+        mode: 'no-cors', // Note: 'no-cors' mode doesn't allow reading the response
+        cache: 'no-cache',
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify({ challenger, opponent })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log('Challenge submitted successfully');
+        // Handle the response here if CORS is enabled and you expect a response
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
