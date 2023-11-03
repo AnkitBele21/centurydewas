@@ -1,59 +1,30 @@
-// Load the Google Sheets API
-gapi.load('client', initClient);
-
-// Initialize the Google Sheets API client
-function initClient() {
-    gapi.client.init({
-        apiKey: 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc', // Your API key
-        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-    }).then(function() {
-        // Handle the initial setup or any additional setup when the page loads
-        prefillChallengerName();
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('challenge-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const challenger = document.getElementById('challenger-name').value;
+        const opponent = document.getElementById('opponent-name').value;
+        submitChallenge(challenger, opponent);
     });
-}
-
-// Prefill the challenger's name from the URL parameter
-function prefillChallengerName() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const challenger = urlParams.get('challenger');
-    if (challenger) {
-        document.getElementById('challenger-name').value = decodeURIComponent(challenger);
-    }
-}
-
-// Event listener for form submission
-document.getElementById('challenge-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const challengerName = document.getElementById('challenger-name').value;
-    const opponentName = document.getElementById('opponent-name').value;
-    submitChallenge(challengerName, opponentName);
 });
 
-// Function to submit the challenge to Google Sheets
 function submitChallenge(challenger, opponent) {
-    const params = {
-        spreadsheetId: '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss', // Your Sheet ID
-        range: 'Challenges!A:B', // Assuming you want to write to columns A and B
-        valueInputOption: 'USER_ENTERED',
-        insertDataOption: 'INSERT_ROWS',
-    };
+    const scriptId = 'YOUR_SCRIPT_ID'; // Replace with your Apps Script ID
 
-    const valueRangeBody = {
-        "values": [
-            [challenger, opponent] // The data to be written: [Challenger, Opponent]
-        ]
-    };
-
-    gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody)
-        .then(function(response) {
-            // Handle the response here, such as showing a success message
-            alert('Challenge submitted successfully!');
-        })
-        .catch(function(response) {
-            // Handle any errors here
-            alert('Failed to submit challenge.');
-        });
+    // Call the Apps Script web app with the challenger and opponent names
+    fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
+        method: 'POST',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify({ challenger, opponent })
+    })
+    .then(response => {
+        console.log('Challenge submitted successfully');
+        // Handle the response from the Apps Script (if CORS is enabled and response is returned)
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
-
-// Call the initClient function to start fetching data
-initClient();
