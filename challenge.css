@@ -1,24 +1,21 @@
-#challenge-form-container {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+body {
+    font-family: Arial, sans-serif;
 }
 
-#challenge-form label {
-    display: block;
-    margin-bottom: 5px;
+#challenge-form-container {
+    margin: 50px;
+    text-align: center;
 }
 
 #challenge-form input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    margin: 10px 0;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    width: 200px;
 }
 
-#challenge-form input[type="submit"] {
+#challenge-form button {
     padding: 10px 20px;
     background-color: #5cb85c;
     color: white;
@@ -27,6 +24,6 @@
     cursor: pointer;
 }
 
-#challenge-form input[type="submit"]:hover {
+#challenge-form button:hover {
     background-color: #4cae4c;
 }
