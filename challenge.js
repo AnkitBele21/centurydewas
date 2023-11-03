@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function submitChallenge(challenger, opponent) {
-    const scriptId = '13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2'; // Replace with your Apps Script ID
+    const scriptUrl = 'https://script.google.com/macros/s/13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2/exec'; // Replace with your actual Apps Script web app URL
 
-    fetch(`https://script.google.com/macros/s/AKfycbxjdMSbeqBuJI5_tnrqB1neG_DSiHrMZXCwT6Bs61lL7qB32dw__Hjqs-plPW0yXAY/exec`, {
+    fetch(scriptUrl, {
         method: 'POST',
         mode: 'no-cors', // Note: 'no-cors' mode doesn't allow reading the response
         cache: 'no-cache',
@@ -19,14 +19,17 @@ function submitChallenge(challenger, opponent) {
         referrerPolicy: 'no-referrer',
         body: JSON.stringify({ challenger, opponent })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+    .then(() => {
+        // Since 'no-cors' mode is used, we don't get a response to read
+        // But we can assume it was successful if no network error was thrown
         console.log('Challenge submitted successfully');
-        // Handle the response here if CORS is enabled and you expect a response
+        alert('Challenge submitted successfully! Redirecting to the leaderboard...');
+        setTimeout(() => {
+            window.location.href = 'https://leaderboard.snookerplus.in';
+        }, 3000); // Redirect after 3 seconds
     })
     .catch(error => {
         console.error('Error:', error);
+        alert('Failed to submit challenge. Please try again.');
     });
 }
