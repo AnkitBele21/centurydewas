@@ -11,18 +11,20 @@ document.addEventListener('DOMContentLoaded', function() {
 function submitChallenge(challenger, opponent) {
     const scriptId = '13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2'; // Replace with your Apps Script ID
 
-    // Call the Apps Script web app with the challenger and opponent names
     fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'no-cors', // Note: 'no-cors' mode doesn't allow reading the response
         cache: 'no-cache',
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
         body: JSON.stringify({ challenger, opponent })
     })
     .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
         console.log('Challenge submitted successfully');
-        // Handle the response from the Apps Script (if CORS is enabled and response is returned)
+        // Handle the response here if CORS is enabled and you expect a response
     })
     .catch(error => {
         console.error('Error:', error);
