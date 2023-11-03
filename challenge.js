@@ -22,13 +22,14 @@ function submitChallenge(challenger, opponent) {
     .then(() => {
         // Since 'no-cors' mode is used, we don't get a response to read
         // But we can assume it was successful if no network error was thrown
+        console.log('Challenge submitted successfully');
         alert('Challenge submitted successfully! Redirecting to the leaderboard...');
         setTimeout(() => {
-            window.location.href = 'https://leaderboard.snookerplus.in'; // Redirect to the leaderboard
-        }, 3000); // Redirect after 3 seconds to give the user time to read the alert
+            window.location.href = 'https://leaderboard.snookerplus.in';
+        }, 3000); // Redirect after 3 seconds
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to submit challenge. Please try again.'); // Notify the user of the failure
+        alert('Failed to submit challenge. Please try again.');
     });
 }
