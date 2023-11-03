@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function submitChallenge(challenger, opponent) {
-    const scriptId = 'YOUR_SCRIPT_ID'; // Replace with your Apps Script ID
+    const scriptId = '13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2'; // Replace with your Apps Script ID
 
     // Call the Apps Script web app with the challenger and opponent names
     fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
