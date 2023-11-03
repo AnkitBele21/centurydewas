@@ -1,0 +1,32 @@
+#challenge-form-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#challenge-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#challenge-form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#challenge-form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#challenge-form input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
