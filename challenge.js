@@ -1,9 +1,10 @@
+// Load the Google Sheets API
 gapi.load('client', initClient);
 
 // Initialize the Google Sheets API client
 function initClient() {
     gapi.client.init({
-        apiKey: 'YOUR_API_KEY', // Replace with your API key
+        apiKey: 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc', // Your API key
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function() {
         // Handle the initial setup or any additional setup when the page loads
@@ -31,7 +32,7 @@ document.getElementById('challenge-form').addEventListener('submit', function(ev
 // Function to submit the challenge to Google Sheets
 function submitChallenge(challenger, opponent) {
     const params = {
-        spreadsheetId: 'YOUR_SHEET_ID', // Replace with your Sheet ID
+        spreadsheetId: '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss', // Your Sheet ID
         range: 'Challenges!A:B', // Assuming you want to write to columns A and B
         valueInputOption: 'USER_ENTERED',
         insertDataOption: 'INSERT_ROWS',
