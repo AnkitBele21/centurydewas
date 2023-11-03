@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenge Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="challenge.js"></script>
+</head>
+<body>
+    <div id="challenge-form-container">
+        <form id="challenge-form">
+            <label for="challenger-name">Your Name:</label>
+            <input type="text" id="challenger-name" name="challenger-name" readonly>
+
+            <label for="opponent-name">Opponent Name:</label>
+            <input type="text" id="opponent-name" name="opponent-name" required>
+
+            <input type="submit" value="Challenge">
+        </form>
+    </div>
+</body>
+</html>
