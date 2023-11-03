@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function submitChallenge(challenger, opponent) {
     const scriptId = '13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2'; // Replace with your Apps Script ID
 
-    fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
+    fetch(`https://script.google.com/macros/s/AKfycbxjdMSbeqBuJI5_tnrqB1neG_DSiHrMZXCwT6Bs61lL7qB32dw__Hjqs-plPW0yXAY/exec`, {
         method: 'POST',
         mode: 'no-cors', // Note: 'no-cors' mode doesn't allow reading the response
         cache: 'no-cache',
