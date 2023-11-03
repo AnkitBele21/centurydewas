@@ -9,8 +9,14 @@
 <body>
     <div id="challenge-form-container">
         <form id="challenge-form">
-            <input type="text" id="challenger-name" placeholder="Your Name" required>
-            <input type="text" id="opponent-name" placeholder="Opponent's Name" required>
+            <!-- Dropdown for challenger's name -->
+            <label for="challenger-name">Your Name:</label>
+            <select id="challenger-name" required></select>
+
+            <!-- Dropdown for opponent's name -->
+            <label for="opponent-name">Opponent's Name:</label>
+            <select id="opponent-name" required></select>
+
             <button type="submit">Submit Challenge</button>
         </form>
     </div>
