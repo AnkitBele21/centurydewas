@@ -8,25 +8,22 @@
 </head>
 <body>
     <div id="challenge-form-container">
-        <h3 id="challenger-heading">Challenger: <span id="challenger-name-display"></span></h3>
+        <h2 id="challenger-name-display"></h2>
         <form id="challenge-form">
-            <input type="text" id="challenger-name" hidden required readonly>
+            <input type="text" id="challenger-name" hidden>
             <label for="opponent-name">Challenge to Player:</label>
-            <input type="text" id="opponent-name" placeholder="Opponent's Name" required list="player-list">
-            <datalist id="player-list"></datalist>
-            <label for="match-type">Match Type:</label>
-            <select id="match-type" required>
-                <option value="Friendly Match">Friendly Match</option>
-                <option value="Loser to Pay">Loser to Pay</option>
-                <option value="Plus">Plus</option>
+            <input type="text" id="opponent-name" placeholder="Enter Opponent's Name" required>
+            <select id="match-type">
+                <option value="friendly">Friendly Match</option>
+                <option value="looserToPay">Looser to Pay</option>
+                <option value="plus">Plus</option>
                 <!-- Add more options as needed -->
             </select>
-            <button type="submit">Challenge Now</button>
+            <button type="submit" id="submit-challenge" disabled>Challenge Now</button>
         </form>
-        <div id="incoming-challenges">
-            <!-- Incoming challenges will be displayed here -->
-        </div>
     </div>
+
+    <div id="incoming-challenges"></div>
 
     <script src="challenge.js"></script>
 </body>
