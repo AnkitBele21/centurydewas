@@ -1,17 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Get the 'name' parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengerName = urlParams.get('name');
+
+    // Autofill the challenger's name and make it readonly
+    const challengerInput = document.getElementById('challenger-name');
+    if (challengerName && challengerInput) {
+        challengerInput.value = challengerName;
+        challengerInput.readOnly = true; // Make the input read-only
+    }
+
     const form = document.getElementById('challenge-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        const challenger = document.getElementById('challenger-name').value;
+        // Since the challenger's name is autofilled and read-only, we don't need to get its value again
         const opponent = document.getElementById('opponent-name').value;
-        submitChallenge(challenger, opponent);
+        submitChallenge(challengerName, opponent);
     });
 });
 
 function submitChallenge(challenger, opponent) {
     const scriptId = '13yZ2go8U7yHoKnXmLklwVONIU3-R0OP_iHKgaFdU9xYJ0rSqDpMofBG2'; // Replace with your Apps Script ID
 
-    fetch(`https://script.google.com/macros/s/AKfycbxjdMSbeqBuJI5_tnrqB1neG_DSiHrMZXCwT6Bs61lL7qB32dw__Hjqs-plPW0yXAY/exec`, {
+    fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
         method: 'POST',
         mode: 'no-cors', // Note: 'no-cors' mode doesn't allow reading the response
         cache: 'no-cache',
@@ -20,13 +31,12 @@ function submitChallenge(challenger, opponent) {
         body: JSON.stringify({ challenger, opponent })
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        // Since 'no-cors' mode is used, we won't get a readable response
         console.log('Challenge submitted successfully');
-        // Handle the response here if CORS is enabled and you expect a response
+        // You can redirect the user or display a success message here
     })
     .catch(error => {
         console.error('Error:', error);
+        // You can display an error message to the user here
     });
 }
