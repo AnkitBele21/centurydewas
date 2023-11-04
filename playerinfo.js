@@ -2,6 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
     const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 
+    // Function to get URL parameters
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Pre-fill the name input if 'player' param is in the URL
+    const playerNameParam = getQueryParam('player');
+    if (playerNameParam) {
+        document.getElementById('name').value = decodeURIComponent(playerNameParam);
+    }
+
     document.getElementById('playerInfoForm').addEventListener('submit', function(e) {
         e.preventDefault();
         fetchPlayerInfo();
@@ -31,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Player not found or pin does not match');
                 }
             })
-            .catch(error => console.error('Error fetching data:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                alert('There was an error fetching the player information.');
+            });
     }
 });
