@@ -46,3 +46,11 @@ button:enabled {
 #incoming-challenges {
     margin-top: 20px;
 }
+#work-in-progress-banner {
+    background-color: #ffeb3b; /* Yellow background to draw attention */
+    color: #333; /* Dark text for contrast */
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc; /* A subtle border to separate from the rest of the page */
+}
