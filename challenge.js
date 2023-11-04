@@ -3,34 +3,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const challengerName = urlParams.get('name');
     const challengerInput = document.getElementById('challenger-name');
     const challengerNameDisplay = document.getElementById('challenger-name-display');
+    const submitButton = document.getElementById('submit-challenge');
+    const opponentInput = document.getElementById('opponent-name');
 
     if (challengerName && challengerInput) {
         challengerInput.value = challengerName;
-        challengerNameDisplay.textContent = challengerName;
+        challengerNameDisplay.textContent = `Challenge to Player: ${challengerName}`;
     }
 
     fetchPlayerList(); // Fetch the player list for the datalist
     fetchIncomingChallenges(challengerName); // Fetch incoming challenges
 
+    opponentInput.addEventListener('input', () => {
+        // Enable the submit button only if the opponent's name is not empty
+        submitButton.disabled = !opponentInput.value.trim();
+    });
+
     const form = document.getElementById('challenge-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        const opponent = document.getElementById('opponent-name').value;
+        const opponent = opponentInput.value;
         const matchType = document.getElementById('match-type').value;
         submitChallenge(challengerName, opponent, matchType);
     });
 });
 
 function fetchPlayerList() {
-    // ... (fetch player list and populate datalist as described in the previous response)
+    // Implement fetching player list and populating datalist
+    // This is a placeholder function, you'll need to implement it according to your application's needs
 }
 
 function fetchIncomingChallenges(challengerName) {
-    // ... (fetch incoming challenges and display them)
+    // Implement fetching incoming challenges and displaying them
+    // This is a placeholder function, you'll need to implement it according to your application's needs
 }
 
 function submitChallenge(challenger, opponent, matchType) {
-    // Correct web app URL from your Google Apps Script deployment
     const webAppUrl = 'https://script.google.com/macros/s/AKfycbxtyT4Ts7KHV7_XXoNFqBMxfsNdCVN2m3Kg05ZtQMUJDRupMbqRF3lQNjaqH-kpUQOx/exec';
 
     fetch(webAppUrl, {
@@ -43,6 +51,8 @@ function submitChallenge(challenger, opponent, matchType) {
     })
     .then(response => {
         console.log('Challenge submitted successfully');
+        opponentInput.value = ''; // Clear the opponent input
+        submitButton.disabled = true; // Disable the submit button again
         // You can redirect the user or display a success message here
     })
     .catch(error => {
