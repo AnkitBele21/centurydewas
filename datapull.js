@@ -103,6 +103,9 @@ function createPlayerCard(player) {
     } else {
         // ... existing progress bar code ...
     }
+    playerName.addEventListener('click', function() {
+    window.location.href = `https://leaderboard.snookerplus.in/playerinfo?player=${encodeURIComponent(name)}`;
+});
 
     return playerCard;
 }
