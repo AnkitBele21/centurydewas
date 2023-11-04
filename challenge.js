@@ -30,9 +30,10 @@ function fetchIncomingChallenges(challengerName) {
 }
 
 function submitChallenge(challenger, opponent, matchType) {
-    const scriptId = 'YOUR_SCRIPT_ID'; // Replace with your Apps Script ID
+    // Correct web app URL from your Google Apps Script deployment
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbxtyT4Ts7KHV7_XXoNFqBMxfsNdCVN2m3Kg05ZtQMUJDRupMbqRF3lQNjaqH-kpUQOx/exec';
 
-    fetch(`https://script.google.com/macros/s/${scriptId}/exec`, {
+    fetch(webAppUrl, {
         method: 'POST',
         mode: 'no-cors',
         cache: 'no-cache',
@@ -42,10 +43,10 @@ function submitChallenge(challenger, opponent, matchType) {
     })
     .then(response => {
         console.log('Challenge submitted successfully');
-        // ... (handle the response)
+        // You can redirect the user or display a success message here
     })
     .catch(error => {
         console.error('Error:', error);
-        // ... (handle the error)
+        // You can display an error message to the user here
     });
 }
