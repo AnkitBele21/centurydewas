@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) and other head elements -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-481JRCY8MD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-481JRCY8MD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snooker Plus Leaderboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -14,21 +27,24 @@
         </div>
     </header>
 
-    <!-- Updated Club Image -->
+    <!-- Club Image Inserted Here -->
     <div class="club-image-container">
-        <img src="https://raw.githubusercontent.com/AnkitBele21/centurydewas/main/photo/century.jpeg" alt="Club Image" style="width: 100%; height: auto;">
+        <img src="https://raw.githubusercontent.com/AnkitBele21/centurydewas/main/club.jpeg" alt="Club Image" style="width: 100%; height: auto;">
     </div>
 
-    <!-- Other content sections -->
     <section id="contestBanner" class="banner-section">
         <h2 class="banner-text">"Century Snooker+ Academy"</h2>
     </section>
 
     <main>
-        <!-- Main content including player search bar and player container -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players..." class="form-control">
+        </div>
+        <div id="playerContainer">
+            <!-- Content will be displayed here dynamically -->
+        </div>
     </main>
 
-    <!-- Scripts -->
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="datapull.js"></script>
 </body>
