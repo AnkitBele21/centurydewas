@@ -28,7 +28,29 @@ function initClient() {
     });
 }
 
-// ... [Rest of your existing functions]
+function fetchPlayerInfo(playerName) {
+    // ... Existing fetchPlayerInfo function ...
+}
+
+function fetchFramesInfo(playerName) {
+    // ... Existing fetchFramesInfo function ...
+}
+
+function fetchRankInfo(playerName) {
+    // ... Existing fetchRankInfo function ...
+}
+
+function displayPlayerInfo(playerInfo) {
+    // ... Existing displayPlayerInfo function ...
+}
+
+function displayFramesInfo(framesData, playerName) {
+    // ... Existing displayFramesInfo function ...
+}
+
+function displayRankInfo(rankInfo) {
+    // ... Existing displayRankInfo function ...
+}
 
 function setupPayNowButton(playerName) {
     document.getElementById('payNowButton').addEventListener('click', function() {
@@ -38,9 +60,16 @@ function setupPayNowButton(playerName) {
 }
 
 function initiatePayment(playerName, amount) {
+    // Convert amount to a number and check if it's valid
+    const paymentAmount = Number(amount);
+    if (isNaN(paymentAmount) || paymentAmount <= 0) {
+        alert('Invalid payment amount');
+        return;
+    }
+
     var options = {
         "key": RAZORPAY_KEY,
-        "amount": amount * 100, // Convert to smallest currency unit
+        "amount": paymentAmount * 100, // Convert to smallest currency unit
         "currency": "INR",
         "name": "Snooker Plus",
         "description": "Clear Player Dues",
