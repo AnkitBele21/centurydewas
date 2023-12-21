@@ -7,7 +7,7 @@ const FRAMES_SHEET_NAME = 'Frames';
 const RANK_SHEET_NAME = 'Rank';
 
 // Razorpay Key - Replace with your actual key
-const RAZORPAY_KEY = 'YOUR_RAZORPAY_KEY';
+const RAZORPAY_KEY = 'rzp_test_zPDNGKOn4kvHGA';
 
 function initClient() {
     gapi.client.init({
