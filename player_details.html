@@ -24,19 +24,19 @@
     <div class="text-center mb-4">
         <button id="challengeButton" class="btn btn-primary">Take on a Challenge</button>
     </div>
+    <!-- Pay Now Button -->
+    <div class="text-center mb-4">
+        <button id="payNowButton" class="btn btn-success">Pay Now</button>
+    </div>
     <div id="framesInfo" class="mx-auto" style="max-width: 540px;"></div>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="player_details.js" defer></script>
     <script>
-        // Script to handle the challenge button click
-        document.addEventListener('DOMContentLoaded', function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var playerName = urlParams.get('player'); // Assuming 'player' is the URL parameter
+        // Existing script for the challenge button
+        // ...
 
-            document.getElementById('challengeButton').addEventListener('click', function() {
-                window.location.href = `https://leaderboard.snookerplus.in/challenge?name=${encodeURIComponent(playerName)}`;
-            });
-        });
+        // Add script for Pay Now button here
+        // ...
     </script>
 </body>
 </html>
