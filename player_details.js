@@ -212,6 +212,22 @@ function initiatePayment(playerName, amount) {
     var rzp = new Razorpay(options);
     rzp.open();
 }
+// Server-side pseudocode (e.g., using Express.js in Node.js)
+app.post('/verify-payment', (req, res) => {
+    const paymentDetails = req.body;
+
+    // Use Razorpay SDK to verify the payment
+    // Update the Google Sheet using the Google Sheets API
+
+    // If verified successfully
+    if(verified) {
+        // Update the Google Sheet or other databases as necessary
+        res.json({ verified: true });
+    } else {
+        // Handle failed verification
+        res.json({ verified: false });
+    }
+});
 
 function sendPaymentDetailsToServer(paymentDetails) {
     fetch('/verify-payment', { // Replace with your actual server endpoint
