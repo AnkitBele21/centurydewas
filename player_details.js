@@ -194,7 +194,12 @@ function initiatePayment(playerName, amount) {
         "handler": function(response) {
             // Handle the payment success
             alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
-            // TODO: Send payment details to server for verification and sheet update
+            // Send payment details to server for verification and sheet update
+            sendPaymentDetailsToServer({
+                paymentId: response.razorpay_payment_id,
+                playerName: playerName,
+                amount: paymentAmount
+            });
         },
         "prefill": {
             "name": playerName,
@@ -206,6 +211,29 @@ function initiatePayment(playerName, amount) {
     };
     var rzp = new Razorpay(options);
     rzp.open();
+}
+
+function sendPaymentDetailsToServer(paymentDetails) {
+    fetch('/verify-payment', { // Replace with your actual server endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentDetails),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.verified) {
+            console.log('Payment verified and sheet updated');
+            // Perform any additional client-side updates or notifications
+        } else {
+            console.error('Payment verification failed');
+            // Handle failed verification
+        }
+    })
+    .catch(error => {
+        console.error('Error sending payment details to server:', error);
+    });
 }
 
 // Load the Google API client and call initClient
