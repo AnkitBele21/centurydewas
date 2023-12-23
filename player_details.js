@@ -194,12 +194,7 @@ function initiatePayment(playerName, amount) {
         "handler": function(response) {
             // Handle the payment success
             alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
-            // Send payment details to server for verification and sheet update
-            sendPaymentDetailsToServer({
-                paymentId: response.razorpay_payment_id,
-                playerName: playerName,
-                amount: paymentAmount
-            });
+            // TODO: Send payment details to server for verification and sheet update
         },
         "prefill": {
             "name": playerName,
@@ -211,45 +206,6 @@ function initiatePayment(playerName, amount) {
     };
     var rzp = new Razorpay(options);
     rzp.open();
-}
-// Server-side pseudocode (e.g., using Express.js in Node.js)
-app.post('/verify-payment', (req, res) => {
-    const paymentDetails = req.body;
-
-    // Use Razorpay SDK to verify the payment
-    // Update the Google Sheet using the Google Sheets API
-
-    // If verified successfully
-    if(verified) {
-        // Update the Google Sheet or other databases as necessary
-        res.json({ verified: true });
-    } else {
-        // Handle failed verification
-        res.json({ verified: false });
-    }
-});
-
-function sendPaymentDetailsToServer(paymentDetails) {
-    fetch('/verify-payment', { // Replace with your actual server endpoint
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(paymentDetails),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.verified) {
-            console.log('Payment verified and sheet updated');
-            // Perform any additional client-side updates or notifications
-        } else {
-            console.error('Payment verification failed');
-            // Handle failed verification
-        }
-    })
-    .catch(error => {
-        console.error('Error sending payment details to server:', error);
-    });
 }
 
 // Load the Google API client and call initClient
