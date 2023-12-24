@@ -104,7 +104,7 @@ function createPlayerCard(player) {
         // ... existing progress bar code ...
     }
     playerName.addEventListener('click', function() {
-    window.location.href = `https://leaderboard.snookerplus.in/playerinfo?player=${encodeURIComponent(name)}`;
+    window.location.href = `https://ankitbele21.github.io/centurydewas/playerinfo?player=${encodeURIComponent(name)}`;
 });
 
     return playerCard;
