@@ -6,8 +6,21 @@ const PLAYER_SHEET_NAME = 'snookerplus';
 const FRAMES_SHEET_NAME = 'Frames';
 const RANK_SHEET_NAME = 'Rank';
 
-// Razorpay Key - Replace with your actual key
-const RAZORPAY_KEY = 'rzp_test_zPDNGKOn4kvHGA';
+//  NOTE NOTE NOTE: Change the Razorpay test key to your actual key
+const RAZORPAY_KEY = 'rzp_test_CyDcbMd3pugIFR';
+
+
+const SHEET_PLAYER_CELLS_CONSTANTS = {
+    playerName: 3, // Assuming column D
+    amountToPay: 7, // Assuming column G
+    razorPayPaid: 58 // Assuming column BF
+}
+
+const loaderInstance = new FullScreenLoader();
+
+function isNumber(value) {
+    return typeof value === "number" && !isNaN(value);
+  }
 
 function initClient() {
     gapi.client.init({
@@ -75,6 +88,113 @@ function fetchRankInfo(playerName) {
         console.error('Error fetching rank data:', response.result.error.message);
     });
 }
+
+
+/**
+ * Retrieves the row of a player from the spreadsheet using the player's name.
+ * Assumption: PlayerName is unique and can be used for identification
+ *
+ * @param {string} playerName - The name of the player.
+ * @return {Array} - An array representing the player's information if found, otherwise undefined.
+ */
+function getPlayerRow(playerName) {
+    return new Promise((resolve, reject) => {
+      gapi.client.sheets.spreadsheets.values
+        .get({
+          spreadsheetId: SHEET_ID,
+          range: `${PLAYER_SHEET_NAME}`,
+        })
+        .then(
+          (response) => {
+            const values = response.result.values;
+            const playerInfo = values.find(
+              (row) => row[SHEET_PLAYER_CELLS_CONSTANTS.playerName] === playerName
+            );
+            if (playerInfo) {
+              resolve(playerInfo);
+            } else {
+              console.log("Player info not found.");
+              resolve(null); // Resolve with null if player info is not found
+            }
+          },
+          (response) => {
+            console.error(
+              "Error fetching player row:",
+              response.result.error.message
+            );
+            reject([]);
+          }
+        );
+    });
+  }
+  
+
+  /**
+   * Updates the specified player's row in the sheet with the provided data.
+   *
+   * @param {string} playerName - The name of the player whose row needs to be updated.
+   * @param {Object} cellsToUpdate - An object containing the cells to be updated. The keys represent
+   * the cell IDs and the values are the new values for those cells.
+   * @return {Promise<void>} A promise that resolves once the player's row has been successfully updated.
+   */
+  async function updatePlayerRow(playerName, cellsToUpdate) {
+    // THIS FUNCTION WILL FAIL AS OF NOW
+    // GOOGLE WON'T LET US UPDATE DATA IN SHEET WITHOUT OAUTH CREDS
+    // WILL NEED A SERVER TO HANDLE ALL THAT
+    // OR NEED TO FIGURE SOMETHING OUT
+    try {
+      const response = await gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: SHEET_ID,
+        range: `${PLAYER_SHEET_NAME}`,
+      });
+  
+      const values = response.result.values;
+      const playerRowIndex = values.findIndex(
+        (row) => row[SHEET_PLAYER_CELLS_CONSTANTS.playerName] === playerName
+      );
+  
+      if (playerRowIndex !== -1) {
+        const playerInfo = values[playerRowIndex];
+  
+        // Update the playerInfo with the provided cellsToUpdate
+        for (const cellId in cellsToUpdate) {
+          if (cellsToUpdate.hasOwnProperty(cellId)) {
+            const columnIndex = parseInt(cellId, 10) - 1; // Convert cellId to 0-based index
+            if (columnIndex >= 0 && columnIndex < playerInfo.length) {
+              playerInfo[columnIndex] = cellsToUpdate[cellId];
+            } else {
+              console.error(`Invalid column index: ${columnIndex}`);
+            }
+          }
+        }
+  
+        // Update the sheet with the modified data
+        await gapi.client.sheets.spreadsheets.values.update({
+          spreadsheetId: SHEET_ID,
+          range: `${PLAYER_SHEET_NAME}!A${playerRowIndex + 1}`, // Assuming data starts from row 1
+          valueInputOption: "USER_ENTERED",
+          resource: {
+            values: [playerInfo],
+          },
+        });
+  
+        console.log("Player info updated successfully.");
+        // Optionally, display the updated player info
+        displayPlayerInfo(playerInfo);
+      } else {
+        console.log("Player info not found.");
+      }
+    } catch (error) {
+      console.error(
+        "Error updating/fetching player data:",
+        error.result?.error?.message || error.message
+      );
+    }
+  }
+  
+
+
+
 function displayPlayerInfo(playerInfo) {
     document.getElementById('playerName').innerText = playerInfo[2]; // Assuming name is in column C
     const totalMoneyElement = document.getElementById('totalMoney');
@@ -177,6 +297,39 @@ function setupPayNowButton(playerName) {
     });
 }
 
+
+/**
+ * Handles the payment success for a player.
+ * - Updates the player's RazorPay paid amount in the sheet.
+ *
+ * @param {string} playerName - The name of the player.
+ * @param {number} amount - The amount of the payment.
+ * @param {string} _paymentId - The ID of the payment.
+ */
+async function handlePaymentSuccess(playerName, amount, _paymentId) {
+    try {
+        loaderInstance.showLoader();
+
+        const playerData = await getPlayerRow(playerName);
+
+        if (!playerData) {
+            // Need to handle what happens if user is missing from the sheet
+            return;
+        }
+
+        const razorPayPaid = parseInt(playerData[SHEET_PLAYER_CELLS_CONSTANTS.razorPayPaid]) || 0;
+        const amountPaid = razorPayPaid + amount;
+
+        await updatePlayerRow(playerName, { [SHEET_PLAYER_CELLS_CONSTANTS.razorPayPaid]: amountPaid });
+
+    } catch (error) {
+        console.error('Error handling payment success:', error.message);
+    } finally {
+        loaderInstance.hideLoader();
+    }
+}
+
+
 function initiatePayment(playerName, amount) {
     // Convert amount to a number and check if it's valid
     const paymentAmount = Number(amount);
@@ -193,8 +346,8 @@ function initiatePayment(playerName, amount) {
         "description": "Clear Player Dues",
         "handler": function(response) {
             // Handle the payment success
-            alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
-            // TODO: Send payment details to server for verification and sheet update
+            // alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
+            handlePaymentSuccess(playerName, paymentAmount, response.razorpay_payment_id);
         },
         "prefill": {
             "name": playerName,
