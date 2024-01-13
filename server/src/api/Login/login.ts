@@ -14,7 +14,7 @@ const googleSheet = require('../../helpers/google-sheet');
 export const loginRoute = async (req: Request, res: Response) => {
     const data: LoginBodyType = req.body;
     if (areKeysEmpty(data, ["username", "password"])) {
-        res.status(400).json('Username or password, cannot be empty');
+        return res.status(400).json('Username or password, cannot be empty');
     }
 
     const response = await googleSheet.read(playerCredentialsRange);
@@ -24,12 +24,12 @@ export const loginRoute = async (req: Request, res: Response) => {
 
     const userIdx = usernameList.indexOf(data.username);
     if (userIdx === -1) {
-        res.status(401).json('Invalid Credentials');
+        return res.status(401).json('Invalid Credentials');
     }
 
     if (data.password !== passwordList[userIdx]) {
-        res.status(401).json('Invalid Credentials');
+        return res.status(401).json('Invalid Credentials');
     }
 
-    res.json("Login Server");
+    return res.json("Login Server");
 }   

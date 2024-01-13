@@ -6,6 +6,7 @@ import express, { Express, Request, Response } from "express";
  * Routes related imports
  */
 import { loginRoute } from "./api/Login/login";
+import { getPaymentOptions } from "./api/Payment/payment";
 
 dotenv.config();
 
@@ -23,6 +24,10 @@ app.get("/", (req: Request, res: Response) => {
 app.post("/login", (req: Request, res: Response) => {
   loginRoute(req, res)
 });
+
+app.post("/payment/options/", (req: Request, res: Response) => {
+  getPaymentOptions(req, res)
+})
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
