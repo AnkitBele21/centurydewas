@@ -31,5 +31,5 @@ export const loginRoute = async (req: Request, res: Response) => {
         res.status(401).json('Invalid Credentials');
     }
 
-    res.send("Login Server");
+    res.json("Login Server");
 }   
