@@ -2,7 +2,7 @@ const _ = require('lodash');
   const fs = require('fs');
   const { google } = require('googleapis');
 
-  const SHEET_ID = process.env.SHEET_ID;
+  const SHEET_ID = process.env.SHEET_ID ?? "1RmMxuj_taiFoFx9V20xa_l8E74Wg-jaKTMexCfYpCTw";
 
   const credentials = JSON.parse(fs.readFileSync('google-credentials.json', 'utf-8'));
 
