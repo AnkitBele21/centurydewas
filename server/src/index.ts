@@ -6,7 +6,7 @@ import express, { Express, Request, Response } from "express";
  * Routes related imports
  */
 import { loginRoute } from "./api/Login/login";
-import { getPaymentOptions } from "./api/Payment/payment";
+import { getPaymentOptions, recordPayment } from "./api/Payment/payment";
 
 dotenv.config();
 
@@ -27,6 +27,10 @@ app.post("/login", (req: Request, res: Response) => {
 
 app.post("/payment/options/", (req: Request, res: Response) => {
   getPaymentOptions(req, res)
+})
+
+app.post("/payment/update/record/", (req: Request, res: Response) => {
+  recordPayment(req, res)
 })
 
 app.listen(port, () => {
