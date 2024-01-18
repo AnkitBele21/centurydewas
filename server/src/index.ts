@@ -25,13 +25,14 @@ app.post("/login", (req: Request, res: Response) => {
   loginRoute(req, res)
 });
 
+app.post("/record_payment/", (req: Request, res: Response) => {
+  recordPayment(req, res)
+})
+
 app.post("/payment/options/", (req: Request, res: Response) => {
   getPaymentOptions(req, res)
 })
 
-app.post("/payment/update/record/", (req: Request, res: Response) => {
-  recordPayment(req, res)
-})
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
