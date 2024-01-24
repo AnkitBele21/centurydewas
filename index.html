@@ -34,7 +34,7 @@
 
     <section id="contestBanner" class="banner-section">
         <<h2 class="banner-text">"Get Ready: The Ultimate Snooker+ Tournament is Coming Soon!"</h2>
-    <p>Leaderboard closes in <span id="countdown"></span> days (Countdown till 3rd Feb).</p>
+    <p>Leaderboard closes in <span id="countdown"></span> days.</p>
 
     <!-- Add your JavaScript for the countdown here -->
     <script>
@@ -57,8 +57,7 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the countdown
-            document.getElementById("countdown").innerHTML = days + " Days, " + hours + " Hours, "
-                + minutes + " Minutes, " + seconds + " Seconds";
+            document.getElementById("countdown").innerHTML = days + " Days, " ;
 
             // If the countdown is over, display a message
             if (distance < 0) {
