@@ -33,7 +33,40 @@
     </div>
 
     <section id="contestBanner" class="banner-section">
-        <h2 class="banner-text">"Century Snooker+ Academy"</h2>
+        <<h2 class="banner-text">"Get Ready: The Ultimate Snooker+ Tournament is Coming Soon!"</h2>
+    <p>Leaderboard closes in <span id="countdown"></span> days (Countdown till 3rd Feb).</p>
+
+    <!-- Add your JavaScript for the countdown here -->
+    <script>
+        // Set the date we're counting down to (3rd Feb)
+        var countDownDate = new Date("Feb 3, 2024 00:00:00").getTime();
+
+        // Update the countdown every 1 second
+        var x = setInterval(function () {
+
+            // Get the current date and time
+            var now = new Date().getTime();
+
+            // Calculate the remaining time
+            var distance = countDownDate - now;
+
+            // Calculate days, hours, minutes, and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById("countdown").innerHTML = days + " Days, " + hours + " Hours, "
+                + minutes + " Minutes, " + seconds + " Seconds";
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
     </section>
 
     <main>
