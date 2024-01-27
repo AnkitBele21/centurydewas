@@ -2,8 +2,10 @@ const _ = require("lodash");
 const fs = require("fs");
 const { google } = require("googleapis");
 
+
+// SNooker Plus Sheet
 const SHEET_ID =
-  process.env.SHEET_ID ?? "1RmMxuj_taiFoFx9V20xa_l8E74Wg-jaKTMexCfYpCTw";
+  process.env.SHEET_ID ?? "1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss";
 
 const credentials = JSON.parse(
   fs.readFileSync("google-credentials.json", "utf-8")

@@ -12,24 +12,29 @@ const googleSheet = require('../../helpers/google-sheet');
  * @return {Promise<void>} - sends the login server response
  */
 export const loginRoute = async (req: Request, res: Response) => {
-    const data: LoginBodyType = req.body;
-    if (areKeysEmpty(data, ["username", "password"])) {
-        return res.status(400).json('Username or password, cannot be empty');
+    try {
+        const data: LoginBodyType = req.body;
+        if (areKeysEmpty(data, ["username", "password"])) {
+            return res.status(400).json('Username or password, cannot be empty');
+        }
+    
+        const response = await googleSheet.read(playerCredentialsRange);
+    
+        const usernameList = response.map((row: any) => row[0]);
+        const passwordList = response.map((row: any) => row[1]);
+    
+        const userIdx = usernameList.indexOf(data.username);
+        if (userIdx === -1) {
+            return res.status(401).json('Invalid Credentials');
+        }
+    
+        if (data.password !== passwordList[userIdx]) {
+            return res.status(401).json('Invalid Credentials');
+        }
+    
+        return res.json("Login Server Success");
+    } catch (err) {
+        console.log("Error: ", err);
+        return res.status(500).json('Something Unexpected Happened');
     }
-
-    const response = await googleSheet.read(playerCredentialsRange);
-
-    const usernameList = response.map((row: any) => row[0]);
-    const passwordList = response.map((row: any) => row[1]);
-
-    const userIdx = usernameList.indexOf(data.username);
-    if (userIdx === -1) {
-        return res.status(401).json('Invalid Credentials');
-    }
-
-    if (data.password !== passwordList[userIdx]) {
-        return res.status(401).json('Invalid Credentials');
-    }
-
-    return res.json("Login Server");
 }   
