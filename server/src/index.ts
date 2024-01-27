@@ -1,17 +1,6 @@
 import dotenv from "dotenv";
 const bodyParser = require('body-parser');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 import express, { Express, Request, Response } from "express";
-
-const target = 'http://35.207.223.133';
-
-
-const proxyMiddleware = createProxyMiddleware({
-  target,
-  changeOrigin: true, // changes the origin of the host header to the target URL
-  secure: false,      // if the target server doesn't support HTTPS
-});
-
 
 /**
  * Routes related imports
@@ -33,13 +22,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-
-
-// Use the proxy middleware for all routes
-app.use('/login', proxyMiddleware);
-app.use('/payment/options', proxyMiddleware);
-app.use('/record_payment', proxyMiddleware);
-
 
 const port = process.env.PORT ?? 3000;
 
