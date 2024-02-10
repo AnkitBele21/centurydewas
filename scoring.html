@@ -11,18 +11,30 @@
         <div class="player" id="player1">
             <input type="text" placeholder="Player 1 Name" id="player1Name">
             <div class="score" id="player1Score">0</div>
-            <button onclick="scoreRed(1)">Red Ball</button>
-            <button onclick="scoreColor(1, 2)">Yellow Ball</button>
-            <!-- Add buttons for other colored balls -->
-            <button onclick="foul(1)">Foul</button>
+            <div class="buttons">
+                <button onclick="scoreBall('red', 1)">Red Ball</button>
+                <button onclick="scoreBall('yellow', 1)">Yellow Ball</button>
+                <button onclick="scoreBall('green', 1)">Green Ball</button>
+                <button onclick="scoreBall('brown', 1)">Brown Ball</button>
+                <button onclick="scoreBall('blue', 1)">Blue Ball</button>
+                <button onclick="scoreBall('pink', 1)">Pink Ball</button>
+                <button onclick="scoreBall('black', 1)">Black Ball</button>
+                <button onclick="foul(1)">Foul</button>
+            </div>
         </div>
         <div class="player" id="player2">
             <input type="text" placeholder="Player 2 Name" id="player2Name">
             <div class="score" id="player2Score">0</div>
-            <button onclick="scoreRed(2)">Red Ball</button>
-            <button onclick="scoreColor(2, 2)">Yellow Ball</button>
-            <!-- Add buttons for other colored balls -->
-            <button onclick="foul(2)">Foul</button>
+            <div class="buttons">
+                <button onclick="scoreBall('red', 2)">Red Ball</button>
+                <button onclick="scoreBall('yellow', 2)">Yellow Ball</button>
+                <button onclick="scoreBall('green', 2)">Green Ball</button>
+                <button onclick="scoreBall('brown', 2)">Brown Ball</button>
+                <button onclick="scoreBall('blue', 2)">Blue Ball</button>
+                <button onclick="scoreBall('pink', 2)">Pink Ball</button>
+                <button onclick="scoreBall('black', 2)">Black Ball</button>
+                <button onclick="foul(2)">Foul</button>
+            </div>
         </div>
     </div>
     <script src="scoring.js"></script>
