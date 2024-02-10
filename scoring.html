@@ -3,188 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snooker Scoring</title>
-    <style>
-        body {
-            background-color: #222;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            margin: 0 auto;
-            max-width: 800px;
-        }
-        .player {
-            width: 45%;
-        }
-        .scoreboard {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-        }
-        .balls-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .ball {
-            width: 40px;
-            height: 40px;
-            background-color: #fff;
-            border-radius: 50%;
-            margin: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-        }
-        .red-ball {
-            background-color: #ff0000;
-        }
-        .yellow-ball {
-            background-color: yellow;
-        }
-        .green-ball {
-            background-color: green;
-        }
-        .brown-ball {
-            background-color: #8b4513;
-        }
-        .blue-ball {
-            background-color: blue;
-        }
-        .pink-ball {
-            background-color: pink;
-        }
-        .black-ball {
-            background-color: black;
-        }
-        .player-name {
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-        .score {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #444;
-            color: #fff;
-        }
-        input[type="button"] {
-            background-color: #009688;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input[type="button"]:hover {
-            background-color: #00796b;
-        }
-    </style>
+    <title>Snooker Scoring App</title>
+    <link rel="stylesheet" href="scoring.css">
 </head>
 <body>
-    <div class="container">
-        <div class="player">
-            <div class="player-name">
-                Player 1
-            </div>
-            <input type="text" id="player1Name" placeholder="Enter name">
+    <div class="app-container">
+        <div class="player" id="player1">
+            <input type="text" placeholder="Player 1 Name" id="player1Name">
+            <div class="score" id="player1Score">0</div>
+            <button onclick="scoreRed(1)">Red Ball</button>
+            <button onclick="scoreColor(1, 2)">Yellow Ball</button>
+            <!-- Add buttons for other colored balls -->
+            <button onclick="foul(1)">Foul</button>
         </div>
-        <div class="player">
-            <div class="player-name">
-                Player 2
-            </div>
-            <input type="text" id="player2Name" placeholder="Enter name">
-        </div>
-    </div>
-    <div class="container">
-        <div class="player">
-            <div class="score">
-                Score: <span id="player1Score">0</span>
-            </div>
-            <input type="button" id="player1Foul" value="+4 (Foul)">
-            <input type="button" id="player1Miss" value="Miss">
-        </div>
-        <div class="player">
-            <div class="score">
-                Score: <span id="player2Score">0</span>
-            </div>
-            <input type="button" id="player2Foul" value="+4 (Foul)">
-            <input type="button" id="player2Miss" value="Miss">
+        <div class="player" id="player2">
+            <input type="text" placeholder="Player 2 Name" id="player2Name">
+            <div class="score" id="player2Score">0</div>
+            <button onclick="scoreRed(2)">Red Ball</button>
+            <button onclick="scoreColor(2, 2)">Yellow Ball</button>
+            <!-- Add buttons for other colored balls -->
+            <button onclick="foul(2)">Foul</button>
         </div>
     </div>
-    <div class="balls-container">
-        <div class="ball red-ball">1</div>
-        <div class="ball yellow-ball">2</div>
-        <div class="ball green-ball">3</div>
-        <div class="ball brown-ball">4</div>
-        <div class="ball blue-ball">5</div>
-        <div class="ball pink-ball">6</div>
-        <div class="ball black-ball">7</div>
-    </div>
-
-    <script>
-        // Player names input fields
-        const player1NameInput = document.getElementById('player1Name');
-        const player2NameInput = document.getElementById('player2Name');
-
-        // Score display elements
-        const player1ScoreDisplay = document.getElementById('player1Score');
-        const player2ScoreDisplay = document.getElementById('player2Score');
-
-        // Buttons for fouls and misses
-        const player1FoulButton = document.getElementById('player1Foul');
-        const player1MissButton = document.getElementById('player1Miss');
-        const player2FoulButton = document.getElementById('player2Foul');
-        const player2MissButton = document.getElementById('player2Miss');
-
-        // Initial scores
-        let player1Score = 0;
-        let player2Score = 0;
-
-        // Update score display for Player 1
-        function updatePlayer1Score(scoreChange) {
-            player1Score += scoreChange;
-            player1ScoreDisplay.textContent = player1Score;
-        }
-
-        // Update score display for Player 2
-        function updatePlayer2Score(scoreChange) {
-            player2Score += scoreChange;
-            player2ScoreDisplay.textContent = player2Score;
-        }
-
-        // Event listeners for Player 1 buttons
-        player1FoulButton.addEventListener('click', () => {
-            updatePlayer1Score(4);
-        });
-
-        player1MissButton.addEventListener('click', () => {
-            updatePlayer1Score(0);
-        });
-
-        // Event listeners for Player 2 buttons
-        player2FoulButton.addEventListener('click', () => {
-            updatePlayer2Score(4);
-        });
-
-        player2MissButton.addEventListener('click', () => {
-            updatePlayer2Score(0);
-        });
-    </script>
+    <script src="scoring.js"></script>
 </body>
 </html>
