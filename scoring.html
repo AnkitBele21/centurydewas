@@ -1,129 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snooker Scoreboard</title>
+    <title>Snooker Scoring</title>
     <style>
         body {
+            background-color: #222;
+            color: #fff;
             font-family: Arial, sans-serif;
-            text-align: center;
         }
-
-        h1 {
-            margin-top: 50px;
-        }
-
-        .score-container {
+        .container {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        .player {
+            width: 45%;
+        }
+        .scoreboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-top: 30px;
         }
-
-        .player {
-            flex: 1;
-        }
-
-        .score {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .buttons {
+        .balls-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
         }
-
-        button {
-            font-size: 18px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .ball {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
         }
-
-        button:hover {
-            background-color: #0056b3;
+        .red-ball {
+            background-color: #ff0000;
+        }
+        .player-name {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #444;
+            color: #fff;
+        }
+        input[type="button"] {
+            background-color: #009688;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #00796b;
         }
     </style>
 </head>
-
 <body>
-    <h1>Snooker Scoreboard</h1>
-
-    <div>
-        <label for="bestOf">Best of:</label>
-        <select id="bestOf" onchange="setBestOf()">
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="7">7</option>
-        </select>
+    <div class="container">
+        <div class="player">
+            <div class="player-name">
+                Player 1
+            </div>
+            <input type="text" id="player1Name" placeholder="Enter name">
+        </div>
+        <div class="player">
+            <div class="player-name">
+                Player 2
+            </div>
+            <input type="text" id="player2Name" placeholder="Enter name">
+        </div>
     </div>
-
-    <div class="score-container">
+    <div class="container">
         <div class="player">
-            <h2>Player 1</h2>
-            <div class="score" id="player1Score">0</div>
-            <div class="buttons">
-                <button onclick="increaseScore('player1', 1)">+1</button>
-                <button onclick="increaseScore('player1', 4)">+4</button>
-                <button onclick="increaseScore('player1', 7)">+7</button>
-                <button onclick="foul('player1')">Foul</button>
+            <div class="score">
+                Score: <span id="player1Score">0</span>
             </div>
+            <input type="button" id="player1Foul" value="+4 (Foul)">
+            <input type="button" id="player1Miss" value="Miss">
         </div>
         <div class="player">
-            <h2>Player 2</h2>
-            <div class="score" id="player2Score">0</div>
-            <div class="buttons">
-                <button onclick="increaseScore('player2', 1)">+1</button>
-                <button onclick="increaseScore('player2', 4)">+4</button>
-                <button onclick="increaseScore('player2', 7)">+7</button>
-                <button onclick="foul('player2')">Foul</button>
+            <div class="score">
+                Score: <span id="player2Score">0</span>
             </div>
+            <input type="button" id="player2Foul" value="+4 (Foul)">
+            <input type="button" id="player2Miss" value="Miss">
         </div>
+    </div>
+    <div class="balls-container">
+        <div class="ball red-ball">1</div>
+        <div class="ball red-ball">2</div>
+        <div class="ball red-ball">3</div>
+        <div class="ball red-ball">4</div>
+        <div class="ball red-ball">5</div>
+        <div class="ball red-ball">6</div>
+        <div class="ball red-ball">7</div>
+        <div class="ball red-ball">8</div>
+        <div class="ball red-ball">9</div>
+        <div class="ball red-ball">10</div>
+        <div class="ball red-ball">11</div>
+        <div class="ball red-ball">12</div>
+        <div class="ball red-ball">13</div>
+        <div class="ball red-ball">14</div>
+        <div class="ball red-ball">15</div>
     </div>
 
     <script>
-        var bestOf = 3;
-        var player1Score = 0;
-        var player2Score = 0;
+        // Player names input fields
+        const player1NameInput = document.getElementById('player1Name');
+        const player2NameInput = document.getElementById('player2Name');
 
-        function setBestOf() {
-            bestOf = parseInt(document.getElementById('bestOf').value);
+        // Score display elements
+        const player1ScoreDisplay = document.getElementById('player1Score');
+        const player2ScoreDisplay = document.getElementById('player2Score');
+
+        // Buttons for fouls and misses
+        const player1FoulButton = document.getElementById('player1Foul');
+        const player1MissButton = document.getElementById('player1Miss');
+        const player2FoulButton = document.getElementById('player2Foul');
+        const player2MissButton = document.getElementById('player2Miss');
+
+        // Initial scores
+        let player1Score = 0;
+        let player2Score = 0;
+
+        // Update score display for Player 1
+        function updatePlayer1Score(scoreChange) {
+            player1Score += scoreChange;
+            player1ScoreDisplay.textContent = player1Score;
         }
 
-        function increaseScore(player, points) {
-            if ((player === 'player1' && player1Score >= Math.ceil(bestOf / 2)) || (player === 'player2' && player2Score >= Math.ceil(bestOf / 2))) {
-                alert('Match Over!');
-                return;
-            }
-
-            if (player === 'player1') {
-                player1Score += points;
-                document.getElementById('player1Score').textContent = player1Score;
-            } else {
-                player2Score += points;
-                document.getElementById('player2Score').textContent = player2Score;
-            }
-
-            checkWinner();
+        // Update score display for Player 2
+        function updatePlayer2Score(scoreChange) {
+            player2Score += scoreChange;
+            player2ScoreDisplay.textContent = player2Score;
         }
 
-        function foul(player) {
-            increaseScore(player === 'player1' ? 'player2' : 'player1', 4);
-        }
+        // Event listeners for Player 1 buttons
+        player1FoulButton.addEventListener('click', () => {
+            updatePlayer1Score(4);
+        });
 
-        function checkWinner() {
-            if (player1Score >= Math.ceil(bestOf / 2)) {
-                alert('Player 1 wins the match!');
-            } else if (player2Score >= Math.ceil(bestOf / 2)) {
-                alert('Player 2 wins the match!');
-            }
-        }
+        player1MissButton.addEventListener('click', () => {
+            updatePlayer1Score(0);
+        });
+
+        // Event listeners for Player 2 buttons
+        player2FoulButton.addEventListener('click', () => {
+            updatePlayer2Score(4);
+        });
+
+        player2MissButton.addEventListener('click', () => {
+            updatePlayer2Score(0);
+        });
     </script>
 </body>
-
 </html>
