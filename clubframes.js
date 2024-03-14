@@ -17,6 +17,7 @@ function displayFrameEntries(frameEntries) {
         const frameElement = document.createElement('div');
         frameElement.className = entry.isActive ? 'frame-card active-frame' : 'frame-card';
         
+        
         const dateElement = document.createElement('h5');
         dateElement.innerText = `Date: ${entry.date}`;
         frameElement.appendChild(dateElement);
@@ -49,14 +50,16 @@ function displayFrameEntries(frameEntries) {
         paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ') || 'N/A'}`;
         frameElement.appendChild(paidByElement);
         
-    // Status Element
-        const statusElement = document.createElement('p');
-        statusElement.innerText = `Status: ${entry.offStatus ? entry.offStatus : 'Active'}`;
-        statusElement.style.color = entry.offStatus ? 'red' : 'green';
-        frameElement.appendChild(statusElement);
-
+    // Status for active frames
         if (entry.isActive) {
-            // Edit Button
+            const statusElement = document.createElement('p');
+            statusElement.innerText = `Status: ${entry.offStatus ? entry.offStatus : 'Active'}`;
+            statusElement.style.color = entry.offStatus ? 'red' : 'green'; // Red for "Off", green for "Active"
+            frameElement.appendChild(statusElement);
+        }
+
+        // Edit Button for active frames
+        if (entry.isActive) {
             const editButton = document.createElement('button');
             editButton.innerText = 'Edit';
             editButton.className = 'btn btn-primary';
@@ -157,7 +160,7 @@ window.onload = function() {
             paidByNames: row.slice(23, 29),
             offStatus: row[8], // Fetching the "Off" status from column "I"
             isValid: row[6],
-            isActive: row[6] && !row[8]
+            isActive: row[6] && !row[8] // Determining if the frame is active based on the presence of "On" and absence of "Off"
         })).filter(entry => entry.isValid).reverse());
     });
 
