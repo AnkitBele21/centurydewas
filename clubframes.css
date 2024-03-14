@@ -80,6 +80,7 @@ button:hover {
     }
 }
 .active-frame {
-    background-color: #4CAF50; /* Green background for active frames */
-    color: #FFFFFF; /* White text for better contrast */
+    border: 2px solid #01AB7A; /* Highlight active frames with a border color similar to the header */
+    background-color: #394045; /* Slightly lighter than the default frame card for distinction */
 }
+
