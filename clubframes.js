@@ -62,7 +62,8 @@ function applyFilters() {
             playerNames: row.slice(12, 18),
             paidByNames: row.slice(23, 29), // Assuming X to AC columns
             isValid: row[6] && row[8]
-        })).filter(entry => entry.isValid);
+        })).filter(entry => entry.isValid)
+        .reverse(); // Reverse the order of entries
         
         if (playerNameFilter) {
             frameEntries = frameEntries.filter(entry =>
@@ -77,6 +78,7 @@ function applyFilters() {
         displayFrameEntries(frameEntries);
     });
 }
+
 function populatePlayerNames() {
     fetchData('SnookerPlus').then(data => {
         const nameDatalist = document.getElementById('playerNames');
@@ -90,14 +92,6 @@ function populatePlayerNames() {
 
 window.onload = function() {
     fetchData('Frames').then(data => {
-        // ... [Code inside this function remains the same]
-    });
-
-    populatePlayerNames(); // Populate player name suggestions
-};
-
-window.onload = function() {
-    fetchData('Frames').then(data => {
         const frameEntries = data.map(row => ({
             date: row[2],
             duration: row[3],
@@ -106,8 +100,11 @@ window.onload = function() {
             playerNames: row.slice(12, 18),
             paidByNames: row.slice(23, 29), // Assuming X to AC columns
             isValid: row[6] && row[8]
-        })).filter(entry => entry.isValid);
+        })).filter(entry => entry.isValid)
+        .reverse(); // Reverse the order of entries
         
         displayFrameEntries(frameEntries);
     });
+
+    populatePlayerNames(); // Populate player name suggestions
 };
