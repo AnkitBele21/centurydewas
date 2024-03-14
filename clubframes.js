@@ -108,9 +108,11 @@ function markFrameOn() {
     fetch(WEB_APP_URL, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json', // Updated to application/json
         },
-        body: 'action=frameOn'
+        body: JSON.stringify({
+            action: 'frameOn'
+        })
     })
     .then(response => response.json())
     .then(data => {
