@@ -46,16 +46,14 @@ function displayFrameEntries(frameEntries) {
         playersElement.innerText = `Players: ${entry.playerNames.filter(name => name).join(', ')}`;
         frameElement.appendChild(playersElement);
 
-        if (!entry.isActive) {
-            const paidByElement = document.createElement('p');
-            paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ')}`;
-            frameElement.appendChild(paidByElement);
-        }
+        // Always include the "Paid by:" section, even for active frames
+        const paidByElement = document.createElement('p');
+        paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ') || 'N/A'}`;
+        frameElement.appendChild(paidByElement);
         
         frameEntriesContainer.appendChild(frameElement);
     });
 }
-
 function applyFilters() {
     const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
     let dateFilter = document.getElementById('dateFilter').value;
