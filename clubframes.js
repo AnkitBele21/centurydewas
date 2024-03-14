@@ -1,5 +1,6 @@
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1RmMxuj_taiFoFx9V20xa_l8E74Wg-jaKTMexCfYpCTw';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxPH0DCcOeaC9L36cOwItGYwJq3e4xRDpz8wJ1XCRdD3DA6EIiIDzATm2FPam1qg2C7hA/exec';
 
 async function fetchData(sheetName) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
@@ -20,7 +21,6 @@ function displayFrameEntries(frameEntries) {
         dateElement.innerText = `Date: ${entry.date}`;
         frameElement.appendChild(dateElement);
 
-        // Always include the "Table No:" section, with a default value if empty
         const tableNoElement = document.createElement('p');
         tableNoElement.innerText = `Table No: ${entry.tableNo || 'N/A'}`;
         frameElement.appendChild(tableNoElement);
@@ -64,20 +64,20 @@ function applyFilters() {
     
     fetchData('Frames').then(data => {
         let frameEntries = data.map(row => {
-            const isActive = row[6] && !row[8]; // "On" is present and "Off" is absent
+            const isActive = row[6] && !row[8];
             return {
                 date: row[2],
                 duration: row[3],
                 startTime: row[10],
                 tableMoney: row[20],
-                tableNo: row[7], // Table number is in column H
+                tableNo: row[7],
                 playerNames: row.slice(12, 18),
                 paidByNames: row.slice(23, 29),
                 isValid: row[6],
                 isActive: isActive
             };
         }).filter(entry => entry.isValid)
-        .reverse(); // Reverse the order of entries
+        .reverse();
         
         if (playerNameFilter) {
             frameEntries = frameEntries.filter(entry =>
@@ -98,32 +98,51 @@ function populatePlayerNames() {
         const nameDatalist = document.getElementById('playerNames');
         data.forEach(row => {
             const optionElement = document.createElement('option');
-            optionElement.value = row[2]; // Assuming names are in column C
+            optionElement.value = row[2];
             nameDatalist.appendChild(optionElement);
         });
     });
 }
 
+function markFrameOn() {
+    fetch(WEB_APP_URL, {
+        method: 'POST',
+        // Google Apps Script does not use the Content-Type header, so we use a query string
+        body: 'action=frameOn',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.status === "success") {
+            // Reload the web page to reflect the changes
+            window.location.reload();
+        } else {
+            alert("There was an error marking the frame as 'On'.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error marking the frame as 'On'.");
+    });
+}
+
 window.onload = function() {
     fetchData('Frames').then(data => {
-        const frameEntries = data.map(row => {
-            const isActive = row[6] && !row[8]; // "On" is present and "Off" is absent
-            return {
-                date: row[2],
-                duration: row[3],
-                startTime: row[10],
-                tableMoney: row[20],
-                tableNo: row[7], // Table number is in column H
-                playerNames: row.slice(12, 18),
-                paidByNames: row.slice(23, 29),
-                isValid: row[6],
-                isActive: isActive
-            };
-        }).filter(entry => entry.isValid)
-        .reverse(); // Reverse the order of entries
-        
-        displayFrameEntries(frameEntries);
+        displayFrameEntries(data.map(row => ({
+            date: row[2],
+            duration: row[3],
+            startTime: row[10],
+            tableMoney: row[20],
+            tableNo: row[7],
+            playerNames: row.slice(12, 18),
+            paidByNames: row.slice(23, 29),
+            isValid: row[6],
+            isActive: row[6] && !row[8]
+        })).filter(entry => entry.isValid).reverse());
     });
 
-    populatePlayerNames(); // Populate player name suggestions
+    populatePlayerNames();
 };
