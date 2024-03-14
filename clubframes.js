@@ -1,6 +1,6 @@
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1RmMxuj_taiFoFx9V20xa_l8E74Wg-jaKTMexCfYpCTw';
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxPH0DCcOeaC9L36cOwItGYwJq3e4xRDpz8wJ1XCRdD3DA6EIiIDzATm2FPam1qg2C7hA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4PPI664Whqr30w-FprrtCiTw2laYIVQAKmhRQCii0NDUSaZpkLO3yB8BvJP-df4vPtg/exec';
 
 async function fetchData(sheetName) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
