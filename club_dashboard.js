@@ -62,6 +62,22 @@ function createGraph(data, labels, canvasId, graphTitle) {
             }
         }
     });
+
+    // Add event listener to handle click on bars
+    ctx.canvas.addEventListener('click', function(event) {
+        var activePoints = myChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+        var firstPoint = activePoints[0];
+        if (firstPoint) {
+            var tableLabel = myChart.data.labels[firstPoint.index];
+            displayTableOptions(tableLabel);
+        }
+    });
+}
+
+function displayTableOptions(tableLabel) {
+    // Display popup with options for the clicked table
+    // For simplicity, let's use a basic alert
+    alert(`Options for Table ${tableLabel}:\n1. Turn On\n2. Turn Off\n3. Undo\n4. Add Players`);
 }
 
 async function createTableWisePerformanceGraph() {
