@@ -11,7 +11,7 @@ async function fetchData(sheetName) {
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
-    frameEntriesContainer.innerHTML = ''; 
+    frameEntriesContainer.innerHTML = '';
     
     frameEntries.forEach(entry => {
         const frameElement = document.createElement('div');
@@ -107,17 +107,16 @@ function populatePlayerNames() {
 function markFrameOn() {
     fetch(WEB_APP_URL, {
         method: 'POST',
-        // Google Apps Script does not use the Content-Type header, so we use a query string
-        body: 'action=frameOn',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'frameOn'
+        })
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         if (data.status === "success") {
-            // Reload the web page to reflect the changes
             window.location.reload();
         } else {
             alert("There was an error marking the frame as 'On'.");
@@ -130,19 +129,6 @@ function markFrameOn() {
 }
 
 window.onload = function() {
-    fetchData('Frames').then(data => {
-        displayFrameEntries(data.map(row => ({
-            date: row[2],
-            duration: row[3],
-            startTime: row[10],
-            tableMoney: row[20],
-            tableNo: row[7],
-            playerNames: row.slice(12, 18),
-            paidByNames: row.slice(23, 29),
-            isValid: row[6],
-            isActive: row[6] && !row[8]
-        })).filter(entry => entry.isValid).reverse());
-    });
-
+    fetchData('Frames').then(displayFrameEntries);
     populatePlayerNames();
 };
