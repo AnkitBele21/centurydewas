@@ -49,6 +49,24 @@ function displayFrameEntries(frameEntries) {
         paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ') || 'N/A'}`;
         frameElement.appendChild(paidByElement);
         
+     if (entry.isActive) {
+            // Edit Button
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Edit';
+            editButton.className = 'btn btn-primary'; // Bootstrap class for styling
+            editButton.style.marginRight = '10px'; // Add some spacing between buttons
+            // Placeholder for edit functionality
+            editButton.onclick = function() { alert('Edit functionality to be implemented.'); };
+            frameElement.appendChild(editButton);
+
+            // Off Button
+            const offButton = document.createElement('button');
+            offButton.innerText = 'Mark Off';
+            offButton.className = 'btn btn-danger'; // Bootstrap class for red color
+            offButton.onclick = function() { markFrameOff(index + 2); }; // Adjusted to account for header row and zero-based index
+            frameElement.appendChild(offButton);
+        }
+        
         frameEntriesContainer.appendChild(frameElement);
     });
 }
