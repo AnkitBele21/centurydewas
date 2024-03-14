@@ -107,17 +107,14 @@ function populatePlayerNames() {
 function markFrameOn() {
     fetch(WEB_APP_URL, {
         method: 'POST',
-        // Google Apps Script does not use the Content-Type header, so we use a query string
-        body: 'action=frameOn',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        },
+        body: 'action=frameOn'
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         if (data.status === "success") {
-            // Reload the web page to reflect the changes
             window.location.reload();
         } else {
             alert("There was an error marking the frame as 'On'.");
