@@ -14,31 +14,43 @@ function displayFrameEntries(frameEntries) {
     
     frameEntries.forEach(entry => {
         const frameElement = document.createElement('div');
-        frameElement.className = 'frame-card';
+        frameElement.className = entry.isActive ? 'frame-card active-frame' : 'frame-card';
         
         const dateElement = document.createElement('h5');
         dateElement.innerText = `Date: ${entry.date}`;
         frameElement.appendChild(dateElement);
+
+        if (entry.tableNo) {
+            const tableNoElement = document.createElement('p');
+            tableNoElement.innerText = `Table No: ${entry.tableNo}`;
+            frameElement.appendChild(tableNoElement);
+        }
         
-        const durationElement = document.createElement('p');
-        durationElement.innerText = `Duration: ${entry.duration} min`;
-        frameElement.appendChild(durationElement);
+        if (!entry.isActive) {
+            const durationElement = document.createElement('p');
+            durationElement.innerText = `Duration: ${entry.duration} min`;
+            frameElement.appendChild(durationElement);
+        }
         
         const startTimeElement = document.createElement('p');
         startTimeElement.innerText = `Start Time: ${entry.startTime}`;
         frameElement.appendChild(startTimeElement);
         
-        const tableMoneyElement = document.createElement('p');
-        tableMoneyElement.innerText = `Table Money: ${entry.tableMoney}`;
-        frameElement.appendChild(tableMoneyElement);
+        if (!entry.isActive) {
+            const tableMoneyElement = document.createElement('p');
+            tableMoneyElement.innerText = `Table Money: ${entry.tableMoney}`;
+            frameElement.appendChild(tableMoneyElement);
+        }
         
         const playersElement = document.createElement('p');
         playersElement.innerText = `Players: ${entry.playerNames.filter(name => name).join(', ')}`;
         frameElement.appendChild(playersElement);
 
-        const paidByElement = document.createElement('p');
-        paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ')}`;
-        frameElement.appendChild(paidByElement);
+        if (!entry.isActive) {
+            const paidByElement = document.createElement('p');
+            paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ')}`;
+            frameElement.appendChild(paidByElement);
+        }
         
         frameEntriesContainer.appendChild(frameElement);
     });
@@ -54,15 +66,20 @@ function applyFilters() {
     }
     
     fetchData('Frames').then(data => {
-        let frameEntries = data.map(row => ({
-            date: row[2],
-            duration: row[3],
-            startTime: row[10],
-            tableMoney: row[20],
-            playerNames: row.slice(12, 18),
-            paidByNames: row.slice(23, 29), // Assuming X to AC columns
-            isValid: row[6] && row[8]
-        })).filter(entry => entry.isValid)
+        let frameEntries = data.map(row => {
+            const isActive = row[6] && !row[8]; // "On" is present and "Off" is absent
+            return {
+                date: row[2],
+                duration: row[3],
+                startTime: row[10],
+                tableMoney: row[20],
+                tableNo: row[7], // Table number is in column H
+                playerNames: row.slice(12, 18),
+                paidByNames: row.slice(23, 29),
+                isValid: row[6],
+                isActive: isActive
+            };
+        }).filter(entry => entry.isValid)
         .reverse(); // Reverse the order of entries
         
         if (playerNameFilter) {
@@ -92,15 +109,20 @@ function populatePlayerNames() {
 
 window.onload = function() {
     fetchData('Frames').then(data => {
-        const frameEntries = data.map(row => ({
-            date: row[2],
-            duration: row[3],
-            startTime: row[10],
-            tableMoney: row[20],
-            playerNames: row.slice(12, 18),
-            paidByNames: row.slice(23, 29), // Assuming X to AC columns
-            isValid: row[6] && row[8]
-        })).filter(entry => entry.isValid)
+        const frameEntries = data.map(row => {
+            const isActive = row[6] && !row[8]; // "On" is present and "Off" is absent
+            return {
+                date: row[2],
+                duration: row[3],
+                startTime: row[10],
+                tableMoney: row[20],
+                tableNo: row[7], // Table number is in column H
+                playerNames: row.slice(12, 18),
+                paidByNames: row.slice(23, 29),
+                isValid: row[6],
+                isActive: isActive
+            };
+        }).filter(entry => entry.isValid)
         .reverse(); // Reverse the order of entries
         
         displayFrameEntries(frameEntries);
