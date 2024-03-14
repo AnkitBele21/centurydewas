@@ -79,3 +79,7 @@ button:hover {
         flex-grow: 1;
     }
 }
+.active-frame {
+    background-color: #4CAF50; /* Green background for active frames */
+    color: #FFFFFF; /* White text for better contrast */
+}
