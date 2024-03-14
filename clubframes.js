@@ -13,7 +13,7 @@ function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
     frameEntriesContainer.innerHTML = ''; 
     
-    frameEntries.forEach(entry => {
+    frameEntries.forEach((entry, index) => {
         const frameElement = document.createElement('div');
         frameElement.className = entry.isActive ? 'frame-card active-frame' : 'frame-card';
         
@@ -49,16 +49,20 @@ function displayFrameEntries(frameEntries) {
         paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ') || 'N/A'}`;
         frameElement.appendChild(paidByElement);
         
-     if (entry.isActive) {
+    // Status Element
+        const statusElement = document.createElement('p');
+        statusElement.innerText = `Status: ${entry.offStatus ? entry.offStatus : 'Active'}`;
+        statusElement.style.color = entry.offStatus ? 'red' : 'green';
+        frameElement.appendChild(statusElement);
+
+        if (entry.isActive) {
             // Edit Button
             const editButton = document.createElement('button');
             editButton.innerText = 'Edit';
-            editButton.className = 'btn btn-primary'; // Bootstrap class for styling
-            editButton.style.marginRight = '10px'; // Add some spacing between buttons
-            // Placeholder for edit functionality
+            editButton.className = 'btn btn-primary';
+            editButton.style.marginRight = '10px';
             editButton.onclick = function() { alert('Edit functionality to be implemented.'); };
             frameElement.appendChild(editButton);
-
         }
         
         frameEntriesContainer.appendChild(frameElement);
@@ -151,6 +155,7 @@ window.onload = function() {
             tableNo: row[7],
             playerNames: row.slice(12, 18),
             paidByNames: row.slice(23, 29),
+            offStatus: row[8], // Fetching the "Off" status from column "I"
             isValid: row[6],
             isActive: row[6] && !row[8]
         })).filter(entry => entry.isValid).reverse());
