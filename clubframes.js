@@ -20,11 +20,10 @@ function displayFrameEntries(frameEntries) {
         dateElement.innerText = `Date: ${entry.date}`;
         frameElement.appendChild(dateElement);
 
-        if (entry.tableNo) {
-            const tableNoElement = document.createElement('p');
-            tableNoElement.innerText = `Table No: ${entry.tableNo}`;
-            frameElement.appendChild(tableNoElement);
-        }
+        // Always include the "Table No:" section, with a default value if empty
+        const tableNoElement = document.createElement('p');
+        tableNoElement.innerText = `Table No: ${entry.tableNo || 'N/A'}`;
+        frameElement.appendChild(tableNoElement);
         
         if (!entry.isActive) {
             const durationElement = document.createElement('p');
@@ -46,7 +45,6 @@ function displayFrameEntries(frameEntries) {
         playersElement.innerText = `Players: ${entry.playerNames.filter(name => name).join(', ')}`;
         frameElement.appendChild(playersElement);
 
-        // Always include the "Paid by:" section, even for active frames
         const paidByElement = document.createElement('p');
         paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ') || 'N/A'}`;
         frameElement.appendChild(paidByElement);
@@ -54,6 +52,7 @@ function displayFrameEntries(frameEntries) {
         frameEntriesContainer.appendChild(frameElement);
     });
 }
+
 function applyFilters() {
     const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
     let dateFilter = document.getElementById('dateFilter').value;
