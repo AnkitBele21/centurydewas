@@ -59,12 +59,6 @@ function displayFrameEntries(frameEntries) {
             editButton.onclick = function() { alert('Edit functionality to be implemented.'); };
             frameElement.appendChild(editButton);
 
-            // Off Button
-            const offButton = document.createElement('button');
-            offButton.innerText = 'Mark Off';
-            offButton.className = 'btn btn-danger'; // Bootstrap class for red color
-            offButton.onclick = function() { markFrameOff(index + 2); }; // Adjusted to account for header row and zero-based index
-            frameElement.appendChild(offButton);
         }
         
         frameEntriesContainer.appendChild(frameElement);
