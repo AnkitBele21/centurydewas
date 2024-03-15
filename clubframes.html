@@ -26,19 +26,36 @@
     </section>
 
     <!-- Edit Modal -->
-    <div id="editModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Edit Frame</h2>
-            <form id="editForm">
-                <label for="tableNo">Table No:</label>
-                <input type="text" id="editTableNo" name="tableNo"><br><br>
-                <label for="startTime">Start Time:</label>
-                <input type="text" id="editStartTime" name="startTime"><br><br>
-                <label for="players">Players (comma-separated):</label>
-                <input type="text" id="editPlayers" name="players"><br><br>
-                <input type="button" value="Submit" onclick="submitEditForm()">
-            </form>
+    <div id="editModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Frame</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="editTableNo">Table No:</label>
+                            <input type="text" class="form-control" id="editTableNo">
+                        </div>
+                        <div class="form-group">
+                            <label for="editStartTime">Start Time:</label>
+                            <input type="text" class="form-control" id="editStartTime">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPlayers">Players (comma-separated):</label>
+                            <input type="text" class="form-control" id="editPlayers">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="submitEditForm()">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
