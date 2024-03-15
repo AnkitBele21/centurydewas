@@ -17,6 +17,12 @@ function displayFrameEntries(frameEntries) {
         const frameElement = document.createElement('div');
         frameElement.className = entry.isActive ? 'frame-card active-frame' : 'frame-card';
         
+        // Include Frame ID
+        const frameIdElement = document.createElement('p');
+        frameIdElement.innerText = `Frame ID: SPS${entry.rowNumber}`;
+        frameIdElement.style.fontSize = 'small'; // Making the font size small
+        frameElement.appendChild(frameIdElement);
+        
         
         const dateElement = document.createElement('h5');
         dateElement.innerText = `Date: ${entry.date}`;
@@ -89,6 +95,7 @@ function applyFilters() {
         let frameEntries = data.map(row => {
             const isActive = row[6] && !row[8];
             return {
+                rowNumber: index + 2, // Adjusting for header row and 0-based index
                 date: row[2],
                 duration: row[3],
                 startTime: row[10],
@@ -155,6 +162,7 @@ function markFrameOn() {
 window.onload = function() {
     fetchData('Frames').then(data => {
         displayFrameEntries(data.map(row => ({
+            rowNumber: index + 2, // Adjusting for header row and 0-based index
             date: row[2],
             duration: row[3],
             startTime: row[10],
