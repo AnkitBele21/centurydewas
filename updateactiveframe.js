@@ -1,35 +1,41 @@
-const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
-const SHEET_ID = '1RmMxuj_taiFoFx9V20xa_l8E74Wg-jaKTMexCfYpCTw';
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxenlvo46ANjLhqxSc5CCXAA9ORTjYMj66DegeB_jWSxUdfFfMxOBEOIPmV-F8rrBKZfQ/exec';
+document.getElementById('updateFrameForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-async function fetchData(sheetName, frameId) {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${sheetName}?key=${API_KEY}`;
+    // Extract the numeric part of the Frame ID (assuming it's in the format "SPS<number>")
+    const frameId = document.getElementById('frameNo').value;
+    const rowNumber = frameId.replace('SPS', '');
+
+    const tableNo = document.getElementById('tableNo').value;
+    const startTime = document.getElementById('startTime').value;
+    const players = document.getElementById('players').value.split(',').map(player => player.trim());
+
+    // Construct the payload to send to your Google Apps Script Web App
+    const payload = {
+        rowNumber: rowNumber,
+        tableNo: tableNo,
+        startTime: startTime,
+        players: players
+    };
+
     try {
-        const response = await fetch(url);
-        const data = await response.json();
-        // Assuming the first column after the header contains the Frame ID in the format "SPS<number>"
-        const frameData = data.values.slice(1).find(row => `SPS${row[0]}` === frameId);
-        return frameData;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return null;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', async function() {
-    const queryParams = new URLSearchParams(window.location.search);
-    const frameId = queryParams.get('frameId');
-
-    if (frameId) {
-        document.getElementById('frameNo').value = frameId; // Display Frame ID
-
-        const frameData = await fetchData('Frames', frameId);
-        if (frameData) {
-            // Assuming the data structure matches your sheet's columns
-            // Update these indices based on your actual sheet structure
-            document.getElementById('tableNo').value = frameData[1]; // Table No.
-            document.getElementById('startTime').value = frameData[2]; // Start Time
-            document.getElementById('players').value = frameData[3]; // Players
+        const response = await fetch(WEB_APP_URL, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const result = await response.json();
+        if (result.success) {
+            // Handle success (e.g., redirect or show a success message)
+            alert('Frame updated successfully!');
+            window.location.href = 'https://ankitbele21.github.io/centurydewas/clubframes';
+        } else {
+            // Handle failure
+            alert('Failed to update the frame. Please try again.');
         }
+    } catch (error) {
+        console.error('Error updating frame:', error);
+        alert('An error occurred while updating the frame.');
     }
 });
