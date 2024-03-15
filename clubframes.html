@@ -20,10 +20,28 @@
         <input type="date" id="dateFilter">
         <button onclick="applyFilters()">Apply Filters</button>
     </section>
-    <button id="frameOnButton" class="btn btn-success" onclick="markFrameOn()">Frame On</button> <!-- Frame On button -->
+    <button id="frameOnButton" class="btn btn-success" onclick="markFrameOn()">Frame On</button>
     <section id="frameEntries">
         <!-- Frame entries will be dynamically added here via JavaScript -->
     </section>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Frame</h2>
+            <form id="editForm">
+                <label for="tableNo">Table No:</label>
+                <input type="text" id="editTableNo" name="tableNo"><br><br>
+                <label for="startTime">Start Time:</label>
+                <input type="text" id="editStartTime" name="startTime"><br><br>
+                <label for="players">Players (comma-separated):</label>
+                <input type="text" id="editPlayers" name="players"><br><br>
+                <input type="button" value="Submit" onclick="submitEditForm()">
+            </form>
+        </div>
+    </div>
+
     <script src="clubframes.js"></script>
 </body>
 </html>
