@@ -11,7 +11,7 @@ async function fetchData(sheetName) {
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
-    frameEntriesContainer.innerHTML = '';
+    frameEntriesContainer.innerHTML = ''; 
     
     frameEntries.forEach((entry, index) => {
         const frameElement = document.createElement('div');
@@ -58,55 +58,19 @@ function displayFrameEntries(frameEntries) {
             frameElement.appendChild(statusElement);
         }
 
+        // Edit Button for active frames
         if (entry.isActive) {
             const editButton = document.createElement('button');
             editButton.innerText = 'Edit';
             editButton.className = 'btn btn-primary';
             editButton.style.marginRight = '10px';
-            editButton.onclick = function() { editFrame(entry, index + 2); }; // Adjusted function call
+            editButton.onclick = function() { alert('Edit functionality to be implemented.'); };
             frameElement.appendChild(editButton);
         }
         
         frameEntriesContainer.appendChild(frameElement);
     });
 }
-
-function editFrame(entry, row) {
-    // Example edit functionality using prompts
-    const newTableNo = prompt("Edit Table No:", entry.tableNo || '');
-    const newStartTime = prompt("Edit Start Time:", entry.startTime || '');
-    const newPlayers = prompt("Edit Players (comma-separated):", entry.playerNames.join(', '));
-    const newPaidBy = prompt("Edit Paid By (comma-separated):", entry.paidByNames.join(', '));
-
-    // Send the edited values back to the server
-    saveEdits(row, {tableNo: newTableNo, startTime: newStartTime, players: newPlayers, paidBy: newPaidBy});
-}
-
-function saveEdits(row, editedValues) {
-    const payload = {
-        action: "saveEdits",
-        row: row,
-        editedValues: JSON.stringify(editedValues) // Ensure editedValues is an object
-    };
-
-    fetch(WEB_APP_URL, {
-        method: 'POST',
-        contentType: 'application/json', // This line is actually not effective for fetch. Use headers instead.
-        headers: {
-            'Content-Type': 'application/json' // Correctly set Content-Type header for JSON
-        },
-        body: JSON.stringify(payload) // Correctly stringify the entire payload
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        // Handle response data
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
 
 function applyFilters() {
     const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
@@ -162,14 +126,17 @@ function populatePlayerNames() {
 function markFrameOn() {
     fetch(WEB_APP_URL, {
         method: 'POST',
+        // Google Apps Script does not use the Content-Type header, so we use a query string
+        body: 'action=frameOn',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: 'action=frameOn'
+        }
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         if (data.status === "success") {
+            // Reload the web page to reflect the changes
             window.location.reload();
         } else {
             alert("There was an error marking the frame as 'On'.");
@@ -181,28 +148,20 @@ function markFrameOn() {
     });
 }
 
-    .catch(error => {
-        console.error('Error:', error);
-        alert("There was an error marking the frame as 'On'.");
-    });
-}
-
 window.onload = function() {
     fetchData('Frames').then(data => {
-        const processedData = data.map(row => ({
+        displayFrameEntries(data.map(row => ({
             date: row[2],
             duration: row[3],
             startTime: row[10],
             tableMoney: row[20],
             tableNo: row[7],
-            playerNames: row.slice(12, 18).filter(name => name).join(', '),
-            paidByNames: row.slice(23, 29).filter(name => name).join(', '),
-            offStatus: row[8],
+            playerNames: row.slice(12, 18),
+            paidByNames: row.slice(23, 29),
+            offStatus: row[8], // Fetching the "Off" status from column "I"
             isValid: row[6],
-            isActive: row[6] && !row[8]
-        })).filter(entry => entry.isValid).reverse();
-
-        displayFrameEntries(processedData);
+            isActive: row[6] && !row[8] // Determining if the frame is active based on the presence of "On" and absence of "Off"
+        })).filter(entry => entry.isValid).reverse());
     });
 
     populatePlayerNames();
