@@ -64,14 +64,14 @@ function displayFrameEntries(frameEntries) {
             editButton.innerText = 'Edit';
             editButton.className = 'btn btn-primary';
             editButton.style.marginRight = '10px';
-            editButton.onclick = function() {
-    // Fill the form with the current entry's data
+          editButton.onclick = function() {
+    // Set the values for the modal's form inputs
     document.getElementById('editTableNo').value = entry.tableNo || '';
     document.getElementById('editStartTime').value = entry.startTime || '';
     document.getElementById('editPlayers').value = entry.playerNames.join(', ');
 
-    // Show the modal
-    var editModal = new bootstrap.Modal(document.getElementById('editModal'), {});
+    // Use Bootstrap 5's method to show the modal
+    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
     editModal.show();
 };
             frameElement.appendChild(editButton);
