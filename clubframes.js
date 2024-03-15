@@ -73,6 +73,7 @@ if (entry.isActive) {
     editButton.className = 'btn btn-primary';
     editButton.style.marginRight = '10px';
     editButton.onclick = function() {
+        const frameId = entry.rowNumber; // Ensure frameId is defined within this scope
         window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${frameId}`;
     };
     frameElement.appendChild(editButton);
