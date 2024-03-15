@@ -1,70 +1,71 @@
 body {
+    background-color: #22252B;
+    color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #22252B;
-    color: #FFFFFF;
 }
 
-header {
+.header {
     background-color: #33363B;
     padding: 20px;
     text-align: center;
 }
 
-header img {
+.header img {
     width: 180px;
 }
 
 h1 {
     color: #01AB7A;
-    margin: 10px 0 0;
-    font-size: 24px;
-    font-weight: 600;
+    margin-top: 10px;
 }
 
-.card {
+.form-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+form {
     background-color: #33363B;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
 }
 
-.form-label {
-    font-weight: 500;
+label {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.form-control, .form-select {
-    background-color: #394045;
+input[type="text"], input[type="time"], select, .back-button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
     border: 1px solid #51575A;
+    background-color: #394045;
     color: #FFFFFF;
 }
 
-.btn-success {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+input[type="submit"], .back-button {
+    background-color: #01AB7A;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
 }
 
-.btn-warning {
-    background-color: #ff9800;
-    border-color: #ff9800;
+input[type="submit"]:hover, .back-button:hover {
+    background-color: #018a5e;
 }
 
-.btn-success:hover {
-    background-color: #45a049;
-    border-color: #45a049;
+.back-button {
+    background-color: #6c757d; /* Differentiate back button */
 }
 
-.btn-warning:hover {
-    background-color: #e68900;
-    border-color: #e68900;
-}
-
-@media (max-width: 768px) {
-    header img {
-        width: 150px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
+.back-button:hover {
+    background-color: #545b62;
 }
