@@ -59,14 +59,18 @@ function displayFrameEntries(frameEntries) {
         }
 
         // Edit Button for active frames
-        if (entry.isActive) {
-            const editButton = document.createElement('button');
-            editButton.innerText = 'Edit';
-            editButton.className = 'btn btn-primary';
-            editButton.style.marginRight = '10px';
-            editButton.onclick = function() { alert('Edit functionality to be implemented.'); };
-            frameElement.appendChild(editButton);
-        }
+        // Edit Button for active frames
+if (entry.isActive) {
+    const editButton = document.createElement('button');
+    editButton.innerText = 'Edit';
+    editButton.className = 'btn btn-primary';
+    editButton.style.marginRight = '10px';
+    editButton.onclick = function() {
+        window.location.href = 'https://ankitbele21.github.io/centurydewas/updateactiveframe';
+    };
+    frameElement.appendChild(editButton);
+}
+
         
         frameEntriesContainer.appendChild(frameElement);
     });
