@@ -11,7 +11,7 @@ async function fetchData(sheetName) {
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
-    frameEntriesContainer.innerHTML = ''; 
+    frameEntriesContainer.innerHTML = '';
     
     frameEntries.forEach((entry, index) => {
         const frameElement = document.createElement('div');
@@ -58,18 +58,44 @@ function displayFrameEntries(frameEntries) {
             frameElement.appendChild(statusElement);
         }
 
-        // Edit Button for active frames
         if (entry.isActive) {
             const editButton = document.createElement('button');
             editButton.innerText = 'Edit';
             editButton.className = 'btn btn-primary';
             editButton.style.marginRight = '10px';
-            editButton.onclick = function() { alert('Edit functionality to be implemented.'); };
+            editButton.onclick = function() { editFrame(entry, index + 2); }; // Adjusted function call
             frameElement.appendChild(editButton);
         }
         
         frameEntriesContainer.appendChild(frameElement);
     });
+}
+
+function editFrame(entry, row) {
+    // Example edit functionality using prompts
+    const newTableNo = prompt("Edit Table No:", entry.tableNo || '');
+    const newStartTime = prompt("Edit Start Time:", entry.startTime || '');
+    const newPlayers = prompt("Edit Players (comma-separated):", entry.playerNames.join(', '));
+    const newPaidBy = prompt("Edit Paid By (comma-separated):", entry.paidByNames.join(', '));
+
+    // Send the edited values back to the server
+    saveEdits(row, {tableNo: newTableNo, startTime: newStartTime, players: newPlayers, paidBy: newPaidBy});
+}
+
+async function saveEdits(row, editedValues) {
+    const response = await fetch(WEB_APP_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `action=saveEdits&row=${row}&editedValues=${encodeURIComponent(JSON.stringify(editedValues))}`
+    });
+    const data = await response.json();
+    if (data.status === "success") {
+        window.location.reload();
+    } else {
+        alert("There was an error saving the edits.");
+    }
 }
 
 function applyFilters() {
@@ -149,20 +175,25 @@ function markFrameOn() {
 }
 
 window.onload = function() {
+    // Fetch data for frames and populate the UI
     fetchData('Frames').then(data => {
-        displayFrameEntries(data.map(row => ({
-            date: row[2],
-            duration: row[3],
-            startTime: row[10],
-            tableMoney: row[20],
-            tableNo: row[7],
-            playerNames: row.slice(12, 18),
-            paidByNames: row.slice(23, 29),
-            offStatus: row[8], // Fetching the "Off" status from column "I"
-            isValid: row[6],
-            isActive: row[6] && !row[8] // Determining if the frame is active based on the presence of "On" and absence of "Off"
-        })).filter(entry => entry.isValid).reverse());
+        const processedData = data.map(row => ({
+            date: row[2], // Assuming date is in column C
+            duration: row[3], // Assuming duration is in column D
+            startTime: row[10], // Assuming start time is in column K
+            tableMoney: row[20], // Assuming table money is in column U
+            tableNo: row[7], // Assuming table number is in column H
+            playerNames: row.slice(12, 18).join(', '), // Assuming player names are in columns M to R
+            paidByNames: row.slice(23, 29).join(', '), // Assuming paid by names are in columns X to AC
+            offStatus: row[8], // Fetching the "Off" status from column I
+            isValid: row[6], // Assuming a validity check on column G (e.g., "On" status)
+            isActive: row[6] && !row[8] // Active if "On" is present in G and "Off" is absent in I
+        }).filter(entry => entry.isValid).reverse(); // Reverse to display the newest entries first
+
+        displayFrameEntries(processedData);
     });
 
+    // Populate player names for filtering or editing purposes
     populatePlayerNames();
 };
+
