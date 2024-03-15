@@ -84,3 +84,21 @@ button:hover {
     background-color: #394045; /* Slightly lighter than the default frame card for distinction */
 }
 
+/* clubframes.css */
+.frame-card {
+    position: relative;
+    /* Other styles for your cards */
+}
+
+.edit-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem; /* Smaller font size for the button */
+}
+
+/* Optional: Specific styles for the "Off" button if needed */
+.off-btn {
+    background-color: #dc3545; /* Bootstrap's btn-danger background color */
+    color: white;
+}
