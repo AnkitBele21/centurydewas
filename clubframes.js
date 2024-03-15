@@ -82,21 +82,31 @@ function editFrame(entry, row) {
     saveEdits(row, {tableNo: newTableNo, startTime: newStartTime, players: newPlayers, paidBy: newPaidBy});
 }
 
-async function saveEdits(row, editedValues) {
-    const response = await fetch(WEB_APP_URL, {
+function saveEdits(row, editedValues) {
+    const payload = {
+        action: "saveEdits",
+        row: row,
+        editedValues: JSON.stringify(editedValues) // Ensure editedValues is an object
+    };
+
+    fetch(WEB_APP_URL, {
         method: 'POST',
+        contentType: 'application/json', // This line is actually not effective for fetch. Use headers instead.
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json' // Correctly set Content-Type header for JSON
         },
-        body: `action=saveEdits&row=${row}&editedValues=${encodeURIComponent(JSON.stringify(editedValues))}`
+        body: JSON.stringify(payload) // Correctly stringify the entire payload
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        // Handle response data
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
-    const data = await response.json();
-    if (data.status === "success") {
-        window.location.reload();
-    } else {
-        alert("There was an error saving the edits.");
-    }
 }
+
 
 function applyFilters() {
     const playerNameFilter = document.getElementById('playerNameFilter').value.toLowerCase();
