@@ -162,17 +162,14 @@ function populatePlayerNames() {
 function markFrameOn() {
     fetch(WEB_APP_URL, {
         method: 'POST',
-        // Google Apps Script does not use the Content-Type header, so we use a query string
-        body: 'action=frameOn',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        },
+        body: 'action=frameOn'
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         if (data.status === "success") {
-            // Reload the web page to reflect the changes
             window.location.reload();
         } else {
             alert("There was an error marking the frame as 'On'.");
@@ -184,26 +181,29 @@ function markFrameOn() {
     });
 }
 
+    .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error marking the frame as 'On'.");
+    });
+}
+
 window.onload = function() {
-    // Fetch data for frames and populate the UI
     fetchData('Frames').then(data => {
         const processedData = data.map(row => ({
-            date: row[2], // Assuming date is in column C
-            duration: row[3], // Assuming duration is in column D
-            startTime: row[10], // Assuming start time is in column K
-            tableMoney: row[20], // Assuming table money is in column U
-            tableNo: row[7], // Assuming table number is in column H
-            playerNames: row.slice(12, 18).join(', '), // Assuming player names are in columns M to R
-            paidByNames: row.slice(23, 29).join(', '), // Assuming paid by names are in columns X to AC
-            offStatus: row[8], // Fetching the "Off" status from column I
-            isValid: row[6], // Assuming a validity check on column G (e.g., "On" status)
-            isActive: row[6] && !row[8] // Active if "On" is present in G and "Off" is absent in I
-        }).filter(entry => entry.isValid).reverse(); // Reverse to display the newest entries first
+            date: row[2],
+            duration: row[3],
+            startTime: row[10],
+            tableMoney: row[20],
+            tableNo: row[7],
+            playerNames: row.slice(12, 18).filter(name => name).join(', '),
+            paidByNames: row.slice(23, 29).filter(name => name).join(', '),
+            offStatus: row[8],
+            isValid: row[6],
+            isActive: row[6] && !row[8]
+        })).filter(entry => entry.isValid).reverse();
 
         displayFrameEntries(processedData);
     });
 
-    // Populate player names for filtering or editing purposes
     populatePlayerNames();
 };
-
