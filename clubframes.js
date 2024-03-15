@@ -66,38 +66,25 @@ function displayFrameEntries(frameEntries) {
 
         // Edit Button for active frames
         // Edit Button for active frames
+// Inside displayFrameEntries, for each active frame
 if (entry.isActive) {
     const editButton = document.createElement('button');
     editButton.innerText = 'Edit';
     editButton.className = 'btn btn-primary';
     editButton.style.marginRight = '10px';
     editButton.onclick = function() {
-    const frameId = entry.rowNumber; // Assuming entry.rowNumber holds the unique frame ID
-    window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${frameId}`;
+        window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${frameId}`;
     };
-    const offButton = document.createElement('button');
-            offButton.innerText = 'Off';
-            offButton.className = 'btn btn-danger';
-            offButton.onclick = function() {
-                showOffPopup(entry.rowNumber, entry.playerNames);
-            };
-            frameElement.appendChild(offButton);
-        }
-        
-        frameEntriesContainer.appendChild(frameElement);
-    });
-}
-
-function showOffPopup(rowNumber, playerNames) {
-    // Implementation for showing the popup overlay
-    // For simplicity, using alert to demonstrate
-    const playerName = prompt("Who is paying? (Enter player name)", playerNames.join(', '));
-    if (playerName) {
-        markFrameOff(rowNumber, playerName);
-    }
-}
-
     frameElement.appendChild(editButton);
+
+    const offButton = document.createElement('button');
+    offButton.innerText = 'Off';
+    offButton.className = 'btn btn-danger';
+    offButton.style.marginLeft = '10px';
+    offButton.onclick = function() {
+        showOffPopup(entry.rowNumber, entry.playerNames);
+    };
+    frameElement.appendChild(offButton);
 }
 
         
