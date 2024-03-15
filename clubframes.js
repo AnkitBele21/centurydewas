@@ -11,19 +11,12 @@ async function fetchData(sheetName) {
 
 function displayFrameEntries(frameEntries) {
     const frameEntriesContainer = document.getElementById('frameEntries');
-    frameEntriesContainer.innerHTML = ''; 
-    
+    frameEntriesContainer.innerHTML = '';
+
     frameEntries.forEach((entry, index) => {
         const frameElement = document.createElement('div');
         frameElement.className = entry.isActive ? 'frame-card active-frame' : 'frame-card';
-        
-        // Include Frame ID
-        const frameIdElement = document.createElement('p');
-        frameIdElement.innerText = `Frame ID: SPS${entry.rowNumber}`;
-        frameIdElement.style.fontSize = 'small'; // Making the font size small
-        frameElement.appendChild(frameIdElement);
-        
-        
+
         const dateElement = document.createElement('h5');
         dateElement.innerText = `Date: ${entry.date}`;
         frameElement.appendChild(dateElement);
@@ -31,57 +24,48 @@ function displayFrameEntries(frameEntries) {
         const tableNoElement = document.createElement('p');
         tableNoElement.innerText = `Table No: ${entry.tableNo || 'N/A'}`;
         frameElement.appendChild(tableNoElement);
-        
-        if (!entry.isActive) {
-            const durationElement = document.createElement('p');
-            durationElement.innerText = `Duration: ${entry.duration} min`;
-            frameElement.appendChild(durationElement);
-        }
-        
+
         const startTimeElement = document.createElement('p');
         startTimeElement.innerText = `Start Time: ${entry.startTime}`;
         frameElement.appendChild(startTimeElement);
-        
-        if (!entry.isActive) {
-            const tableMoneyElement = document.createElement('p');
-            tableMoneyElement.innerText = `Table Money: ${entry.tableMoney}`;
-            frameElement.appendChild(tableMoneyElement);
-        }
-        
+
         const playersElement = document.createElement('p');
         playersElement.innerText = `Players: ${entry.playerNames.filter(name => name).join(', ')}`;
         frameElement.appendChild(playersElement);
 
-        const paidByElement = document.createElement('p');
-        paidByElement.innerText = `Paid by: ${entry.paidByNames.filter(name => name).join(', ') || 'N/A'}`;
-        frameElement.appendChild(paidByElement);
-        
-    // Status for active frames
         if (entry.isActive) {
             const statusElement = document.createElement('p');
             statusElement.innerText = `Status: ${entry.offStatus ? entry.offStatus : 'Active'}`;
-            statusElement.style.color = entry.offStatus ? 'red' : 'green'; // Red for "Off", green for "Active"
+            statusElement.style.color = entry.offStatus ? 'red' : 'green';
             frameElement.appendChild(statusElement);
+
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Edit';
+            editButton.className = 'btn btn-primary';
+            editButton.style.marginRight = '10px';
+            editButton.onclick = function() {
+                window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${index + 2}`;
+            };
+            frameElement.appendChild(editButton);
+
+            const offButton = document.createElement('button');
+            offButton.innerText = 'Mark Off';
+            offButton.className = 'btn btn-danger';
+            offButton.style.marginLeft = '10px';
+            offButton.onclick = function() { markFrameOff(index + 2, entry.playerNames); };
+            frameElement.appendChild(offButton);
         }
 
-        // Edit Button for active frames
-        // Edit Button for active frames
-if (entry.isActive) {
-    const editButton = document.createElement('button');
-    editButton.innerText = 'Edit';
-    editButton.className = 'btn btn-primary';
-    editButton.style.marginRight = '10px';
-    editButton.onclick = function() {
-    const frameId = entry.rowNumber; // Assuming entry.rowNumber holds the unique frame ID
-    window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${frameId}`;
-    };
-
-    frameElement.appendChild(editButton);
-}
-
-        
         frameEntriesContainer.appendChild(frameElement);
     });
+}
+
+function markFrameOff(rowIndex, playerNames) {
+    // Implementation for marking a frame as "Off"
+    // This could involve showing a modal to select which player will pay,
+    // then sending that information back to the server or Google Apps Script.
+    console.log(`Marking frame at row ${rowIndex} as off. Players: ${playerNames.join(', ')}`);
+    // Show modal logic here
 }
 
 function applyFilters() {
@@ -161,21 +145,18 @@ function markFrameOn() {
 
 window.onload = function() {
     fetchData('Frames').then(data => {
-        const frameEntries = data.map((row, index) => ({
-            rowNumber: index + 2, // Correctly scoped index
+        displayFrameEntries(data.map((row, index) => ({
             date: row[2],
             duration: row[3],
             startTime: row[10],
             tableMoney: row[20],
             tableNo: row[7],
-            playerNames: row.slice(12, 18),
-            paidByNames: row.slice(23, 29),
+            playerNames: row.slice(12, 18).filter(name => name),
+            paidByNames: row.slice(23, 29).filter(name => name),
             offStatus: row[8],
             isValid: row[6],
             isActive: row[6] && !row[8]
-        })).filter(entry => entry.isValid).reverse();
-
-        displayFrameEntries(frameEntries);
+        })).filter(entry => entry.isValid).reverse());
     });
 
     populatePlayerNames();
