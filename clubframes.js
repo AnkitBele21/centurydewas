@@ -92,22 +92,18 @@ function applyFilters() {
     }
     
     fetchData('Frames').then(data => {
-        let frameEntries = data.map(row => {
-            const isActive = row[6] && !row[8];
-            return {
-                rowNumber: index + 2, // Adjusting for header row and 0-based index
-                date: row[2],
-                duration: row[3],
-                startTime: row[10],
-                tableMoney: row[20],
-                tableNo: row[7],
-                playerNames: row.slice(12, 18),
-                paidByNames: row.slice(23, 29),
-                isValid: row[6],
-                isActive: isActive
-            };
-        }).filter(entry => entry.isValid)
-        .reverse();
+        let frameEntries = data.map((row, index) => ({
+            rowNumber: index + 2, // Correctly scoped index
+            date: row[2],
+            duration: row[3],
+            startTime: row[10],
+            tableMoney: row[20],
+            tableNo: row[7],
+            playerNames: row.slice(12, 18),
+            paidByNames: row.slice(23, 29),
+            isValid: row[6],
+            isActive: row[6] && !row[8]
+        })).filter(entry => entry.isValid).reverse();
         
         if (playerNameFilter) {
             frameEntries = frameEntries.filter(entry =>
@@ -161,8 +157,8 @@ function markFrameOn() {
 
 window.onload = function() {
     fetchData('Frames').then(data => {
-        displayFrameEntries(data.map(row => ({
-            rowNumber: index + 2, // Adjusting for header row and 0-based index
+        const frameEntries = data.map((row, index) => ({
+            rowNumber: index + 2, // Correctly scoped index
             date: row[2],
             duration: row[3],
             startTime: row[10],
@@ -170,10 +166,12 @@ window.onload = function() {
             tableNo: row[7],
             playerNames: row.slice(12, 18),
             paidByNames: row.slice(23, 29),
-            offStatus: row[8], // Fetching the "Off" status from column "I"
+            offStatus: row[8],
             isValid: row[6],
-            isActive: row[6] && !row[8] // Determining if the frame is active based on the presence of "On" and absence of "Off"
-        })).filter(entry => entry.isValid).reverse());
+            isActive: row[6] && !row[8]
+        })).filter(entry => entry.isValid).reverse();
+
+        displayFrameEntries(frameEntries);
     });
 
     populatePlayerNames();
