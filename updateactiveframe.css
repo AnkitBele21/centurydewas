@@ -1,40 +1,69 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa; /* Light grey background */
+    background-color: #22252B;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
 }
 
-.container {
-    padding-top: 20px;
+header {
+    background-color: #33363B;
+    padding: 20px;
+    text-align: center;
+}
+
+header img {
+    width: 180px;
+}
+
+h1 {
+    color: #01AB7A;
+    margin: 10px 0 0;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add some shadow to the card for depth */
+    background-color: #33363B;
+    border-radius: 8px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-.card-title {
-    color: #007bff; /* Bootstrap primary color for consistency */
+.form-label, .btn {
+    color: #FFFFFF;
 }
 
-.form-label {
-    font-weight: bold;
+.form-control, .form-select {
+    background-color: #394045;
+    border: 1px solid #51575A;
+    color: #FFFFFF;
 }
 
 .btn-primary {
-    background-color: #007bff; /* Bootstrap primary color */
-    border-color: #007bff;
+    background-color: #01AB7A;
+    border-color: #01AB7A;
 }
 
 .btn-secondary {
-    background-color: #6c757d; /* Bootstrap secondary color */
+    background-color: #6c757d;
     border-color: #6c757d;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darken the button on hover */
-    border-color: #0056b3;
+    background-color: #018a5e;
+    border-color: #018a5e;
 }
 
 .btn-secondary:hover {
-    background-color: #545b62; /* Darken the button on hover */
+    background-color: #545b62;
     border-color: #545b62;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header img {
+        width: 150px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
 }
