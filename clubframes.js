@@ -142,19 +142,21 @@ function markFrameOn() {
         }
     })
     .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if (data.status === "success") {
-            // Reload the web page to reflect the changes
-            window.location.reload();
-        } else {
-            alert("There was an error marking the frame as 'On'.");
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("There was an error marking the frame as 'On'.");
-    });
+.then(data => {
+    if (data.status === "success") {
+        alert("Frame marked as 'On' successfully.");
+        window.location.reload();
+    } else {
+        // If the status is not "success", log or alert the error message if available
+        console.error('Error marking frame as On:', data.message || 'Unknown error');
+        alert("There was an error marking the frame as 'On'. " + (data.message || ''));
+    }
+})
+.catch(error => {
+    console.error('Fetch error:', error);
+    alert("There was an error marking the frame as 'On'.");
+});
+
 }
 
 window.onload = function() {
