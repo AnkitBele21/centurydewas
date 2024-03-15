@@ -1,33 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Frame</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="updateactiveframe.css">
 </head>
 <body>
-    <form id="updateFrameForm">
-        <label for="frameNo">Frame ID:</label>
-        <input type="text" id="frameNo" name="frameNo" readonly><br>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Update Frame</h5>
+                        <form id="updateFrameForm">
+                            <div class="mb-3">
+                                <label for="frameNo" class="form-label">Frame ID:</label>
+                                <input type="text" class="form-control" id="frameNo" name="frameNo" readonly>
+                            </div>
 
-        <label for="tableNo">Table No.:</label>
-        <select id="tableNo" name="tableNo">
-            <option value="T1">T1</option>
-            <option value="T2">T2</option>
-            <option value="T3">T3</option>
-            <option value="T4">T4</option>
-        </select><br>
+                            <div class="mb-3">
+                                <label for="tableNo" class="form-label">Table No.:</label>
+                                <select class="form-select" id="tableNo" name="tableNo">
+                                    <option value="T1">T1</option>
+                                    <option value="T2">T2</option>
+                                    <option value="T3">T3</option>
+                                    <option value="T4">T4</option>
+                                </select>
+                            </div>
 
-        <label for="startTime">Start Time:</label>
-        <input type="time" id="startTime" name="startTime"><br>
+                            <div class="mb-3">
+                                <label for="startTime" class="form-label">Start Time:</label>
+                                <input type="time" class="form-control" id="startTime" name="startTime">
+                            </div>
 
-        <label for="players">Players (up to 6, separated by comma):</label>
-        <input type="text" id="players" name="players" placeholder="Player1, Player2, ..."><br>
+                            <div class="mb-3">
+                                <label for="players" class="form-label">Players (up to 6, separated by comma):</label>
+                                <input type="text" class="form-control" id="players" name="players" placeholder="Player1, Player2, ...">
+                            </div>
 
-        <input type="submit" value="Submit">
-        <!-- Back Button -->
-        <button type="button" onclick="window.location.href='https://ankitbele21.github.io/centurydewas/clubframes';">Back</button>
-    </form>
+                            <div class="d-grid gap-2">
+                                <input type="submit" class="btn btn-primary" value="Submit">
+                                <button type="button" class="btn btn-secondary" onclick="window.location.href='https://ankitbele21.github.io/centurydewas/clubframes';">Back</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="updateactiveframe.js"></script>
 </body>
 </html>
