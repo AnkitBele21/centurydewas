@@ -13,8 +13,10 @@
     </header>
     <div class="form-container">
         <form id="updateFrameForm">
-            <label for="frameNo">Frame ID:</label>
-            <input type="text" id="frameNo" name="frameNo" readonly><br>
+            <div class="frame-id">
+                <label for="frameNo">Frame ID:</label>
+                <span id="frameNo">SPS12</span> <!-- Example Frame ID -->
+            </div>
 
             <label for="tableNo">Table No.:</label>
             <select id="tableNo" name="tableNo">
@@ -30,8 +32,10 @@
             <label for="players">Players (up to 6, separated by comma):</label>
             <input type="text" id="players" name="players" placeholder="Player1, Player2, ..."><br>
 
-            <input type="submit" value="Submit">
-            <button type="button" class="back-button" onclick="window.location.href='https://ankitbele21.github.io/centurydewas/clubframes';">Back</button>
+            <div class="form-buttons">
+                <button type="button" class="back-button" onclick="window.location.href='https://ankitbele21.github.io/centurydewas/clubframes';">Back</button>
+                <input type="submit" value="Submit">
+            </div>
         </form>
     </div>
 
