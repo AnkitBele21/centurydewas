@@ -1,3 +1,6 @@
+// Updated Web App URL
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyHFvuKZ3cg3E65jDfzvJM56d9qoD21DUP-re4uqH0pkPcKQdXGuNCDfsNV_zartWL5eQ/exec';
+
 document.getElementById('updateFrameForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
