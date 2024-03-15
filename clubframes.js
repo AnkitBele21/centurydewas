@@ -72,8 +72,10 @@ if (entry.isActive) {
     editButton.className = 'btn btn-primary';
     editButton.style.marginRight = '10px';
     editButton.onclick = function() {
-        window.location.href = 'https://ankitbele21.github.io/centurydewas/updateactiveframe';
+    const frameId = entry.rowNumber; // Assuming entry.rowNumber holds the unique frame ID
+    window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${frameId}`;
     };
+
     frameElement.appendChild(editButton);
 }
 
