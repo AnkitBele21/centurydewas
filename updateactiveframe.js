@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (frameId) {
         document.getElementById('frameNo').value = frameId; // Set the Frame ID in the form
     }
+fetch(WEB_APP_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    mode: 'no-cors' // This avoids the CORS preflight check, but you get an opaque response
+});
 
     // Listen for form submission
     document.getElementById('updateFrameForm').addEventListener('submit', async function(event) {
