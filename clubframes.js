@@ -68,22 +68,23 @@ function displayFrameEntries(frameEntries) {
         // Edit Button for active frames
 // Inside displayFrameEntries, for each active frame
 if (entry.isActive) {
-    const editButton = document.createElement('button');
-editButton.innerHTML = '&#9998; Edit'; // Unicode pencil icon for simplicity
-editButton.className = 'btn btn-primary btn-sm edit-btn'; // Added btn-sm for a smaller button and edit-btn for custom positioning
+    // Assuming this is within the loop that generates each frame card
+const editButton = document.createElement('button');
+editButton.innerText = 'Edit';
+editButton.className = 'btn btn-primary edit-btn';
 editButton.onclick = function() {
     window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${entry.rowNumber}`;
 };
 frameElement.appendChild(editButton);
 
-// Off Button
 const offButton = document.createElement('button');
 offButton.innerText = 'Off';
-offButton.className = 'btn off-btn'; // Use off-btn for custom red styling
+offButton.className = 'btn btn-danger off-btn';
 offButton.onclick = function() {
     showOffPopup(entry.rowNumber, entry.playerNames);
 };
 frameElement.appendChild(offButton);
+
     
 }
 
