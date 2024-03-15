@@ -69,23 +69,22 @@ function displayFrameEntries(frameEntries) {
 // Inside displayFrameEntries, for each active frame
 if (entry.isActive) {
     const editButton = document.createElement('button');
-    editButton.innerText = 'Edit';
-    editButton.className = 'btn btn-primary';
-    editButton.style.marginRight = '10px';
-    editButton.onclick = function() {
-        const frameId = entry.rowNumber; // Ensure frameId is defined within this scope
-        window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${frameId}`;
-    };
-    frameElement.appendChild(editButton);
+editButton.innerHTML = '&#9998; Edit'; // Unicode pencil icon for simplicity
+editButton.className = 'btn btn-primary btn-sm edit-btn'; // Added btn-sm for a smaller button and edit-btn for custom positioning
+editButton.onclick = function() {
+    window.location.href = `https://ankitbele21.github.io/centurydewas/updateactiveframe.html?frameId=SPS${entry.rowNumber}`;
+};
+frameElement.appendChild(editButton);
 
-    const offButton = document.createElement('button');
-    offButton.innerText = 'Off';
-    offButton.className = 'btn btn-danger';
-    offButton.style.marginLeft = '10px';
-    offButton.onclick = function() {
-        showOffPopup(entry.rowNumber, entry.playerNames);
-    };
-    frameElement.appendChild(offButton);
+// Off Button
+const offButton = document.createElement('button');
+offButton.innerText = 'Off';
+offButton.className = 'btn off-btn'; // Use off-btn for custom red styling
+offButton.onclick = function() {
+    showOffPopup(entry.rowNumber, entry.playerNames);
+};
+frameElement.appendChild(offButton);
+    
 }
 
         
