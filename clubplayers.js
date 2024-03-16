@@ -21,17 +21,23 @@ function fetchPlayerData() {
                     const rowElement = tableBody.insertRow();
                     rowElement.insertCell(0).textContent = playerName;
                     rowElement.insertCell(1).textContent = balance.toFixed(2);
-                    const actionCell = rowElement.insertCell(2);
+
+                    const actionsCell = rowElement.insertCell(2);
                     const topUpButton = document.createElement('button');
                     topUpButton.textContent = 'Top Up';
                     topUpButton.className = 'btn btn-primary mr-2';
-                    topUpButton.addEventListener('click', () => topUpBalance(playerName));
-                    actionCell.appendChild(topUpButton);
+                    actionsCell.appendChild(topUpButton);
+
+                    const purchaseButton = document.createElement('button');
+                    purchaseButton.textContent = 'Purchase';
+                    purchaseButton.className = 'btn btn-warning';
+                    actionsCell.appendChild(purchaseButton);
                 }
             });
         })
         .catch(error => console.error('Error fetching player data:', error));
 }
+
 
 function topUpBalance(playerName) {
     // Example function to handle top-ups
