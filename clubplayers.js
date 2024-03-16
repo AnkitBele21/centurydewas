@@ -6,10 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchPlayerData();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetchPlayerData();
-});
-
 function fetchPlayerData() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${PLAYER_SHEET_NAME}?key=${API_KEY}`;
     fetch(url)
@@ -25,21 +21,27 @@ function fetchPlayerData() {
                     const rowElement = tableBody.insertRow();
                     rowElement.insertCell(0).textContent = playerName;
                     rowElement.insertCell(1).textContent = balance.toFixed(2);
-                    const topUpCell = rowElement.insertCell(2);
+                    const actionCell = rowElement.insertCell(2);
                     const topUpButton = document.createElement('button');
                     topUpButton.textContent = 'Top Up';
-                    topUpButton.className = 'btn btn-primary';
+                    topUpButton.className = 'btn btn-primary mr-2';
                     topUpButton.addEventListener('click', () => topUpBalance(playerName));
-                    topUpCell.appendChild(topUpButton);
+                    actionCell.appendChild(topUpButton);
                 }
             });
         })
         .catch(error => console.error('Error fetching player data:', error));
 }
 
-// Implement the topUpBalance, applyFilter, and addPlayer functions as needed
-
-
+function topUpBalance(playerName) {
+    // Example function to handle top-ups
+    let topUpAmount = prompt(`Enter top-up amount for ${playerName}:`);
+    if (topUpAmount) {
+        // Validate and process the top-up amount
+        console.log(`Top-up ${topUpAmount} for ${playerName}`);
+        // Update the balance in the sheet and refresh the table
+    }
+}
 
 function applyFilter() {
     const filterValue = document.getElementById('playerFilter').value.toLowerCase();
@@ -57,16 +59,9 @@ function applyFilter() {
 }
 
 function addPlayer() {
-    // Example: Open a modal or redirect to a page for adding a new player
     console.log('Add Player button clicked');
-    // Redirect example: window.location.href = 'path/to/add/player/page';
+    // Implement the functionality to add a new player
+    // This could involve displaying a modal to enter the new player's details or redirecting to a new page/form
 }
 
-window.onload = function() {
-    fetchPlayersData().then(playersData => {
-        displayPlayersData(playersData);
-    });
-
-    document.getElementById('playerFilter').addEventListener('keyup', applyFilter);
-    document.getElementById('addPlayerButton').addEventListener('click', addPlayer);
-};
+// Removed the redundant window.onload function as it was causing issues with loading the player data correctly.
