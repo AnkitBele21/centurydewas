@@ -80,3 +80,10 @@ body {
 .ml-2 {
     margin-left: 8px;
 }
+.balance-high td {
+    color: #F44336; /* Red text for high balance */
+}
+
+.balance-low td {
+    color: #4CAF50; /* Green text for low (negative) balance */
+}
