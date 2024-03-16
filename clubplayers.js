@@ -35,3 +35,34 @@ function topUpBalance(playerName) {
     console.log(`Top up for ${playerName}`);
     // This could involve displaying a modal to enter the top-up amount and then updating the sheet accordingly.
 }
+// Existing code remains the same...
+
+function applyFilter() {
+    const filterValue = document.getElementById('playerFilter').value.toLowerCase();
+    const tableBody = document.getElementById('playersTable').getElementsByTagName('tbody')[0];
+    const rows = tableBody.getElementsByTagName('tr');
+
+    for (let i = 0; i < rows.length; i++) {
+        let playerName = rows[i].getElementsByTagName('td')[0].textContent;
+        if (playerName.toLowerCase().indexOf(filterValue) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+
+function addPlayer() {
+    // Example: Open a modal or redirect to a page for adding a new player
+    console.log('Add Player button clicked');
+    // Redirect example: window.location.href = 'path/to/add/player/page';
+}
+
+window.onload = function() {
+    fetchPlayersData().then(playersData => {
+        displayPlayersData(playersData);
+    });
+
+    document.getElementById('playerFilter').addEventListener('keyup', applyFilter);
+    document.getElementById('addPlayerButton').addEventListener('click', addPlayer);
+};
