@@ -37,8 +37,30 @@ function fetchPlayerData() {
                     const playerName = row[3]; // Assuming player names are in column D
                     const balance = parseFloat(row[6]); // Assuming balances are in column G
                     const rowElement = tableBody.insertRow();
-                    rowElement.insertCell(0).textContent = playerName;
-                    rowElement.insertCell(1).textContent = balance.toFixed(2);
+
+                    // Apply classes based on balance conditions
+                    if (balance > 5) {
+                        rowElement.classList.add('balance-high');
+                    } else if (balance < -5) {
+                        rowElement.classList.add('balance-low');
+                    }
+
+                    const playerNameCell = rowElement.insertCell(0);
+                    playerNameCell.textContent = playerName;
+                    // Apply text color based on balance directly to playerNameCell and balanceCell
+                    if (balance > 5) {
+                        playerNameCell.style.color = '#F44336'; // Red for high balance
+                    } else if (balance < -5) {
+                        playerNameCell.style.color = '#4CAF50'; // Green for low balance
+                    }
+
+                    const balanceCell = rowElement.insertCell(1);
+                    balanceCell.textContent = balance.toFixed(2);
+                    if (balance > 5) {
+                        balanceCell.style.color = '#F44336'; // Red for high balance
+                    } else if (balance < -5) {
+                        balanceCell.style.color = '#4CAF50'; // Green for low balance
+                    }
 
                     const actionsCell = rowElement.insertCell(2);
                     const topUpButton = document.createElement('button');
@@ -57,6 +79,7 @@ function fetchPlayerData() {
         })
         .catch(error => console.error('Error fetching player data:', error));
 }
+
 
 function topUpBalance(playerName) {
     const amount = prompt(`Enter top-up amount for ${playerName}:`);
