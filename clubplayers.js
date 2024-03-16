@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchPlayerData();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    fetchPlayerData();
+});
+
 function fetchPlayerData() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${PLAYER_SHEET_NAME}?key=${API_KEY}`;
     fetch(url)
@@ -13,36 +17,28 @@ function fetchPlayerData() {
         .then(data => {
             const rows = data.values;
             const tableBody = document.getElementById('playersTable').getElementsByTagName('tbody')[0];
-            rows.slice(3).forEach(row => {
-                const playerName = row[3]; // Assuming player names are in column D
-                const balance = parseFloat(row[6]); // Assuming balances are in column G
-                const rowElement = tableBody.insertRow();
-                
-                rowElement.insertCell(0).textContent = playerName;
-                const balanceCell = rowElement.insertCell(1);
-                balanceCell.textContent = balance.toFixed(2);
-
-                // Color coding based on balance
-                if (balance > 2000) {
-                    rowElement.classList.add('high-balance');
-                } else if (balance > 1000) {
-                    rowElement.classList.add('medium-balance');
-                } else if (balance > 100) {
-                    rowElement.classList.add('low-balance');
-                } else if (balance <= -10) {
-                    rowElement.classList.add('negative-balance');
+            tableBody.innerHTML = ''; // Clear existing rows
+            rows.slice(3).forEach((row, index) => {
+                if (row.length > 0) { // Check if row is not empty
+                    const playerName = row[3]; // Assuming player names are in column D
+                    const balance = parseFloat(row[6]); // Assuming balances are in column G
+                    const rowElement = tableBody.insertRow();
+                    rowElement.insertCell(0).textContent = playerName;
+                    rowElement.insertCell(1).textContent = balance.toFixed(2);
+                    const topUpCell = rowElement.insertCell(2);
+                    const topUpButton = document.createElement('button');
+                    topUpButton.textContent = 'Top Up';
+                    topUpButton.className = 'btn btn-primary';
+                    topUpButton.addEventListener('click', () => topUpBalance(playerName));
+                    topUpCell.appendChild(topUpButton);
                 }
-
-                const topUpCell = rowElement.insertCell(2);
-                const topUpButton = document.createElement('button');
-                topUpButton.textContent = 'Top Up';
-                topUpButton.className = 'btn btn-primary';
-                topUpButton.addEventListener('click', () => topUpBalance(playerName));
-                topUpCell.appendChild(topUpButton);
             });
         })
         .catch(error => console.error('Error fetching player data:', error));
 }
+
+// Implement the topUpBalance, applyFilter, and addPlayer functions as needed
+
 
 
 function applyFilter() {
