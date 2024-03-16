@@ -101,3 +101,18 @@ button:hover {
     background-color: #dc3545; /* Bootstrap's btn-danger color */
     color: white;
 }
+#addPlayersButton {
+    display: inline-block; /* This makes the button width as per its content */
+    padding: 5px 15px; /* Adjust padding as needed */
+    font-size: 16px;
+    margin-right: 20px; /* Adjust or add margin for spacing */
+    background-color: #4CAF50; /* Your button color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+}
+
+#addPlayersButton:hover {
+    background-color: #45a049; /* Slightly darker shade on hover */
+}
