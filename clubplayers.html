@@ -13,7 +13,15 @@
         <h1>Club Players</h1>
     </header>
     <div class="container mt-4">
-        <table class="table table-dark table-striped" id="playersTable">
+    <div class="d-flex justify-content-between mb-3">
+        <input type="text" id="playerFilter" class="form-control" placeholder="Filter by player name">
+        <button id="addPlayerButton" class="btn btn-success ml-2">Add Player</button>
+    </div>
+    <table class="table table-dark table-striped" id="playersTable">
+        <!-- Table structure remains the same -->
+    </table>
+</div>
+
             <thead>
                 <tr>
                     <th>Player Name</th>
