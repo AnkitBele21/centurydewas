@@ -102,14 +102,17 @@ button:hover {
     color: white;
 }
 #addPlayersButton {
-    padding: 0.375rem 0.75rem; /* Bootstrap's default padding for buttons */
-    font-size: 1rem; /* Bootstrap's default font size for buttons */
-    line-height: 1.5; /* Bootstrap's default line height for buttons */
-    border-radius: 0.25rem; /* Bootstrap's default border-radius for buttons */
-    /* Add any additional styling here */
+    background-color: #01AB7A;
+    color: #FFFFFF;
+    padding: 5px 15px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
 }
 
 #addPlayersButton:hover {
-    background-color: #45a049; /* Slightly darker shade on hover */
+    background-color: #018a5e; /* Darker shade for hover effect */
 }
 
