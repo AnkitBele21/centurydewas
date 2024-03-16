@@ -26,11 +26,13 @@ function fetchPlayerData() {
                     const topUpButton = document.createElement('button');
                     topUpButton.textContent = 'Top Up';
                     topUpButton.className = 'btn btn-primary mr-2';
+                    topUpButton.addEventListener('click', () => topUpBalance(playerName));
                     actionsCell.appendChild(topUpButton);
 
                     const purchaseButton = document.createElement('button');
                     purchaseButton.textContent = 'Purchase';
                     purchaseButton.className = 'btn btn-warning';
+                    purchaseButton.addEventListener('click', () => makePurchase(playerName));
                     actionsCell.appendChild(purchaseButton);
                 }
             });
@@ -38,14 +40,19 @@ function fetchPlayerData() {
         .catch(error => console.error('Error fetching player data:', error));
 }
 
-
 function topUpBalance(playerName) {
-    // Example function to handle top-ups
-    let topUpAmount = prompt(`Enter top-up amount for ${playerName}:`);
-    if (topUpAmount) {
-        // Validate and process the top-up amount
-        console.log(`Top-up ${topUpAmount} for ${playerName}`);
-        // Update the balance in the sheet and refresh the table
+    const amount = prompt(`Enter top-up amount for ${playerName}:`);
+    if (amount) {
+        console.log(`Top up ${amount} for ${playerName}`);
+        // Here, you would typically make a fetch call to your server or Google Apps Script to update the sheet accordingly.
+    }
+}
+
+function makePurchase(playerName) {
+    const amount = prompt(`Enter purchase amount for ${playerName}:`);
+    if (amount) {
+        console.log(`Purchase ${amount} for ${playerName}`);
+        // Similar to top-up, handle the purchase amount update here.
     }
 }
 
