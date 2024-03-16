@@ -15,10 +15,24 @@ function fetchPlayerData() {
             const tableBody = document.getElementById('playersTable').getElementsByTagName('tbody')[0];
             rows.slice(3).forEach(row => {
                 const playerName = row[3]; // Assuming player names are in column D
-                const balance = row[6]; // Assuming balances are in column G
+                const balance = parseFloat(row[6]); // Assuming balances are in column G
                 const rowElement = tableBody.insertRow();
+                
                 rowElement.insertCell(0).textContent = playerName;
-                rowElement.insertCell(1).textContent = balance;
+                const balanceCell = rowElement.insertCell(1);
+                balanceCell.textContent = balance.toFixed(2);
+
+                // Color coding based on balance
+                if (balance > 2000) {
+                    rowElement.classList.add('high-balance');
+                } else if (balance > 1000) {
+                    rowElement.classList.add('medium-balance');
+                } else if (balance > 100) {
+                    rowElement.classList.add('low-balance');
+                } else if (balance <= -10) {
+                    rowElement.classList.add('negative-balance');
+                }
+
                 const topUpCell = rowElement.insertCell(2);
                 const topUpButton = document.createElement('button');
                 topUpButton.textContent = 'Top Up';
@@ -30,12 +44,6 @@ function fetchPlayerData() {
         .catch(error => console.error('Error fetching player data:', error));
 }
 
-function topUpBalance(playerName) {
-    // Implement the top-up functionality here
-    console.log(`Top up for ${playerName}`);
-    // This could involve displaying a modal to enter the top-up amount and then updating the sheet accordingly.
-}
-// Existing code remains the same...
 
 function applyFilter() {
     const filterValue = document.getElementById('playerFilter').value.toLowerCase();
