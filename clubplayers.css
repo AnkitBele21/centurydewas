@@ -29,3 +29,18 @@ body {
 .table th, .table td {
     color: #FFFFFF;
 }
+.high-balance {
+    background-color: #ffcccc; /* Light red for attention */
+}
+
+.medium-balance {
+    background-color: #ffebcc; /* Light orange */
+}
+
+.low-balance {
+    background-color: #ffffcc; /* Light yellow */
+}
+
+.negative-balance {
+    background-color: #ccffcc; /* Light green for calm */
+}
