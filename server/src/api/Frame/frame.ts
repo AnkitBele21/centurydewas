@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-
-const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
-const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
-const SHEET_NAME = 'Frames';
+import { tableNoColIndex, startTimeColIndex, playerNamesStartColIndex, sheetName } from "../../constants/framesheetconstant";
+const googleSheet = require("../../helpers/google-sheet");
+//const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
+//const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
+//const SHEET_NAME = 'Frames';
 
 async function updateFrameData(req: Request, res: Response) {
   try {
