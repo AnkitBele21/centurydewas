@@ -1,7 +1,12 @@
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import { loginRoute } from "./api/Login/login";
-import { getPaymentOptions, recordPayment } from "./api/Payment/payment";
+import {
+  getPaymentOptions,
+  recordAppPurchase,
+  recordPayment,
+  recordTopUpBalance,
+} from "./api/Payment/payment";
 import { turnOffFrame, turnOnFrame, updateFrameData } from "./api/Frame/frame";
 
 dotenv.config();
@@ -31,6 +36,14 @@ app.post("/login", (req: Request, res: Response) => {
 
 app.post("/record_payment/", (req: Request, res: Response) => {
   recordPayment(req, res);
+});
+
+app.post("/record_top_up/", (req: Request, res: Response) => {
+  recordTopUpBalance(req, res);
+});
+
+app.post("/record_app_purchase/", (req: Request, res: Response) => {
+  recordAppPurchase(req, res);
 });
 
 app.post("/payment/options/", (req: Request, res: Response) => {

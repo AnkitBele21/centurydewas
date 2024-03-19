@@ -28,6 +28,17 @@ export const endTimeColumnName = "S";
 
 export const tableTurnOffColName = "I";
 export const tableTurnOnColName = "G";
+
+export const appPurchaseColName = "BI";
+export const appPurchaseColIndex = 61; // Assuming column BF
+
+export const topUpColName = "BH";
+export const topUpColIndex = 60; // Assuming column BF
 // X- AG - count 10
 
 // S - end time
+
+// BH - topup
+// BI - app purchase
+// Add Player
+

@@ -35,18 +35,12 @@ export const updateFrameData = async (req: Request, res: Response) => {
 
     const colsMapping = ["M", "N", "O", "P", "Q", "R"];
 
-    // Update player names in columns M to R
-    for (let i = 0; i < players.length; i++) {
-      if (i > 5) {
-        {
-          break;
-        }
-      }
+    colsMapping.map( async(val, i) => {
       const resp_01 = await googleSheet.update(
-        `${snookerPlusSheetFrames}!${colsMapping[i]}${rowNumber}`,
-        [[players[i]]]
+        `${snookerPlusSheetFrames}!${val}${rowNumber}`,
+        [[players?.[i] || ""]]
       );
-    }
+    })
 
     res.json({ success: true });
   } catch (error) {
