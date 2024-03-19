@@ -7,6 +7,7 @@ import {
   razorPayPaidColName,
   snookerPlusSheetName,
   topUpColIndex,
+  topUpColName,
 } from "../../constants/sheetConstants";
 const googleSheet = require("../../helpers/google-sheet");
 
@@ -58,9 +59,11 @@ export const recordAppPurchase = async (req: Request, res: Response) => {
   try {
     const { user_id, amount_paid } = req.body;
     const userData = await getUserIndex({ username: user_id });
+    console.log(userData)
     const appPurchaseAlreadyPaid =
       parseInt(userData.user[appPurchaseColIndex - 1]) || 0;
-    const amountPaid = appPurchaseAlreadyPaid + amount_paid;
+    const amountPaid = appPurchaseAlreadyPaid + parseInt(amount_paid);
+    console.log(amountPaid)
     const resp = await googleSheet.update(
       `${snookerPlusSheetName}!${appPurchaseColName}${userData.idx}`,
       [[amountPaid]]
@@ -78,9 +81,9 @@ export const recordTopUpBalance = async (req: Request, res: Response) => {
     const { user_id, amount_paid } = req.body;
     const userData = await getUserIndex({ username: user_id });
     const topUpBalancePaid = parseInt(userData.user[topUpColIndex - 1]) || 0;
-    const amountPaid = topUpBalancePaid + amount_paid;
+    const amountPaid = topUpBalancePaid + parseInt(amount_paid);
     const resp = await googleSheet.update(
-      `${snookerPlusSheetName}!${topUpColIndex}${userData.idx}`,
+      `${snookerPlusSheetName}!${topUpColName}${userData.idx}`,
       [[amountPaid]]
     );
     res.json({ result: "Good" });
