@@ -63,7 +63,7 @@ export const turnOffFrame = async (req: Request, res: Response) => {
     // Extract data from the payload
     const frameId = payload.frameId;
     const endTime = new Date();
-    const options = { hour12: false };
+    const options = { hour12: false, timeZone: 'Asia/Calcutta'};
     const timeString = endTime.toLocaleTimeString(undefined, options);
     const players = payload.players.map((player: string) => player.trim());
 
@@ -124,7 +124,7 @@ export const turnOnFrame = async (req: Request, res: Response) => {
     const players = payload.players.map((player: string) => player.trim());
 
     const startTime = new Date();
-    const options = { hour12: false };
+    const options = { hour12: false, timeZone: 'Asia/Calcutta'};
     const timeString = startTime.toLocaleTimeString(undefined, options);
 
     // Calculate the row number from the frameId
