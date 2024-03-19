@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getUserIndex } from "../../helpers/user";
 import {
   appPurchaseColIndex,
+  appPurchaseColName,
   razorPayPaidColIndex,
   razorPayPaidColName,
   snookerPlusSheetName,
@@ -9,7 +10,7 @@ import {
 } from "../../constants/sheetConstants";
 const googleSheet = require("../../helpers/google-sheet");
 
-const RAZOR_PAY_KEY = process.env.RAZOR_PAY_KEY ?? "rzp_test_CyDcbMd3pugIFR";
+const RAZOR_PAY_KEY = process.env.RAZOR_PAY_KEY ?? 'rzp_live_XGD2OT2v7VL4P3';
 
 export const getPaymentOptions = async (req: Request, res: Response) => {
   try {
@@ -61,7 +62,7 @@ export const recordAppPurchase = async (req: Request, res: Response) => {
       parseInt(userData.user[appPurchaseColIndex - 1]) || 0;
     const amountPaid = appPurchaseAlreadyPaid + amount_paid;
     const resp = await googleSheet.update(
-      `${snookerPlusSheetName}!${appPurchaseColIndex}${userData.idx}`,
+      `${snookerPlusSheetName}!${appPurchaseColName}${userData.idx}`,
       [[amountPaid]]
     );
 
