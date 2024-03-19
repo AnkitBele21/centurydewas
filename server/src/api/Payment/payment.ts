@@ -60,16 +60,11 @@ export const recordAppPurchase = async (req: Request, res: Response) => {
     const appPurchaseAlreadyPaid =
       parseInt(userData.user[appPurchaseColIndex - 1]) || 0;
     const amountPaid = appPurchaseAlreadyPaid + amount_paid;
-    try {
-      const resp = await googleSheet.update(
-        `${snookerPlusSheetName}!${appPurchaseColIndex}${userData.idx}`,
-        [[amountPaid]]
-      );
+    const resp = await googleSheet.update(
+      `${snookerPlusSheetName}!${appPurchaseColIndex}${userData.idx}`,
+      [[amountPaid]]
+    );
 
-      console.log(amountPaid, resp);
-    } catch (err) {
-      console.log(err);
-    }
     res.json({ result: "Good" });
   } catch (err) {
     console.log("Error: ", err);
@@ -83,16 +78,10 @@ export const recordTopUpBalance = async (req: Request, res: Response) => {
     const userData = await getUserIndex({ username: user_id });
     const topUpBalancePaid = parseInt(userData.user[topUpColIndex - 1]) || 0;
     const amountPaid = topUpBalancePaid + amount_paid;
-    try {
-      const resp = await googleSheet.update(
-        `${snookerPlusSheetName}!${topUpColIndex}${userData.idx}`,
-        [[amountPaid]]
-      );
-
-      console.log(amountPaid, resp);
-    } catch (err) {
-      console.log(err);
-    }
+    const resp = await googleSheet.update(
+      `${snookerPlusSheetName}!${topUpColIndex}${userData.idx}`,
+      [[amountPaid]]
+    );
     res.json({ result: "Good" });
   } catch (err) {
     console.log("Error: ", err);
