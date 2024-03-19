@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { tableNoColIndex, startTimeColIndex, playerNamesStartColIndex, sheetName } from "../../constants/framesheetconstant";
-const googleSheet = require("../../helpers/google-sheet");
+const sheet = require("../../helpers/google-sheet");
 
 async function updateFrameData(req: Request, res: Response) {
   try {
@@ -9,12 +9,12 @@ async function updateFrameData(req: Request, res: Response) {
     const payload = req.body;
 
     // Authenticate and load the Google Sheets document by ID
-    const doc = new GoogleSpreadsheet(process.env.SHEET_ID); // Assuming SHEET_ID is set as an environment variable
-    await doc.useApiKey(process.env.API_KEY); // Assuming API_KEY is set as an environment variable
-    await doc.loadInfo();
+    //const doc = new GoogleSpreadsheet(process.env.SHEET_ID); // Assuming SHEET_ID is set as an environment variable
+    //await doc.useApiKey(process.env.API_KEY); // Assuming API_KEY is set as an environment variable
+    //await doc.loadInfo();
 
     // Get the desired worksheet (Frames)
-    const sheet = doc.sheetsByTitle[sheetName];
+    //const sheet = doc.sheetsByTitle[sheetName];
 
     // Extract data from the payload
     const frameId = payload.frameId;
