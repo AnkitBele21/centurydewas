@@ -1,4 +1,4 @@
-import { sheetName, usernameColIndex } from "../constants/sheetConstants";
+import { snookerPlusSheetName, usernameColIndex } from "../constants/sheetConstants";
 
 const googleSheet = require("./google-sheet");
 
@@ -21,7 +21,7 @@ export const getUserIndex = async (identifier: {
 
 const getUserIdxByUsername = async (username: string) => {
   const response = await googleSheet.read(
-    `${sheetName}!${String.fromCharCode(
+    `${snookerPlusSheetName}!${String.fromCharCode(
       64 + usernameColIndex
     )}:${String.fromCharCode(64 + usernameColIndex)}`
   );
@@ -36,7 +36,7 @@ const getUserIdxByUsername = async (username: string) => {
 
   const userResponse = await googleSheet.read(
     // Reading upto column ZZ
-    `${sheetName}!A${userIdx}:${
+    `${snookerPlusSheetName}!A${userIdx}:${
       String.fromCharCode(64 + 26) + String.fromCharCode(64 + 26)
     }${userIdx}`
   );

@@ -2,9 +2,7 @@ import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import { loginRoute } from "./api/Login/login";
 import { getPaymentOptions, recordPayment } from "./api/Payment/payment";
-
-// Import function for updating frame data
-import { updateFrameData } from "./api/Frame/updateFrameData";
+import { turnOffFrame, turnOnFrame, updateFrameData } from "./api/Frame/frame";
 
 dotenv.config();
 
@@ -16,9 +14,9 @@ app.use(express.json());
 
 // Middleware to handle CORS
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
@@ -28,26 +26,28 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.post("/login", (req: Request, res: Response) => {
-  loginRoute(req, res)
+  loginRoute(req, res);
 });
 
 app.post("/record_payment/", (req: Request, res: Response) => {
-  recordPayment(req, res)
-})
+  recordPayment(req, res);
+});
 
 app.post("/payment/options/", (req: Request, res: Response) => {
-  getPaymentOptions(req, res)
-})
+  getPaymentOptions(req, res);
+});
 
 // New route for updating frame data
-app.post("/update_frame", async (req: Request, res: Response) => {
-  try {
-    // Call the function to update frame data
-    await updateFrameData(req, res);
-  } catch (error) {
-    console.error("Error updating frame:", error);
-    res.status(500).json({ success: false, error: "Failed to update frame" });
-  }
+app.post("/update/frame/", (req: Request, res: Response) => {
+  updateFrameData(req, res);
+});
+
+app.post("/update/frame/off/", (req: Request, res: Response) => {
+  turnOffFrame(req, res);
+});
+
+app.post("/update/frame/on/", (req: Request, res: Response) => {
+  turnOnFrame(req, res);
 });
 
 const port = process.env.PORT ?? 3000;

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getUserIndex } from "../../helpers/user";
-import { razorPayPaidColIndex, razorPayPaidColName, sheetName } from "../../constants/sheetConstants";
+import { razorPayPaidColIndex, razorPayPaidColName, snookerPlusSheetName } from "../../constants/sheetConstants";
 const googleSheet = require("../../helpers/google-sheet");
 
 const RAZOR_PAY_KEY = process.env.RAZOR_PAY_KEY ?? 'rzp_test_CyDcbMd3pugIFR';
@@ -31,7 +31,7 @@ export const recordPayment = async (req: Request, res: Response) => {
         const amountPaid = razorPayAlreadyPaid + amount_paid;
         try {
             const resp = await googleSheet.update(
-                `${sheetName}!${razorPayPaidColName}${userData.idx}`,
+                `${snookerPlusSheetName}!${razorPayPaidColName}${userData.idx}`,
                 [[amountPaid]]
             )
         
